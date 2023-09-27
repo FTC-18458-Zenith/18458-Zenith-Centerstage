@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.opmode.tuner;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -9,14 +9,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.drive.Drive;
+import org.firstinspires.ftc.teamcode.subsystem.Drive;
 
 /*
  * This is a simple routine to test translational drive capabilities.
  */
 @Config
 @Autonomous(group = "drive")
-public class StraightTest extends LinearOpMode {
+public class StrafeTest extends LinearOpMode {
     public static double DISTANCE = 60; // in
 
     @Override
@@ -26,7 +26,7 @@ public class StraightTest extends LinearOpMode {
         Drive drive = new Drive(hardwareMap);
 
         Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
-                .forward(DISTANCE)
+                .strafeRight(DISTANCE)
                 .build();
 
         waitForStart();
