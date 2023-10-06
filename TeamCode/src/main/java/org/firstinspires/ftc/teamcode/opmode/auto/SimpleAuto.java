@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmode.auto;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp
+@Autonomous
 public class SimpleAuto extends LinearOpMode {
     //Dcmotor leftFront is equal to null by default
     DcMotor leftFront, leftRear, rightRear, rightFront;
