@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @Autonomous
 public class SimpleAuto extends LinearOpMode {
     //Dcmotor leftFront is equal to null by default
-    DcMotor leftFront, leftRear, rightRear, rightFront;
-    DcMotor[] leftDriveTrainMotors = {leftRear, leftFront};
-    DcMotor[] rightDriveTrainMotors = {rightRear, rightFront};
+    private DcMotor leftFront, leftRear, rightRear, rightFront;
+    private final DcMotor[] leftDriveTrainMotors = {leftRear, leftFront};
+    private final DcMotor[] rightDriveTrainMotors = {rightRear, rightFront};
     @Override
     public void runOpMode() throws InterruptedException {
 
