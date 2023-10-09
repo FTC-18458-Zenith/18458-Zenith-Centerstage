@@ -28,12 +28,12 @@ public class DigitalDrive extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
 
-            if (gamepad1.left_stick_y == -1) movingForwardPowers(1);
-            else if (gamepad1.left_stick_y == 1) movingForwardPowers(-1);
-            else if (gamepad1.right_stick_x == 1) turningDirectionsPowers(-1, 1);
-            else if (gamepad1.right_stick_x == -1) turningDirectionsPowers(1,-1);
-            else if (gamepad1.left_stick_x == -1) strafingDirectionsPowers(-1, 1);
-            else if (gamepad1.left_stick_x == 1) strafingDirectionsPowers(1,-1);
+            if (gamepad1.left_stick_y < -0.75) movingForwardPowers(1);
+            else if (gamepad1.left_stick_y > 0.75) movingForwardPowers(-1);
+            else if (gamepad1.right_stick_x > 0.75) turningDirectionsPowers(-1, 1);
+            else if (gamepad1.right_stick_x < -0.75) turningDirectionsPowers(1,-1);
+            else if (gamepad1.left_stick_x > -0.75) strafingDirectionsPowers(-1, 1);
+            else if (gamepad1.left_stick_x < 0.75) strafingDirectionsPowers(1,-1);
             else movingForwardPowers(0);
         }
     }
