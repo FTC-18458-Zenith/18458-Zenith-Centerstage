@@ -78,7 +78,9 @@ public class FieldCentricDrive extends LinearOpMode {
             else if (gamepad2.y) slideMotors(250);
             else if (gamepad2.x) slideMotors(0);
 
-            spinnerTHing();
+            if (gamepad2.right_bumper) spinnerTHing(0.5);
+            else if (gamepad2.left_bumper) spinnerTHing(-0.5);
+            else spinnerTHing(0);
         }
     }
 
@@ -104,7 +106,7 @@ public class FieldCentricDrive extends LinearOpMode {
         leftSlide.setTargetPosition(targetPosition);
         rightSlide.setTargetPosition(targetPosition);
     }
-    public void spinnerTHing () {
-        spinner.setPower(0.5);
+    public void spinnerTHing (double powerSpinner) {
+        spinner.setPower(powerSpinner);
     }
 }
