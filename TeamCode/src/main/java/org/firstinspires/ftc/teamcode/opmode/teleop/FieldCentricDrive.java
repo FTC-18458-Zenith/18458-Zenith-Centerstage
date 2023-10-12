@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Slides;
 public class FieldCentricDrive extends LinearOpMode {
     private DcMotor leftSlide, rightSlide, spinner;
     private Servo lClaw, rClaw, rightArmServo, leftArmServo;
-    private IMU imu;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,11 +26,6 @@ public class FieldCentricDrive extends LinearOpMode {
         rClaw = (Servo) hardwareMap.get("rClaw");
         spinner = (DcMotor) hardwareMap.get("spinner");
 
-        imu = hardwareMap.get(IMU.class, "imu");
-
-        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-        imu.initialize(parameters);
-
         spinner.setDirection(DcMotorSimple.Direction.FORWARD);
         spinner.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lClaw.setDirection(Servo.Direction.REVERSE);
@@ -40,9 +35,7 @@ public class FieldCentricDrive extends LinearOpMode {
 - is Up, + is Down for Y axis sticks
  */
         waitForStart();
-
         while (opModeIsActive()) {
-
             drivetrain.runOpMode();
             slides.runOpMode();
 

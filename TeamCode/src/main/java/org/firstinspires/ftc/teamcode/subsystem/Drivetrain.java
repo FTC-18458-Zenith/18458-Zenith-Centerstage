@@ -20,9 +20,6 @@ public class Drivetrain extends LinearOpMode {
         leftRear = (DcMotor) hardwareMap.get("leftRear");
         rightFront = (DcMotor) hardwareMap.get("rightFront");
         rightRear = (DcMotor) hardwareMap.get("rightRear");
-        imu = hardwareMap.get(IMU.class, "imu");
-        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-        imu.initialize(parameters);
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -32,7 +29,12 @@ public class Drivetrain extends LinearOpMode {
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //TODO: RUN_WITHOUT_ENCODER for all drivetrainmotors
+        imu = hardwareMap.get(IMU.class, "imu");
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
+        imu.initialize(parameters);
+
+
+        //TODO: RUN_WITHOUT_ENCODER for all drive train motors
 
         waitForStart();
         if (gamepad1.right_bumper) moveDrive(0.5);
