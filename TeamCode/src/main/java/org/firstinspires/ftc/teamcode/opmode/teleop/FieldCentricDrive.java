@@ -6,18 +6,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 
 @TeleOp
 public class FieldCentricDrive extends LinearOpMode {
     private DcMotor spinner;
     private Servo lClaw, rClaw;
+    public static final double TRIGGER_THRESHOLD = 0.1;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Drivetrain drivetrain = new Drivetrain(hardwareMap, gamepad1);
+        Drive drive = new Drive(this);
         Slides slides = new Slides(hardwareMap, gamepad2);
 
         lClaw = (Servo) hardwareMap.get("lClaw");
@@ -34,7 +35,7 @@ public class FieldCentricDrive extends LinearOpMode {
  */
         waitForStart();
         while (opModeIsActive()) {
-            drivetrain.teleOp();
+            drive.teleOp();
             slides.teleOp();
 
             if (gamepad2.right_trigger >= 0.1) clawServo(1, 1);
@@ -43,6 +44,7 @@ public class FieldCentricDrive extends LinearOpMode {
             if (gamepad2.right_bumper) spinnerIntakeThing(0.5);
             else if (gamepad2.left_bumper) spinnerIntakeThing(-0.5);
             else spinnerIntakeThing(0);
+
         }
     }
     public void clawServo(double setPositionRight, double setPositionLeft) {

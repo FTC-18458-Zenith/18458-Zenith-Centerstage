@@ -72,7 +72,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
 
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, dashboard.getTelemetry());
 
-        drive = new Drive(hardwareMap);
+        drive = new Drive(this);
 
         final VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
