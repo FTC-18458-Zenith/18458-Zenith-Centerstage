@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.opmode.teleop;
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
@@ -13,14 +11,14 @@ import org.firstinspires.ftc.teamcode.subsystem.Slides;
 
 @TeleOp
 public class FieldCentricDrive extends LinearOpMode {
-    private DcMotor leftSlide, rightSlide, spinner;
-    private Servo lClaw, rClaw, rightArmServo, leftArmServo;
+    private DcMotor spinner;
+    private Servo lClaw, rClaw;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Drivetrain drivetrain = new Drivetrain();
-        Slides slides = new Slides();
+        Drivetrain drivetrain = new Drivetrain(hardwareMap, gamepad1);
+        Slides slides = new Slides(hardwareMap, gamepad2);
 
         lClaw = (Servo) hardwareMap.get("lClaw");
         rClaw = (Servo) hardwareMap.get("rClaw");
@@ -36,8 +34,8 @@ public class FieldCentricDrive extends LinearOpMode {
  */
         waitForStart();
         while (opModeIsActive()) {
-            drivetrain.runOpMode();
-            slides.runOpMode();
+            drivetrain.teleOp();
+            slides.teleOp();
 
             if (gamepad2.right_trigger >= 0.1) clawServo(1, 1);
             else if (gamepad2.left_trigger >= 0.1) clawServo(0,0);
@@ -53,8 +51,5 @@ public class FieldCentricDrive extends LinearOpMode {
     }
     public void spinnerIntakeThing(double powerSpinner) {
         spinner.setPower(powerSpinner);
-    }
-    public void armOuttake () {
-
     }
 }

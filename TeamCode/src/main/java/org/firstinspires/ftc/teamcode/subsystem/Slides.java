@@ -1,19 +1,19 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.apache.commons.math3.geometry.euclidean.twod.Line;
-@TeleOp
-public class Slides extends LinearOpMode {
-    private DcMotor leftSlide, rightSlide;
-    @Override
-    public void runOpMode() throws InterruptedException {
+public class Slides {
+    private final DcMotor leftSlide, rightSlide;
+    private final Gamepad gamepad2;
 
+    public Slides(HardwareMap hardwareMap, Gamepad gamepad2) {
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
+        this.gamepad2 = gamepad2;
+
         leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
@@ -29,15 +29,13 @@ public class Slides extends LinearOpMode {
         rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlide.setPower(1);
         rightSlide.setPower(1);
-
-        waitForStart();
-        while (opModeIsActive()) {
+    }
+    public void teleOp() {
             //Depends on number of ticks per revolution
-            if (gamepad2.a) slideMotors(1000);
-            else if (gamepad2.b)slideMotors(500);
-            else if (gamepad2.y) slideMotors(250);
-            else if (gamepad2.x) slideMotors(0);
-        }
+        if (gamepad2.a) slideMotors(1000);
+        else if (gamepad2.b)slideMotors(500);
+        else if (gamepad2.y) slideMotors(250);
+        else if (gamepad2.x) slideMotors(0);
     }
     public void slideMotors(int targetPosition) {
         leftSlide.setTargetPosition(targetPosition);
