@@ -31,6 +31,7 @@ public class Slides {
         rightSlide.setPower(1);
     }
     public void teleOp() {
+        //TODO: Edit these values when bot made, and do the formulas to convert ticks, CENTIMETERS = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
             //Depends on number of ticks per revolution
         if (gamepad2.a) slideMotors(1000);
         else if (gamepad2.b)slideMotors(500);
