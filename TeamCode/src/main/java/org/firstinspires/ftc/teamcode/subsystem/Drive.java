@@ -337,6 +337,7 @@ public class Drive extends MecanumDrive {
         leftFront.setPower(((-gamepad1.left_stick_y  + gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
         leftRear.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
         rightRear.setPower(((-gamepad1.left_stick_y -gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
-        rightFront.setPower(((-gamepad1.left_stick_y -gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
+        rightFront.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
+
     }
 }

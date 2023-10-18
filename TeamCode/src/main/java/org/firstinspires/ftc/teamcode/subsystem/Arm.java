@@ -16,13 +16,13 @@ public class Arm {
         rightArmServo.setPosition(0);
     }
     public void teleOp() {
-        //TODO: Edit these values when bot made, and do the formulas to convert ticks, DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / 360
-      if (gamepad2.a) armServos(0, 0);
-      else if (gamepad2.b) armServos(0.5, 0.5);
-      else if (gamepad2.y) armServos(0.75, 0.75);
-      else if (gamepad2.x) armServos(1,1);
-    } public void armServos(double positionLeft, double positionRight) {
-        leftArmServo.setPosition(positionLeft);
-        rightArmServo.setPosition(positionRight);
+        //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / 360
+      if (gamepad2.a) armServos(0);
+      else if (gamepad2.b) armServos(0.5);
+      else if (gamepad2.y) armServos(0.75);
+      else if (gamepad2.x) armServos(1);
+    } public void armServos(double position) {
+        leftArmServo.setPosition(position);
+        rightArmServo.setPosition(position);
     }
 }

@@ -9,6 +9,7 @@ public class Slides {
     private final DcMotor leftSlide, rightSlide;
     private final Gamepad gamepad2;
 
+
     public Slides(HardwareMap hardwareMap, Gamepad gamepad2) {
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
@@ -31,7 +32,6 @@ public class Slides {
         rightSlide.setPower(1);
     }
     public void teleOp() {
-        //TODO: Edit these values when bot made, and do the formulas to convert ticks, CENTIMETERS = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
             //Depends on number of ticks per revolution
         if (gamepad2.a) slideMotors(1000);
         else if (gamepad2.b)slideMotors(500);
@@ -39,6 +39,7 @@ public class Slides {
         else if (gamepad2.x) slideMotors(0);
     }
     public void slideMotors(int targetPosition) {
+    //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
         leftSlide.setTargetPosition(targetPosition);
         rightSlide.setTargetPosition(targetPosition);
     }
