@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.subsystem.Spinner;
 @TeleOp
-public class FieldCentricDrive extends LinearOpMode {
+public class TeleOpMain extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Drive drive = new Drive(this);
