@@ -334,8 +334,6 @@ public class Drive extends MecanumDrive {
         rightRear.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
         leftFront.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
         rightFront.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
-
-
     }
     public void auto() {
         autoMoving(100);
