@@ -15,7 +15,7 @@ public class Arm {
     //TODO:EDIT THESE VALUES TO CONSTRAINTS OF SERVO
     private static double GEAR_RATIO = 0;
     private static double READINGS_PER_REVOLUTION = 0;
-    private static double DEGREES_OF_FREEDOM = 0;
+    private static double DEGREES_OF_FREEDOM = 355;
     private static double GOAL_DEGREES = 0;
     public Arm(HardwareMap hardwareMap, Gamepad gamepad2) {
         leftArmServo = (Servo) hardwareMap.get("LeftArmServo");

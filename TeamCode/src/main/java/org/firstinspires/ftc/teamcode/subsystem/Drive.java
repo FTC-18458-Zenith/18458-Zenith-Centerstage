@@ -330,10 +330,25 @@ public class Drive extends MecanumDrive {
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(gamepad1.right_stick_x), 1);
 
-        leftFront.setPower(((-gamepad1.left_stick_y  + gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
         leftRear.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
-        rightRear.setPower(((-gamepad1.left_stick_y -gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
+        rightRear.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
+        leftFront.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
         rightFront.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
 
+
+    }
+    public void auto() {
+        autoMoving(100);
+    }
+    // Go forward a certain number of centimeters
+    final static double GEAR_RATIO = 1;
+    final static double TICKS_PER_REVOLUTION = 1150;
+    final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
+    final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
+    public void autoMoving(double movement) {
+        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
     }
 }
