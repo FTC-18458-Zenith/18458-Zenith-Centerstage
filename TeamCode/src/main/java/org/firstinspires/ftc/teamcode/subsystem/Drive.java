@@ -128,7 +128,7 @@ public class Drive extends MecanumDrive {
         }
 
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -334,7 +334,7 @@ public class Drive extends MecanumDrive {
         final double rotationalMovement = gamepad1.right_stick_x;
 
         leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
-        leftRear.setPower(-1 * (((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator));
+        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
         rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
         rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
     }
