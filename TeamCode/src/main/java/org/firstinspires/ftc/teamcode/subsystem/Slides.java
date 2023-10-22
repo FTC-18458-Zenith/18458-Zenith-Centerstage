@@ -46,6 +46,8 @@ public class Slides {
         else if (gamepad2.y) moveLow();
         else if (gamepad2.x) moveToPOS4();
         else if (gamepad2.a) moveToIntakeLevel();
+        else if (gamepad2.left_stick_y > 0.75) manualSlideMovement(0.75);
+        else if (gamepad2.left_stick_y < -0.75) manualSlideMovement(-0.75);
     }
     public void moveSlides(double centimeters) {
         //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
@@ -71,5 +73,9 @@ public class Slides {
     public void moveToIntakeLevel() {
         leftSlide.setTargetPosition(INTAKE);
         rightSlide.setTargetPosition(INTAKE);
+    }
+    public void manualSlideMovement(double motorPowers) {
+        leftSlide.setPower(motorPowers);
+        rightSlide.setPower(motorPowers);
     }
 }
