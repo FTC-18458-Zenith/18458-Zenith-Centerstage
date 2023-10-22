@@ -329,11 +329,14 @@ public class Drive extends MecanumDrive {
         double rotY = gamepad1.left_stick_x * Math.cos(-botHeading) + gamepad1.left_stick_y * Math.sin(-botHeading);
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(gamepad1.right_stick_x), 1);
+        final double yAxisMovement = -gamepad1.left_stick_y;
+        final double xAxisMovement = gamepad1.left_stick_x;
+        final double rotationalMovement = gamepad1.right_stick_x;
 
-        leftRear.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
-        rightRear.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
-        leftFront.setPower(((-gamepad1.left_stick_y + gamepad1.right_stick_x + gamepad1.left_stick_x) * driveTrainPower)/denominator);
-        rightFront.setPower(((-gamepad1.left_stick_y - gamepad1.right_stick_x - gamepad1.left_stick_x) * driveTrainPower)/denominator);
+        leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
+        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
+        rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
+        rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
     }
     public void auto() {
         autoMoving(100);
