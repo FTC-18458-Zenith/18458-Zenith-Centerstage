@@ -326,7 +326,8 @@ public class Drive extends MecanumDrive {
     public void moveDrive(double driveTrainPower) {
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         double rotX = gamepad1.left_stick_x * Math.cos(-botHeading) - gamepad1.left_stick_y * Math.sin(-botHeading);
-        double rotY = gamepad1.left_stick_x * Math.cos(-botHeading) + gamepad1.left_stick_y * Math.sin(-botHeading);
+        double rotY = gamepad1.left_stick_x * Math.cos(-botHeading) + gamepad1.left_stick_y * Math.cos(-botHeading);
+        //Try with sin with later if it still doesn't work
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(gamepad1.right_stick_x), 1);
         final double yAxisMovement = -gamepad1.left_stick_y;
