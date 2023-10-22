@@ -334,7 +334,7 @@ public class Drive extends MecanumDrive {
         final double rotationalMovement = gamepad1.right_stick_x;
 
         leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
-        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
+        leftRear.setPower(-1 * (((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator));
         rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
         rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
     }

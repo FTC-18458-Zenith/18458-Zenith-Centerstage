@@ -18,9 +18,7 @@ public class TeleOpMain extends LinearOpMode {
         Claw claw = new Claw(hardwareMap, gamepad2);
         Spinner spinner = new Spinner(gamepad2, hardwareMap);
         Arm arm = new Arm(hardwareMap, gamepad2);
-/*
-- is Up, + is Down for Y axis sticks
- */
+
         waitForStart();
         while (opModeIsActive()) {
             drive.teleOp();
