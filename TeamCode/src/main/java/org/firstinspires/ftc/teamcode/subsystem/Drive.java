@@ -318,7 +318,7 @@ public class Drive extends MecanumDrive {
     }
     public void teleOp() {
         if (gamepad1.right_bumper) moveDrive(0.5);
-        else moveDrive(1);
+        else moveDrive(0.8);
         if (gamepad1.options) {
             imu.resetYaw();
         }
