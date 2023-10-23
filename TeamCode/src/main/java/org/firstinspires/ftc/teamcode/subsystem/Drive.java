@@ -125,7 +125,7 @@ public class Drive extends MecanumDrive {
 
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
@@ -325,16 +325,16 @@ public class Drive extends MecanumDrive {
         final double rotationalMovement = gamepad1.right_stick_x;
 
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-        double rotX = gamepad1.left_stick_x * Math.cos(-botHeading) - gamepad1.left_stick_y * Math.sin(-botHeading);
-        double rotY = gamepad1.left_stick_x * Math.sin(-botHeading) + gamepad1.left_stick_y * Math.cos(-botHeading);
+        double rotX = xAxisMovement * Math.cos(-botHeading) - yAxisMovement * Math.sin(-botHeading);
+        double rotY = xAxisMovement * Math.sin(-botHeading) + yAxisMovement * Math.cos(-botHeading);
         //Try with sin with later if it still doesn't work
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rotationalMovement), 1);
 
-        leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement)/denominator) * driveTrainPower);
-        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement)/denominator) * driveTrainPower);
-        rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement)/denominator) * driveTrainPower);
-        rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement)/denominator) * driveTrainPower);
+        leftFront.setPower(((rotY + rotX + rotationalMovement)/denominator) * driveTrainPower);
+        leftRear.setPower(((rotY - rotX + rotationalMovement)/denominator) * driveTrainPower);
+        rightFront.setPower(((rotY - rotX - rotationalMovement)/denominator) * driveTrainPower);
+        rightRear.setPower(((rotY + rotX - rotationalMovement)/denominator) * driveTrainPower);
     }
 //    public void auto() {
 //        autoMoving(100);

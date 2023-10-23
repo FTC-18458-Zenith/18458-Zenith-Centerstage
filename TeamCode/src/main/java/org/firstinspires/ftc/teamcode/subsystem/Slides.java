@@ -42,10 +42,10 @@ public class Slides {
     public void teleOp() {
             //Depends on number of ticks per revolution
         if (gamepad2.dpad_up) moveHigh();
-        else if (gamepad2.b) moveMid();
-        else if (gamepad2.y) moveLow();
-        else if (gamepad2.x) moveToPOS4();
-        else if (gamepad2.a) moveToIntakeLevel();
+        else if (gamepad2.cross) moveMid();
+        else if (gamepad2.triangle) moveLow();
+        else if (gamepad2.square) moveToPOS4();
+        else if (gamepad2.circle) moveToIntakeLevel();
         else if (gamepad2.left_stick_y > 0.75) manualSlideMovement(0.75);
         else if (gamepad2.left_stick_y < -0.75) manualSlideMovement(-0.75);
     }

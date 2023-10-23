@@ -29,10 +29,10 @@ public class Arm {
     }
     public void teleOp() {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
-      if (gamepad2.a) moveIntake();
-      else if (gamepad2.b) moveLow();
-      else if (gamepad2.y) moveMid();
-      else if (gamepad2.x) moveHigh();
+      if (gamepad2.circle) moveIntake();
+      else if (gamepad2.cross) moveLow();
+      else if (gamepad2.square) moveMid();
+      else if (gamepad2.triangle) moveHigh();
     }
     public void setPosition(double position) {
         leftArmServo.setPosition(position);
