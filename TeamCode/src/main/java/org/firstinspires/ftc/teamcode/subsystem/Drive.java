@@ -61,13 +61,10 @@ public class Drive extends MecanumDrive {
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
 
     public static double LATERAL_MULTIPLIER = 1;
-
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
     public static double OMEGA_WEIGHT = 1;
-
     private final TrajectorySequenceRunner trajectorySequenceRunner;
-
     private static final TrajectoryVelocityConstraint VEL_CONSTRAINT = getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
     private static final TrajectoryAccelerationConstraint ACCEL_CONSTRAINT = getAccelerationConstraint(MAX_ACCEL);
 
@@ -98,7 +95,6 @@ public class Drive extends MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: adjust the names of the following hardware devices to match your configuration
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 DriveConstants.LOGO_FACING_DIR, DriveConstants.USB_FACING_DIR));
@@ -128,7 +124,7 @@ public class Drive extends MecanumDrive {
         }
 
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -318,7 +314,7 @@ public class Drive extends MecanumDrive {
     }
     public void teleOp() {
         if (gamepad1.right_bumper) moveDrive(0.5);
-        else moveDrive(0.8);
+        else moveDrive(1);
         if (gamepad1.options) {
             imu.resetYaw();
         }
@@ -333,25 +329,25 @@ public class Drive extends MecanumDrive {
         double rotY = gamepad1.left_stick_x * Math.sin(-botHeading) + gamepad1.left_stick_y * Math.cos(-botHeading);
         //Try with sin with later if it still doesn't work
         rotX = rotX * 1.1;
-        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rotationalMovement), 1);
+        double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rotationalMovement), 1);
 
-        leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
-        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement) * driveTrainPower)/denominator);
-        rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
-        rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement) * driveTrainPower)/denominator);
+        leftFront.setPower(((yAxisMovement + xAxisMovement + rotationalMovement)/denominator) * driveTrainPower);
+        leftRear.setPower(((yAxisMovement - xAxisMovement + rotationalMovement)/denominator) * driveTrainPower);
+        rightFront.setPower(((yAxisMovement - xAxisMovement - rotationalMovement)/denominator) * driveTrainPower);
+        rightRear.setPower(((yAxisMovement + xAxisMovement - rotationalMovement)/denominator) * driveTrainPower);
     }
-    public void auto() {
-        autoMoving(100);
-    }
-    // Go forward a certain number of centimeters
-    final static double GEAR_RATIO = 1;
-    final static double TICKS_PER_REVOLUTION = 1150;
-    final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
-    final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
-    public void autoMoving(double movement) {
-        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-    }
+//    public void auto() {
+//        autoMoving(100);
+//    }
+//    // Go forward a certain number of centimeters
+//    final static double GEAR_RATIO = 1;
+//    final static double TICKS_PER_REVOLUTION = 1150;
+//    final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
+//    final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
+//    public void autoMoving(double movement) {
+//        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+//        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+//        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+//        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+//    }
 }
