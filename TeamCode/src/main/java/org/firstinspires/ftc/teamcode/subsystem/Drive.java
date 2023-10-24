@@ -315,13 +315,13 @@ public class Drive extends MecanumDrive {
     public void teleOp() {
         if (gamepad1.right_bumper) moveDrive(0.5);
         else moveDrive(1);
-        if (gamepad1.options) {
+        if (gamepad1.cross) {
             imu.resetYaw();
         }
     }
     public void moveDrive(double driveTrainPower) {
-        final double yAxisMovement = gamepad1.left_stick_y;
-        final double xAxisMovement = -gamepad1.left_stick_x;
+        final double yAxisMovement = -gamepad1.left_stick_y;
+        final double xAxisMovement = gamepad1.left_stick_x;
         final double rotationalMovement = gamepad1.right_stick_x;
 
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
