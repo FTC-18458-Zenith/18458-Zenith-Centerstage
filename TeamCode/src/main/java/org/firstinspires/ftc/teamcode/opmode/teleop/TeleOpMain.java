@@ -16,7 +16,7 @@ public class TeleOpMain extends LinearOpMode {
         //Drive code is all the way at the bottom of the Drive class
         Slides slides = new Slides(hardwareMap, gamepad2);
         Claw claw = new Claw(hardwareMap, gamepad2);
-        Spinner spinner = new Spinner(gamepad2, hardwareMap);
+        //Spinner spinner = new Spinner(gamepad2, hardwareMap);
         Arm arm = new Arm(hardwareMap, gamepad2);
 
         waitForStart();
@@ -24,7 +24,7 @@ public class TeleOpMain extends LinearOpMode {
             drive.teleOp();
             slides.teleOp();
             claw.teleOp();
-            spinner.teleOp();
+            //spinner.teleOp();
             arm.teleOp();
         }
     }
