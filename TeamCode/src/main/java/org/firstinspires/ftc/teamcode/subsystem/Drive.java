@@ -122,7 +122,7 @@ public class Drive extends MecanumDrive {
         if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
             setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
-
+        //RightFront is 2, RightRear 3, LeftFront is 1, LeftRear is 0
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -320,8 +320,8 @@ public class Drive extends MecanumDrive {
         }
     }
     public void moveDrive(double driveTrainPower) {
-        final double yAxisMovement = -gamepad1.left_stick_y;
-        final double xAxisMovement = gamepad1.left_stick_x;
+        final double yAxisMovement = gamepad1.left_stick_y;
+        final double xAxisMovement = -gamepad1.left_stick_x;
         final double rotationalMovement = gamepad1.right_stick_x;
 
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
@@ -331,7 +331,7 @@ public class Drive extends MecanumDrive {
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rotationalMovement), 1);
 
-        leftFront.setPower(((rotY + rotX + rotationalMovement)/denominator) * driveTrainPower);
+        leftFront.setPower(((rotY + rotX+ rotationalMovement)/denominator) * driveTrainPower);
         leftRear.setPower(((rotY - rotX + rotationalMovement)/denominator) * driveTrainPower);
         rightFront.setPower(((rotY - rotX - rotationalMovement)/denominator) * driveTrainPower);
         rightRear.setPower(((rotY + rotX - rotationalMovement)/denominator) * driveTrainPower);
