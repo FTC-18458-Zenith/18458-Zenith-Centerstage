@@ -10,6 +10,7 @@ public class Slides {
     private final Gamepad gamepad2;
     final static double GEAR_RATIO = 1;
     final static double TICKS_PER_REVOLUTION = 145.1;
+    //could be RPM
     final static double GEAR_DIAMETER_CENTIMETERS = 4;
     private static final double HIGH = 10.33;
     //max is 33
@@ -42,13 +43,13 @@ public class Slides {
     }
     public void teleOp() {
             //Depends on number of ticks per revolution
-        if (gamepad2.dpad_up) moveSlides(INTAKE);
-        else if (gamepad2.cross) moveSlides(MID);
-        else if (gamepad2.triangle) moveSlides(LOW);
-        else if (gamepad2.square) moveSlides(POSITION4);
-        else if (gamepad2.circle) moveSlides(HIGH);
-        else if (gamepad2.left_stick_y > 0.75) manualSlideMovement(0.75);
-        else if (gamepad2.left_stick_y < -0.75) manualSlideMovement(-0.75);
+        if (gamepad2.dpad_up) moveToIntakeLevel();
+        else if (gamepad2.cross) moveMid();
+        else if (gamepad2.triangle) moveLow();
+        else if (gamepad2.square) moveToPOS4();
+        else if (gamepad2.circle) moveHigh();
+        else if (gamepad2.left_stick_y > 0.75 || gamepad2.left_stick_y < -0.75) manualSlideMovement();
+        else moveSlides(0);
     }
     public void moveSlides(double centimeters) {
         //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
@@ -75,8 +76,8 @@ public class Slides {
         leftSlide.setTargetPosition(INTAKE);
         rightSlide.setTargetPosition(INTAKE);
     }
-    public void manualSlideMovement(double motorPowers) {
-        leftSlide.setPower(motorPowers);
-        rightSlide.setPower(motorPowers);
+    public void manualSlideMovement() {
+        leftSlide.setPower(gamepad2.left_stick_y);
+        rightSlide.setPower(gamepad2.left_stick_y);
     }
 }
