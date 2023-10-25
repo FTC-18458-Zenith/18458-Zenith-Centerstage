@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode.auto;
 
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,7 +19,6 @@ public class SimpleParkLeft extends LinearOpMode {
         rightFront = (DcMotor) hardwareMap.get("rightFront");
         rightRear = (DcMotor) hardwareMap.get("rightRear");
         // init
-
         waitForStart();
 
     }

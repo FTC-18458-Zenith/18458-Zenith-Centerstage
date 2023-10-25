@@ -7,16 +7,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @Autonomous
 public class SimpleAuto extends LinearOpMode {
     //Dcmotor leftFront is equal to null by default
-    private DcMotor leftFront, leftRear, rightRear, rightFront;
+    private DcMotor leftFront =(DcMotor) hardwareMap.get("leftFront"),
+            leftRear = (DcMotor) hardwareMap.get("leftRear"),
+            rightRear = (DcMotor) hardwareMap.get("rightRear"),
+            rightFront = (DcMotor) hardwareMap.get("rightFront");
     private final DcMotor[] leftDriveTrainMotors = {leftRear, leftFront};
     private final DcMotor[] rightDriveTrainMotors = {rightRear, rightFront};
+    
     @Override
     public void runOpMode() throws InterruptedException {
 
-        leftFront = (DcMotor) hardwareMap.get("leftFront");
-        leftRear = (DcMotor) hardwareMap.get("leftRear");
-        rightFront = (DcMotor) hardwareMap.get("rightFront");
-        rightRear = (DcMotor) hardwareMap.get("rightRear");
+
         // init
         waitForStart();
         setPowers(1,1, 1000);
