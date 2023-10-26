@@ -49,7 +49,7 @@ public class Slides {
         else if (gamepad2.square) moveToPOS4();
         else if (gamepad2.circle) moveHigh();
         else if (gamepad2.left_stick_y > 0.75 || gamepad2.left_stick_y < -0.75) manualSlideMovement();
-        else moveSlides(0);
+        else moveSlides(10);
     }
     public void moveSlides(double centimeters) {
         //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
