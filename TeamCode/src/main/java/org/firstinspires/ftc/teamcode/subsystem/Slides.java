@@ -14,9 +14,9 @@ public class Slides {
     final static double GEAR_DIAMETER_CENTIMETERS = 4;
     private static final double HIGH = 1200;
     //max is 33
-    private static final double MID = 25.75;
-    private static final double LOW = 19;
-    private static final double POSITION4 = 12.375;
+    private static final double MID = 1000;
+    private static final double LOW = 800;
+    private static final double POSITION4 = 600;
     private static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
 
@@ -43,11 +43,11 @@ public class Slides {
     }
     public void teleOp() {
             //Depends on number of ticks per revolution
-        if (gamepad2.dpad_up) moveToIntakeLevel();
-        else if (gamepad2.cross) moveMid();
-        else if (gamepad2.triangle) moveLow();
-        else if (gamepad2.square) moveToPOS4();
-        else if (gamepad2.circle) moveHigh();
+        if (gamepad2.dpad_left) moveToIntakeLevel();
+        else if (gamepad2.square) moveMid();
+        else if (gamepad2.dpad_down) moveLow();
+        else if (gamepad2.dpad_right) moveToPOS4();
+        else if (gamepad2.dpad_up) moveHigh();
         else if (gamepad2.left_stick_y > 0.75 || gamepad2.left_stick_y < -0.75) manualSlideMovement();
     }
     public void moveSlides(double centimeters) {

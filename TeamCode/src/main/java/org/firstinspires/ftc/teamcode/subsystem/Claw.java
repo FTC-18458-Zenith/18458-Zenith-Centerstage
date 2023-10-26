@@ -14,12 +14,12 @@ public class Claw {
 
         lClaw.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.FORWARD);
-        clawServo(0,0);
+        clawServo(0.5,0.5);
     }
     public void teleOp() {
         //TODO Change position left trigger outtake
-        if (gamepad2.right_trigger >= 0.1) clawServo(1, 1);
-        else if (gamepad2.left_trigger >= 0.1) clawServo(0,0);
+        if (gamepad2.cross) clawServo(0.59, 0.59);
+        else if (gamepad2.circle) clawServo(0.4,0.4);
     }
     public void clawServo(double setPositionRight, double setPositionLeft) {
         rClaw.setPosition(setPositionRight);
