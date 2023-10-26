@@ -12,7 +12,7 @@ public class Slides {
     final static double TICKS_PER_REVOLUTION = 145.1;
     //could be RPM
     final static double GEAR_DIAMETER_CENTIMETERS = 4;
-    private static final double HIGH = 10.33;
+    private static final double HIGH = 1.33;
     //max is 33
     private static final double MID = 25.75;
     private static final double LOW = 19;
