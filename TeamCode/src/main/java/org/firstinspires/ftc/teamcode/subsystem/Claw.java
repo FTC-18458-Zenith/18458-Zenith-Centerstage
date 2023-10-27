@@ -21,6 +21,7 @@ public class Claw {
         if (gamepad2.cross) clawServo(0.59, 0.59);
         else if (gamepad2.circle) clawServo(0.4,0.4);
     }
+
     public void clawServo(double setPositionRight, double setPositionLeft) {
         rClaw.setPosition(setPositionRight);
         lClaw.setPosition(setPositionLeft);
