@@ -14,7 +14,7 @@ public class Claw {
 
         lClaw.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.FORWARD);
-        clawServo(0.5,0.5);
+        clawServo(0.42,0.42);
     }
     public void teleOp() {
         //TODO Change position left trigger outtake

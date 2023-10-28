@@ -24,8 +24,8 @@ public class Arm {
         rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
         this.gamepad2 = gamepad2;
 
-        leftArmServo.setPower(0.24);
-        rightArmServo.setPower(0.24);
+        leftArmServo.setPower(0.2);
+        rightArmServo.setPower(0.2);
         leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
         rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
     }
