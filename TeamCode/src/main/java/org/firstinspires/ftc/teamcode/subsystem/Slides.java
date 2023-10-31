@@ -15,7 +15,7 @@ public class Slides {
     private static final double HIGH = 1200;
     //max is 33
     private static final double MID = 1000;
-    private static final double LOW = 800;
+    private static final double LOW = 700;
     private static final double POSITION4 = 600;
     private static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
