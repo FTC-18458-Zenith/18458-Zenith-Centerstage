@@ -336,18 +336,18 @@ public class Drive extends MecanumDrive {
         rightFront.setPower(((rotY - rotX - rotationalMovement)/denominator) * driveTrainPower);
         rightRear.setPower(((rotY + rotX - rotationalMovement)/denominator) * driveTrainPower);
     }
-//    public void auto() {
-//        autoMoving(100);
-//    }
-//    // Go forward a certain number of centimeters
-//    final static double GEAR_RATIO = 1;
-//    final static double TICKS_PER_REVOLUTION = 1150;
-//    final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
-//    final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
-//    public void autoMoving(double movement) {
-//        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-//        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-//        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-//        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-//    }
+    public void auto() {
+        autoMoving(100);
+    }
+    // Go forward a certain number of centimeters
+    final static double GEAR_RATIO = 1;
+    final static double TICKS_PER_REVOLUTION = 1150;
+    final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
+    final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
+    public void autoMoving(double movement) {
+        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+    }
 }
