@@ -350,4 +350,13 @@ public class Drive extends MecanumDrive {
         rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
         rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
     }
+
+    public void drive(double leftPower, double rightPower, long sleepMillis) throws InterruptedException {
+        setMotorPowers(leftPower, leftPower, rightPower, rightPower);
+        Thread.sleep(sleepMillis);
+        stop();
+    }
+    public void stop() {
+        setMotorPowers(0,0,0,0);
+    }
 }
