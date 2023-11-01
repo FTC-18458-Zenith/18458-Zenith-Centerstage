@@ -26,7 +26,7 @@ public class Arm {
         this.gamepad2 = gamepad2;
 
         leftArmServo.setPosition(INTAKE);
-        rightArmServo.setPosition(INTAKE);
+        rightArmServo.setPosition(-INTAKE);
         leftArmServo.setDirection(Servo.Direction.FORWARD);
         rightArmServo.setDirection(Servo.Direction.FORWARD);
     }
