@@ -48,7 +48,7 @@ public class Slides {
         else if (gamepad2.dpad_left) moveLow();
         //else if (gamepad2.dpad_right) moveToPOS4();
         else if (gamepad2.dpad_up) moveHigh();
-        else if (gamepad2.left_stick_y > 0.75 || gamepad2.left_stick_y < -0.75) manualSlideMovement();
+        else if (gamepad2.left_stick_y >= 0.1 || gamepad2.left_stick_y <= -0.1) manualSlideMovement();
     }
     public void moveSlides(double centimeters) {
         //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
@@ -78,5 +78,8 @@ public class Slides {
     public void manualSlideMovement() {
         leftSlide.setPower(gamepad2.left_stick_y);
         rightSlide.setPower(gamepad2.left_stick_y);
+        int ticksPerRev = 100;
+        if (gamepad2.left_stick_y >= 0.1) leftSlide.setTargetPosition(ticksPerRev++);
+        else if (gamepad2.left_stick_y <= -0.1) leftSlide.setTargetPosition(ticksPerRev--);
     }
 }
