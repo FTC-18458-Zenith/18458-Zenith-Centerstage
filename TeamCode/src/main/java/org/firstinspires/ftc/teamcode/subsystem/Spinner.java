@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Spinner {
     private DcMotor spinner;
     private final Gamepad gamepad2;
-    public Spinner (Gamepad gamepad2, HardwareMap hardwareMap) {
+    public Spinner (HardwareMap hardwareMap, Gamepad gamepad2) {
         spinner = (DcMotor) hardwareMap.get("Spinner");
         this.gamepad2 = gamepad2;
         spinner.setDirection(DcMotorSimple.Direction.FORWARD);

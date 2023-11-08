@@ -11,7 +11,7 @@ public class Slides {
     final static double GEAR_RATIO = 1;
     final static double TICKS_PER_REVOLUTION = 145.1;
     //could be RPM
-    final static double GEAR_DIAMETER_CENTIMETERS = 4;
+    final static double GEAR_DIAMETER_CENTIMETERS = 9.6;
     private static final double HIGH = 1200;
     //max is 33
     private static final double MID = 1000;
@@ -19,6 +19,7 @@ public class Slides {
     private static final double POSITION4 = 600;
     private static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
+    private static final double Isisah = 42.1052631579;
 
     public Slides(HardwareMap hardwareMap, Gamepad gamepad2) {
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
@@ -28,7 +29,6 @@ public class Slides {
         leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        //TODO:Test for the other mode Float
         rightSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -51,7 +51,7 @@ public class Slides {
         else if (gamepad2.left_stick_y >= 0.1 || gamepad2.left_stick_y <= -0.1) manualSlideMovement();
     }
     public void moveSlides(double centimeters) {
-        //Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI)
+//        Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
         leftSlide.setTargetPosition((int) (centimeters * CENTIMETER_TO_TICKS));
         rightSlide.setTargetPosition((int) (centimeters * CENTIMETER_TO_TICKS));
     }

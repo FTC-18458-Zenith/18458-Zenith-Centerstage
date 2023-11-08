@@ -17,7 +17,6 @@ public class Claw {
         clawServo(0.42,0.42);
     }
     public void teleOp() {
-        //TODO Change position left trigger outtake
         if (gamepad2.cross) clawServo(0.59, 0.59);
         else if (gamepad2.circle) clawServo(0.4,0.4);
     }

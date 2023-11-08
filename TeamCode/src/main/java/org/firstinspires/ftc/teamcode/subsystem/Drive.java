@@ -327,7 +327,6 @@ public class Drive extends MecanumDrive {
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         double rotX = xAxisMovement * Math.cos(-botHeading) - yAxisMovement * Math.sin(-botHeading);
         double rotY = xAxisMovement * Math.sin(-botHeading) + yAxisMovement * Math.cos(-botHeading);
-        //Try with sin with later if it still doesn't work
         rotX = rotX * 1.1;
         double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rotationalMovement), 1);
 
