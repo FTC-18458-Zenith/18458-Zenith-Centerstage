@@ -4,12 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
-import org.firstinspires.ftc.teamcode.subsystem.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.HangingMech;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
-import org.firstinspires.ftc.teamcode.subsystem.Spinner;
+import org.firstinspires.ftc.teamcode.subsystem.Intake;
 @TeleOp
 public class TeleOpMain extends LinearOpMode {
     @Override
@@ -19,7 +18,7 @@ public class TeleOpMain extends LinearOpMode {
         Slides slides = new Slides(hardwareMap, gamepad2);
         Arm arm = new Arm(hardwareMap, gamepad2);
         DroneLauncher droneLauncher = new DroneLauncher(hardwareMap, gamepad2);
-        Spinner spinner = new Spinner(hardwareMap, gamepad2);
+        Intake intake = new Intake(hardwareMap, gamepad2);
         HangingMech hangingMech =  new HangingMech(hardwareMap, gamepad2);
 
         waitForStart();
@@ -28,7 +27,7 @@ public class TeleOpMain extends LinearOpMode {
             slides.teleOp();
             arm.teleOp();
             droneLauncher.teleOp();
-            spinner.teleOp();
+            intake.teleOp();
             hangingMech.teleOp();
         }
     }

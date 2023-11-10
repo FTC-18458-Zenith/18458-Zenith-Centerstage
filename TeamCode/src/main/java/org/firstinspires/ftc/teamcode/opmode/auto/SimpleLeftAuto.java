@@ -6,10 +6,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
-import org.firstinspires.ftc.teamcode.subsystem.Spinner;
+import org.firstinspires.ftc.teamcode.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.subsystem.Slides;
 
 @Autonomous
-public class SimpleParkLeft extends LinearOpMode {
+public class SimpleLeftAuto extends LinearOpMode {
     private DcMotor leftFront, leftRear, rightRear, rightFront;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -18,20 +19,24 @@ public class SimpleParkLeft extends LinearOpMode {
         rightFront = (DcMotor) hardwareMap.get("rightFront");
         rightRear = (DcMotor) hardwareMap.get("rightRear");
 
-        boolean aprilTagExample1 = true;
-        boolean aprilTagExample2 = true;
-        boolean aprilTagExample3 = true;
 
-        Spinner spinner = new Spinner(hardwareMap, gamepad2);
+        Intake spinner = new Intake(hardwareMap, gamepad2);
         Drive drive = new Drive(this);
         Arm arm = new Arm(hardwareMap, gamepad2);
+        Slides slides = new Slides(hardwareMap, gamepad2);
 
         //init
         waitForStart();
-        while (opModeIsActive()) {
-            if (aprilTagExample1) {
+        movingMotors(1,1,1,1,1000);
+        slides.moveLow();
 
-            }
-        }
+    }
+    public void movingMotors(double leftFrontPowers, double rightFrontPowers,
+                             double leftRearPowers, double rightRearPowers, long durationOfAction  ) {
+        leftFront.setPower(leftFrontPowers);
+        rightFront.setPower(rightFrontPowers);
+        leftRear.setPower(leftRearPowers);
+        rightRear.setPower(rightRearPowers);
+        sleep(durationOfAction);
     }
 }
