@@ -19,10 +19,10 @@ public class SimpleLeftAuto extends LinearOpMode {
         rightFront = (DcMotor) hardwareMap.get("rightFront");
         rightRear = (DcMotor) hardwareMap.get("rightRear");
 
-        Intake spinner = new Intake(hardwareMap, gamepad2);
+        Intake spinner = new Intake(this);
         Drive drive = new Drive(this);
-        Arm arm = new Arm(hardwareMap, gamepad2);
-        Slides slides = new Slides(hardwareMap, gamepad2);
+        Arm arm = new Arm(this);
+        Slides slides = new Slides(this);
 
         //init
         waitForStart();

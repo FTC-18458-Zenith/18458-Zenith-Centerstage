@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Slides {
     private final DcMotor leftSlide, rightSlide;
     private final Gamepad gamepad2;
+    private final Gamepad gamepad1;
     final static double GEAR_RATIO = 1;
     final static double TICKS_PER_REVOLUTION = 145.1;
     //could be RPM
@@ -19,12 +21,15 @@ public class Slides {
     private static final double POSITION4 = 600;
     private static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
+    private HardwareMap hardwareMap;
     private static final double Isisah = 42.1052631579;
 
-    public Slides(HardwareMap hardwareMap, Gamepad gamepad2) {
+    public Slides(OpMode opMode) {
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
-        this.gamepad2 = gamepad2;
+        this.hardwareMap = opMode.hardwareMap;
+        this.gamepad2 = opMode.gamepad2;
+        this.gamepad1 = opMode.gamepad1;
 
         leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -48,7 +53,12 @@ public class Slides {
         else if (gamepad2.dpad_left) moveLow();
         //else if (gamepad2.dpad_right) moveToPOS4();
         else if (gamepad2.dpad_up) moveHigh();
-        else if (gamepad2.left_stick_y >= 0.1 || gamepad2.left_stick_y <= -0.1) manualSlideMovement();
+    }
+    public void soloTeleOp() {
+        if (gamepad1.dpad_down) moveToIntakeLevel();
+        else if (gamepad1.dpad_right) moveMid();
+        else if (gamepad1.dpad_left) moveLow();
+        else if (gamepad1.dpad_up) moveHigh();
     }
     public void moveSlides(double centimeters) {
 //        Centimeters = (GEAR_RATIO * TICKS_PER_REVOLUTION) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);

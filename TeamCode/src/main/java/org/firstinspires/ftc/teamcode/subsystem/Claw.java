@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -7,10 +8,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Claw {
     private Servo lClaw, rClaw;
     private final Gamepad gamepad2;
-    public Claw(HardwareMap hardwareMap, Gamepad gamepad2) {
+    private HardwareMap hardwareMap;
+    public Claw(OpMode opMode) {
         lClaw = (Servo) hardwareMap.get("lClaw");
         rClaw = (Servo) hardwareMap.get("rClaw");
-        this.gamepad2 = gamepad2;
+
+        this.hardwareMap = opMode.hardwareMap;
+        this.gamepad2 = opMode.gamepad2;
 
         lClaw.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.FORWARD);

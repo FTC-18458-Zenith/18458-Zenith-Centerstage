@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -10,6 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Arm {
     private final CRServo leftArmServo, rightArmServo;
     private final Gamepad gamepad2;
+    private final Gamepad gamepad1;
     private static volatile double OUTTAKE = 1;
     private static volatile double INTAKE = 0.24;
 
@@ -18,21 +20,30 @@ public class Arm {
     private static double READINGS_PER_REVOLUTION = 0;
     private static double DEGREES_OF_FREEDOM = 355;
     private static double GOAL_DEGREES = 0;
-    public Arm(HardwareMap hardwareMap, Gamepad gamepad2) {
+    private HardwareMap hardwareMap;
+    public Arm(OpMode opMode) {
         leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
         rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
-        this.gamepad2 = gamepad2;
+
+        this.hardwareMap = opMode.hardwareMap;
+        this.gamepad2 = opMode.gamepad2;
+        this.gamepad1 = opMode.gamepad1;
 
         leftArmServo.setPower(INTAKE - 0.52);
         rightArmServo.setPower(INTAKE);
         leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
         rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
     }
+    public void soloTeleOp() {
+        if (gamepad1.triangle) outtake();
+        else if (gamepad1.square) intake();
+    }
     public void teleOp() {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
         if (gamepad2.triangle) outtake();
-        else if (gamepad2.square) moveIntake();
+        else if (gamepad2.square) intake();
     }
+
     public void setPosition(double position) {
         leftArmServo.setPower(position);
         rightArmServo.setPower(position);
@@ -41,7 +52,7 @@ public class Arm {
         leftArmServo.setPower(-OUTTAKE);
         rightArmServo.setPower(OUTTAKE);
     }
-    public void moveIntake() {
+    public void intake() {
         leftArmServo.setPower(-INTAKE);
         rightArmServo.setPower(INTAKE);
     }

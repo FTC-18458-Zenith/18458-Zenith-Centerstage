@@ -15,11 +15,11 @@ public class TeleOpMain extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Drive drive = new Drive(this);
         //Drive code is all the way at the bottom of the Drive class
-        Slides slides = new Slides(hardwareMap, gamepad2);
-        Arm arm = new Arm(hardwareMap, gamepad2);
-        DroneLauncher droneLauncher = new DroneLauncher(hardwareMap, gamepad2);
-        Intake intake = new Intake(hardwareMap, gamepad2);
-        HangingMech hangingMech =  new HangingMech(hardwareMap, gamepad1);
+        Slides slides = new Slides(this);
+        Arm arm = new Arm(this);
+        DroneLauncher droneLauncher = new DroneLauncher(this);
+        Intake intake = new Intake(this);
+        HangingMech hangingMech = new HangingMech(this);
 
         waitForStart();
         while (opModeIsActive()) {
