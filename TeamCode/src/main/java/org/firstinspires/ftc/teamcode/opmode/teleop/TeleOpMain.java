@@ -19,7 +19,7 @@ public class TeleOpMain extends LinearOpMode {
         Arm arm = new Arm(hardwareMap, gamepad2);
         DroneLauncher droneLauncher = new DroneLauncher(hardwareMap, gamepad2);
         Intake intake = new Intake(hardwareMap, gamepad2);
-        HangingMech hangingMech =  new HangingMech(hardwareMap, gamepad2);
+        HangingMech hangingMech =  new HangingMech(hardwareMap, gamepad1);
 
         waitForStart();
         while (opModeIsActive()) {

@@ -6,12 +6,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class HangingMech {
     private final DcMotor hangingMotor;
-    private final Gamepad gamepad2;
+    private final Gamepad gamepad1;
     private final int hanging = 1000;
 
-    public HangingMech(HardwareMap hardwareMap, Gamepad gamepad2) {
+    public HangingMech(HardwareMap hardwareMap, Gamepad gamepad1) {
         hangingMotor = (DcMotor) hardwareMap.get("hangingMotor");
-        this.gamepad2 = gamepad2;
+        this.gamepad1 = gamepad1;
 
         hangingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         hangingMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -21,7 +21,7 @@ public class HangingMech {
         hangingMotor.setPower(1);
     }
     public void teleOp() {
-        if (gamepad2.left_bumper) hanging();
+        if (gamepad1.left_bumper) hanging();
     }
     public void hanging() {
         hangingMotor.setTargetPosition(hanging);

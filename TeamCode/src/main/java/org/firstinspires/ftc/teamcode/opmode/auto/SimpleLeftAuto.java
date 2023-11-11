@@ -19,7 +19,6 @@ public class SimpleLeftAuto extends LinearOpMode {
         rightFront = (DcMotor) hardwareMap.get("rightFront");
         rightRear = (DcMotor) hardwareMap.get("rightRear");
 
-
         Intake spinner = new Intake(hardwareMap, gamepad2);
         Drive drive = new Drive(this);
         Arm arm = new Arm(hardwareMap, gamepad2);
@@ -28,11 +27,11 @@ public class SimpleLeftAuto extends LinearOpMode {
         //init
         waitForStart();
         movingMotors(1,1,1,1,1000);
-        slides.moveLow();
+        arm.outtake();
 
     }
     public void movingMotors(double leftFrontPowers, double rightFrontPowers,
-                             double leftRearPowers, double rightRearPowers, long durationOfAction  ) {
+                             double leftRearPowers, double rightRearPowers, long durationOfAction) {
         leftFront.setPower(leftFrontPowers);
         rightFront.setPower(rightFrontPowers);
         leftRear.setPower(leftRearPowers);
