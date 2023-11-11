@@ -23,6 +23,9 @@ public class HangingMech {
     public void teleOp() {
         if (gamepad1.left_bumper) hanging();
     }
+    public void soloTeleOp() {
+        if (gamepad1.left_bumper)hanging();
+    }
     public void hanging() {
         hangingMotor.setTargetPosition(hanging);
     }
