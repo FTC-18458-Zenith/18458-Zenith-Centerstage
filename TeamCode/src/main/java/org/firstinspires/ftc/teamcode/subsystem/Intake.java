@@ -20,8 +20,8 @@ public class Intake {
         spinner.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void teleOp() {
-        if (gamepad2.right_bumper) spinnerIntakeThing(0.5);
-        else if (gamepad2.left_bumper) spinnerIntakeThing(-0.5);
+        if (gamepad2.right_bumper) spinnerIntakeThing(0.05);
+        else if (gamepad2.left_bumper) spinnerIntakeThing(-0.05);
         else spinnerIntakeThing(0);
     }
     public void soloTeleOp() {

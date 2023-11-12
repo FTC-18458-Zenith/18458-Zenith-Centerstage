@@ -335,9 +335,6 @@ public class Drive extends MecanumDrive {
         rightFront.setPower(((rotY - rotX - rotationalMovement)/denominator) * driveTrainPower);
         rightRear.setPower(((rotY + rotX - rotationalMovement)/denominator) * driveTrainPower);
     }
-    public void auto() {
-        autoMoving(100);
-    }
     // Go forward a certain number of centimeters
     final static double GEAR_RATIO = 1;
     final static double TICKS_PER_REVOLUTION = 1150;
