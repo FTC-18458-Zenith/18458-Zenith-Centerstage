@@ -17,7 +17,6 @@ public class Intake {
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
         spinner.setDirection(DcMotorSimple.Direction.FORWARD);
-        spinner.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void teleOp() {
         if (gamepad2.right_bumper) spinnerIntakeThing(0.5);
