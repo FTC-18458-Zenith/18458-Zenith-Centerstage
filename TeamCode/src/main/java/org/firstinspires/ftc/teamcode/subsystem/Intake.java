@@ -21,7 +21,7 @@ public class Intake {
     }
     public void teleOp() {
         if (gamepad2.right_bumper) spinnerIntakeThing(0.0000000000005);
-        else if (gamepad2.left_bumper) spinnerIntakeThing(-0.0000000000005);
+        if (gamepad2.left_bumper) spinnerIntakeThing(-0.0000000000005);
         else spinnerIntakeThing(0);
     }
     public void soloTeleOp() {
