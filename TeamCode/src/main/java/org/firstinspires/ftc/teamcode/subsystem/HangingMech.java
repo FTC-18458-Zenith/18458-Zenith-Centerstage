@@ -12,9 +12,10 @@ public class HangingMech {
     private HardwareMap hardwareMap;
 
     public HangingMech(OpMode opMode) {
-        hangingMotor = (DcMotor) hardwareMap.get("hangingMotor");
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad1 = opMode.gamepad1;
+
+        hangingMotor = (DcMotor) hardwareMap.get("hangingMotor");
 
         hangingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         hangingMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

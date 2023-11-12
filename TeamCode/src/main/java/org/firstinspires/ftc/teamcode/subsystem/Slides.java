@@ -25,11 +25,12 @@ public class Slides {
     private static final double Isisah = 42.1052631579;
 
     public Slides(OpMode opMode) {
-        leftSlide = (DcMotor) hardwareMap.get("leftSlide");
-        rightSlide = (DcMotor) hardwareMap.get("rightSlide");
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
+        
+        leftSlide = (DcMotor) hardwareMap.get("leftSlide");
+        rightSlide = (DcMotor) hardwareMap.get("rightSlide");
 
         leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -76,10 +77,6 @@ public class Slides {
     public void moveLow() {
         leftSlide.setTargetPosition((int) LOW);
         rightSlide.setTargetPosition((int) LOW);
-    }
-    public void moveToPOS4() {
-        leftSlide.setTargetPosition((int) POSITION4);
-        rightSlide.setTargetPosition((int) POSITION4);
     }
     public void moveToIntakeLevel() {
         leftSlide.setTargetPosition(INTAKE);

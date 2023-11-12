@@ -12,15 +12,16 @@ public class Intake {
     private final Gamepad gamepad1;
     private HardwareMap hardwareMap;
     public Intake(OpMode opMode) {
-        spinner = (DcMotor) hardwareMap.get("Spinner");
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
+
+        spinner = (DcMotor) hardwareMap.get("Spinner");
         spinner.setDirection(DcMotorSimple.Direction.FORWARD);
     }
     public void teleOp() {
         if (gamepad2.right_bumper) spinnerIntakeThing(0.5);
-        if (gamepad2.left_bumper) spinnerIntakeThing(-0.5);
+        else if (gamepad2.left_bumper) spinnerIntakeThing(-0.5);
         //0.0000000000005
         //5*10^-12
         else spinnerIntakeThing(0);

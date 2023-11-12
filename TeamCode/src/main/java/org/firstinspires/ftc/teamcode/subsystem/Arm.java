@@ -22,12 +22,12 @@ public class Arm {
     private static double GOAL_DEGREES = 0;
     private HardwareMap hardwareMap;
     public Arm(OpMode opMode) {
-        leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
-        rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
-
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
+
+        leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
+        rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
 
         leftArmServo.setPower(INTAKE - 0.52);
         rightArmServo.setPower(INTAKE);

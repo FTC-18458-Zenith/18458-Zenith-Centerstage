@@ -11,12 +11,13 @@ public class DroneLauncher {
     private final Servo servoLauncher;
     private HardwareMap hardwareMap;
     public DroneLauncher(OpMode opMode) {
-        servoLauncher = (Servo) hardwareMap.get("servoLauncher");
-        servoLauncher.setPosition(0);
-        servoLauncher.setDirection(Servo.Direction.FORWARD);
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
+
+        servoLauncher = (Servo) hardwareMap.get("servoLauncher");
+        servoLauncher.setPosition(0);
+        servoLauncher.setDirection(Servo.Direction.FORWARD);
     }
     public void teleOp() {
         if (gamepad2.right_trigger <= 1) servoPosition(1);

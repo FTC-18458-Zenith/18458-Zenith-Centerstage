@@ -340,11 +340,36 @@ public class Drive extends MecanumDrive {
     final static double TICKS_PER_REVOLUTION = 1150;
     final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
-    public void autoMoving(double movement) {
-        leftFront.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        leftRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
-        rightRear.setTargetPosition((int) (movement * CENTIMETER_TO_TICKS));
+    public void stuffForAuto() {
+        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftFront.setTargetPosition(0);
+        rightFront.setTargetPosition(0);
+        rightRear.setTargetPosition(0);
+        leftRear.setTargetPosition(0);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(1);
+        rightFront.setPower(1);
+        leftRear.setPower(1);
+        rightRear.setPower(1);
     }
 
     public void drive(double leftPower, double rightPower, long sleepMillis) throws InterruptedException {
