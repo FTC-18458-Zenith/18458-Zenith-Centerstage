@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class Slides {
     private final DcMotor leftSlide, rightSlide;
     private final Gamepad gamepad2;
@@ -22,12 +24,14 @@ public class Slides {
     static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
     private HardwareMap hardwareMap;
+    private Telemetry telemetry;
     private static final double Isisah = 42.1052631579;
 
     public Slides(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
+        this.telemetry = opMode.telemetry;
         
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
@@ -54,6 +58,9 @@ public class Slides {
         else if (gamepad2.dpad_left) moveLow();
         //else if (gamepad2.dpad_right) moveToPOS4();
         else if (gamepad2.dpad_up) moveHigh();
+        telemetry.addData("Slide left position", leftSlide);
+        telemetry.addData("Slide right position", rightSlide);
+        telemetry.update();
     }
     public void soloTeleOp() {
         if (gamepad1.dpad_down) moveToIntakeLevel();

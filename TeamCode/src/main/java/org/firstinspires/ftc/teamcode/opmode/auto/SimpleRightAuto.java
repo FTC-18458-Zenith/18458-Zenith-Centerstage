@@ -26,7 +26,7 @@ public class SimpleRightAuto extends LinearOpMode {
         waitForStart();
         drive.movingMotors(0.8,0.8,0.8,0.8,1000, 1000);
         spinner.spinnerAutoThing(0.5, 500);
-        spinner.spinnerIntakeThing(0);
+        spinner.spinnerAutoThing(0, 500);
         sleep(10000);
         drive.movingMotors(0.8, 0.8, 0.8, 0.8, 1000, 0);
         drive.movingMotors(0.3, 0.3, 0.3, 0.3, 1000, 10000);
