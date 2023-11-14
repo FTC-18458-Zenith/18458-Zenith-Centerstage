@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Slides;
 
 @Autonomous
 public class SimpleRightAuto extends LinearOpMode {
-    private DcMotor leftFront, leftRear, rightRear, rightFront;
+
     @Override
     public void runOpMode() throws InterruptedException {
         Intake spinner = new Intake(this);
@@ -20,29 +20,17 @@ public class SimpleRightAuto extends LinearOpMode {
         Arm arm = new Arm(this);
         Slides slides = new Slides(this);
 
-        leftFront = (DcMotor) hardwareMap.get("leftFront");
-        leftRear = (DcMotor) hardwareMap.get("leftRear");
-        rightFront = (DcMotor) hardwareMap.get("rightFront");
-        rightRear = (DcMotor) hardwareMap.get("rightRear");
         drive.stuffForAuto();
 
         //init
         waitForStart();
-        movingMotors(0.8,0.8,0.8,0.8,1000, 10000);
-        arm.outtake();
-    }
-    public void movingMotors(double leftFrontPowers, double rightFrontPowers,
-                             double leftRearPowers, double rightRearPowers, long durationOfAction, int targetPosition) {
-        leftFront.setPower(leftFrontPowers);
-        rightFront.setPower(rightFrontPowers);
-        leftRear.setPower(leftRearPowers);
-        rightRear.setPower(rightRearPowers);
-
-        leftFront.setTargetPosition(targetPosition);
-        leftRear.setTargetPosition(targetPosition);
-        rightFront.setTargetPosition(targetPosition);
-        rightRear.setTargetPosition(targetPosition);
-
-        sleep(durationOfAction);
+        drive.movingMotors(0.8,0.8,0.8,0.8,1000, 1000);
+        spinner.spinnerAutoThing(0.5, 500);
+        spinner.spinnerIntakeThing(0);
+        sleep(10000);
+        drive.movingMotors(0.8, 0.8, 0.8, 0.8, 1000, 0);
+        drive.movingMotors(0.3, 0.3, 0.3, 0.3, 1000, 10000);
+        sleep(250);
+        arm.armAutoOuttake(1000);
     }
 }

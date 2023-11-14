@@ -56,4 +56,19 @@ public class Arm {
         leftArmServo.setPower(-INTAKE);
         rightArmServo.setPower(INTAKE);
     }
+    public void armAutoOuttake(long durationOfAction) throws InterruptedException {
+        leftArmServo.setPower(-OUTTAKE);
+        rightArmServo.setPower(OUTTAKE);
+        Thread.sleep(durationOfAction);
+        leftArmServo.setPower(-INTAKE);
+        rightArmServo.setPower(INTAKE);
+    }
+    public void armAutoIntake(long durationOfAction) throws InterruptedException {
+        leftArmServo.setPower(-INTAKE);
+        rightArmServo.setPower(INTAKE);
+        Thread.sleep(durationOfAction);
+        leftArmServo.setPower(-OUTTAKE);
+        rightArmServo.setPower(OUTTAKE);
+    }
+
 }

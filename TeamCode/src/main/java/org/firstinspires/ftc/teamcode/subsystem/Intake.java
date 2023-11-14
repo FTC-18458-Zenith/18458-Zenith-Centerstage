@@ -34,4 +34,8 @@ public class Intake {
     public void spinnerIntakeThing(double powerSpinner) {
         spinner.setPower(powerSpinner);
     }
+    public void spinnerAutoThing(double powerSpinner, long durationOfActions) throws InterruptedException {
+        spinner.setPower(powerSpinner);
+        Thread.sleep(durationOfActions);
+    }
 }

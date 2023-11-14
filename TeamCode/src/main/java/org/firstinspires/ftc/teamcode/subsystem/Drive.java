@@ -123,8 +123,8 @@ public class Drive extends MecanumDrive {
             setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
         //RightFront is 2, RightRear 3, LeftFront is 1, LeftRear is 0
-        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
 
@@ -337,7 +337,7 @@ public class Drive extends MecanumDrive {
     }
     // Go forward a certain number of centimeters
     final static double GEAR_RATIO = 1;
-    final static double TICKS_PER_REVOLUTION = 1150;
+    final static double TICKS_PER_REVOLUTION = 537.7;
     final static double GEAR_DIAMETER_CENTIMETERS = 3.2;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
     public void stuffForAuto() {
@@ -379,5 +379,20 @@ public class Drive extends MecanumDrive {
     }
     public void stop() {
         setMotorPowers(0,0,0,0);
+    }
+
+    public void movingMotors(double leftFrontPowers, double rightFrontPowers,
+                             double leftRearPowers, double rightRearPowers, long durationOfAction, int targetPosition) throws InterruptedException {
+        leftFront.setPower(leftFrontPowers);
+        rightFront.setPower(rightFrontPowers);
+        leftRear.setPower(leftRearPowers);
+        rightRear.setPower(rightRearPowers);
+
+        leftFront.setTargetPosition(targetPosition);
+        leftRear.setTargetPosition(targetPosition);
+        rightFront.setTargetPosition(targetPosition);
+        rightRear.setTargetPosition(targetPosition);
+
+        Thread.sleep(durationOfAction);
     }
 }

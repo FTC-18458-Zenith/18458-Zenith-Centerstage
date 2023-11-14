@@ -14,12 +14,12 @@ public class Slides {
     final static double TICKS_PER_REVOLUTION = 145.1;
     //could be RPM
     final static double GEAR_DIAMETER_CENTIMETERS = 9.6;
-    private static final double HIGH = 1200;
+    static final double HIGH = 1200;
     //max is 33
-    private static final double MID = 1000;
-    private static final double LOW = 700;
-    private static final double POSITION4 = 600;
-    private static final int INTAKE = 0;
+    static final double MID = 1000;
+    static final double LOW = 700;
+    static final double POSITION4 = 600;
+    static final int INTAKE = 0;
     final double CENTIMETER_TO_TICKS = (TICKS_PER_REVOLUTION * GEAR_RATIO) / (GEAR_DIAMETER_CENTIMETERS * Math.PI);
     private HardwareMap hardwareMap;
     private static final double Isisah = 42.1052631579;
