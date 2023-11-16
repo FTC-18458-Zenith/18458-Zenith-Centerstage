@@ -34,11 +34,11 @@ public class Arm {
         leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
         rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
     }
-    public void soloTeleOp() {
+    public void soloTeleOp() throws InterruptedException {
         if (gamepad1.triangle) outtake();
         else if (gamepad1.square) intake();
     }
-    public void teleOp() {
+    public void teleOp() throws InterruptedException {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
         if (gamepad2.triangle) outtake();
         else if (gamepad2.square) intake();
@@ -48,9 +48,11 @@ public class Arm {
         leftArmServo.setPower(position);
         rightArmServo.setPower(position);
     }
-    public void outtake() {
+    public void outtake() throws InterruptedException {
         leftArmServo.setPower(-OUTTAKE);
         rightArmServo.setPower(OUTTAKE);
+        Thread.sleep(100);
+        intake();
     }
     public void intake() {
         leftArmServo.setPower(-INTAKE);

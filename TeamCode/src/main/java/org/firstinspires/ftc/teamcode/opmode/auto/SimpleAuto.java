@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.opmode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 
@@ -13,6 +12,6 @@ public class SimpleAuto extends LinearOpMode {
         Drive drive = new Drive(this);
         // init
         waitForStart();
-        drive.drive(0.7,0.7, 1000);
+        drive.drive(0.5,0.5, 1000);
     }
 }
