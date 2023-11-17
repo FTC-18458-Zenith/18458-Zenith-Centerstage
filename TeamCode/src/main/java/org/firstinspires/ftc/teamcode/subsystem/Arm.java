@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Arm {
-    private final CRServo leftArmServo, rightArmServo;
+    private final Servo leftArmServo, rightArmServo;
     private final Gamepad gamepad2;
     private final Gamepad gamepad1;
     private static volatile double OUTTAKE = 1;
@@ -27,14 +27,14 @@ public class Arm {
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
 
-        leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
-        rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
+        leftArmServo = (Servo) hardwareMap.get("LeftArmServo");
+        rightArmServo = (Servo) hardwareMap.get("RightArmServo");
 
 
-        leftArmServo.setPower(INTAKE - 0.52);
-        rightArmServo.setPower(INTAKE);
-        leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftArmServo.setPosition(INTAKE - 0.52);
+        rightArmServo.setPosition(INTAKE);
+        leftArmServo.setDirection(Servo.Direction.FORWARD);
+        rightArmServo.setDirection(Servo.Direction.FORWARD);
     }
     public void soloTeleOp() throws InterruptedException {
         if (gamepad1.triangle) outtake();
@@ -47,32 +47,28 @@ public class Arm {
     }
 
     public void setPosition(double position) {
-        leftArmServo.setPower(position);
-        rightArmServo.setPower(position);
+        leftArmServo.setPosition(position);
+        rightArmServo.setPosition(position);
     }
     public void outtake() throws InterruptedException {
-        leftArmServo.setPower(-OUTTAKE);
-        rightArmServo.setPower(OUTTAKE);
+        leftArmServo.setPosition(-OUTTAKE);
+        rightArmServo.setPosition(OUTTAKE);
         Thread.sleep(100);
         intake();
     }
     public void intake() {
-        leftArmServo.setPower(-INTAKE);
-        rightArmServo.setPower(INTAKE);
+        leftArmServo.setPosition(-INTAKE);
+        rightArmServo.setPosition(INTAKE);
     }
     public void armAutoOuttake(long durationOfAction) throws InterruptedException {
-        leftArmServo.setPower(-OUTTAKE);
-        rightArmServo.setPower(OUTTAKE);
+        leftArmServo.setPosition(-OUTTAKE);
+        rightArmServo.setPosition(OUTTAKE);
         Thread.sleep(durationOfAction);
-        leftArmServo.setPower(-INTAKE);
-        rightArmServo.setPower(INTAKE);
+        leftArmServo.setPosition(-INTAKE);
+        rightArmServo.setPosition(INTAKE);
     }
-    public void armAutoIntake(long durationOfAction) throws InterruptedException {
-        leftArmServo.setPower(-INTAKE);
-        rightArmServo.setPower(INTAKE);
-        Thread.sleep(durationOfAction);
-        leftArmServo.setPower(-OUTTAKE);
-        rightArmServo.setPower(OUTTAKE);
+    public void armAutoIntake() throws InterruptedException {
+        leftArmServo.setPosition(-INTAKE);
+        rightArmServo.setPosition(INTAKE);
     }
-
 }

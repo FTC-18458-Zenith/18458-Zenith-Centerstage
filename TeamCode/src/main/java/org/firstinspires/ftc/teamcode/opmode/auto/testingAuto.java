@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.Slides;
 
 @Autonomous
 public class testingAuto extends LinearOpMode {
@@ -12,7 +13,11 @@ public class testingAuto extends LinearOpMode {
 
         waitForStart();
         Arm arm = new Arm(this);
+        Slides slides = new Slides(this);
 
-        arm.armAutoOuttake(10000);
+        slides.moveLow();
+        arm.armAutoOuttake(1000);
+        sleep(1000);
+
     }
 }

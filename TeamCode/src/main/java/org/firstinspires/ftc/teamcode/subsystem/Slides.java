@@ -101,4 +101,13 @@ public class Slides {
         if (gamepad2.left_stick_y >= 0.1) leftSlide.setTargetPosition(ticksPerRev++);
         else if (gamepad2.left_stick_y <= -0.1) leftSlide.setTargetPosition(ticksPerRev--);
     }
+    public void resetSlidesAuto() {
+        leftSlide.setTargetPosition(INTAKE);
+        rightSlide.setTargetPosition(INTAKE);
+    }
+    public void lowSlideAuto(long durationOfAction) throws InterruptedException {
+        leftSlide.setTargetPosition(LOW);
+        rightSlide.setTargetPosition(LOW);
+        Thread.sleep(1000);
+    }
 }

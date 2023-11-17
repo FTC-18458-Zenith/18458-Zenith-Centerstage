@@ -63,7 +63,8 @@ public class LeftAuto extends LinearOpMode {
                 drive.followTrajectorySequence(Trajectory2_1);
 
                 drive.followTrajectorySequence(Trajectory3_1);
-                arm.armAutoOuttake(250);
+                slides.moveLow();
+                arm.armAutoOuttake(1000);
 
                 break;
             case 2:
@@ -73,7 +74,8 @@ public class LeftAuto extends LinearOpMode {
                 spinner.spinnerAutoThing(-0.5, 250);
 
                 drive.followTrajectorySequence(Trajectory2_3);
-                arm.armAutoOuttake(250);
+                slides.moveLow();
+                arm.armAutoOuttake(1000);
 
 
         }
