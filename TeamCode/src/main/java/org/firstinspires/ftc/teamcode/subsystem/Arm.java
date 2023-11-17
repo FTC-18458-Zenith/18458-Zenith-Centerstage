@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Arm {
@@ -28,6 +29,7 @@ public class Arm {
 
         leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
         rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
+
 
         leftArmServo.setPower(INTAKE - 0.52);
         rightArmServo.setPower(INTAKE);

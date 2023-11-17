@@ -11,12 +11,11 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
 @Config
-@Autonomous (name = "Park", group = "RoadRunnerPath")
+@Autonomous (name = "LeftAutoPark", group = "RoadRunnerPath")
 
 public class Park extends LinearOpMode {
-
-
     public static double Park_Distance = 30;
+    public static double Pixel_Dis = 20;
 
     @Override
     public void runOpMode() throws InterruptedException {

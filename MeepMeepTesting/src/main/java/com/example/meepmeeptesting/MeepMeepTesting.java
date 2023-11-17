@@ -18,25 +18,23 @@ public class MeepMeepTesting {
                 .setColorScheme((new ColorSchemeRedDark()))
                 .setDimensions(13.4,14.8031)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 2)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(14, -60, Math.toRadians(90)))
                                 .forward(29)
                                 .turn(Math.toRadians(-90))
                                 .forward(30)
-                                .forward(-102)
-                                .strafeLeft(5)
                                 .build()
                 );
         RoadRunnerBotEntity blueAlliance = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueDark()))
                 .setDimensions(13.4,14.8031)
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-34, 68, Math.toRadians(270)))
-                                .forward(37)
-                                .turn(Math.toRadians(90))
-                                .forward(83)
+                                .forward(35)
+                                .turn(Math.toRadians(-90))
+                                .forward(-83)
                                 .build()
                 );
 
