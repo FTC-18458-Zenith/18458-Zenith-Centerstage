@@ -34,7 +34,7 @@ public class MeepMeepTesting {
                         drive.trajectorySequenceBuilder(new Pose2d(-34, 68, Math.toRadians(270)))
                                 .forward(35)
                                 .turn(Math.toRadians(-90))
-                                .forward(-83)
+                                .forward(-17)
                                 .build()
                 );
 

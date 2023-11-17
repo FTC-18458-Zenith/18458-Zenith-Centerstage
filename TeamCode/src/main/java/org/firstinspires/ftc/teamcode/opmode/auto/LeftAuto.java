@@ -15,6 +15,8 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 public class LeftAuto extends LinearOpMode {
     public static double Park_Distance = 35;
     public static double Pixel_Dis = -83;
+    public static double randomization2 = -17;
+    public static int colorSensor;
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -29,28 +31,51 @@ public class LeftAuto extends LinearOpMode {
 
         drive.setPoseEstimate(startPos);
 
-        TrajectorySequence Trajectory1 = drive.trajectorySequenceBuilder(startPos)
-                .forward(Pixel_Dis)
+        TrajectorySequence Trajectory1_1 = drive.trajectorySequenceBuilder(startPos)
+                .forward(Park_Distance)
                 .build();
 
-        TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
-                .turn(Math.toRadians(-90))
-                .back(Park_Distance)
-                .build();
+            TrajectorySequence Trajectory2_1 = drive.trajectorySequenceBuilder(Trajectory1_1.end())
+                    .turn(Math.toRadians(-90))
+                    .forward(Pixel_Dis)
+                    .build();
 
-        TrajectorySequence Trajectory3 = drive.trajectorySequenceBuilder(Trajectory2.end())
-                .forward(83)
-                .build();
+            TrajectorySequence Trajectory3_1 = drive.trajectorySequenceBuilder(Trajectory2_1.end())
+                    .forward(83)
+                    .build();
+
+        TrajectorySequence Trajectory1_2 = drive.trajectorySequenceBuilder(startPos)
+                    .forward(Park_Distance)
+                    .build();
+            TrajectorySequence Trajectory2_2 = drive.trajectorySequenceBuilder(Trajectory1_2.end())
+                    .forward(randomization2)
+                    .build();
+            TrajectorySequence Trajectory2_3 = drive.trajectorySequenceBuilder(Trajectory2_2.end())
+                    .turn(-90)
+                    .forward(Pixel_Dis + randomization2)
+                    .build();
+
+        switch (colorSensor) {
+            case 1:
+                drive.followTrajectorySequence(Trajectory1_1);
+                spinner.spinnerAutoThing(-0.5, 250);
+
+                drive.followTrajectorySequence(Trajectory2_1);
+
+                drive.followTrajectorySequence(Trajectory3_1);
+                arm.armAutoOuttake(250);
+
+                break;
+            case 2:
+                drive.followTrajectorySequence(Trajectory1_2);
+
+                drive.followTrajectorySequence(Trajectory2_2);
+                spinner.spinnerAutoThing(-0.5, 250);
+
+                drive.followTrajectorySequence(Trajectory2_3);
+                arm.armAutoOuttake(250);
 
 
-        //Run Auto
-        drive.followTrajectorySequence(Trajectory1);
-        spinner.spinnerAutoThing(-0.5, 250);
-
-        drive.followTrajectorySequence(Trajectory2);
-
-        drive.followTrajectorySequence(Trajectory3);
-        arm.armAutoOuttake(250);
-
+        }
     }
 }
