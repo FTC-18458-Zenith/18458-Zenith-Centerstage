@@ -24,9 +24,9 @@ public class TeleOpMainV2 extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
+            arm.teleOp();
             drive.teleOp();
             slides.teleOp();
-            arm.teleOp();
             droneLauncher.teleOp();
             intake.teleOp();
             hangingMech.teleOp();

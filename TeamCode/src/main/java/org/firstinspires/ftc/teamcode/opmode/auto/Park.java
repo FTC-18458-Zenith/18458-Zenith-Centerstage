@@ -34,6 +34,7 @@ public class Park extends LinearOpMode {
 
             //Run Auto
             drive.followTrajectorySequence(Trajectory1);
+            drive.movingMotors(0.1, 10000, 1000);
         }
     }
 

@@ -18,14 +18,13 @@ public class Slides {
     final static double TICKS_PER_REVOLUTION = 145.1;
     //could be RPM
     final static double GEAR_DIAMETER_CENTIMETERS = 9.6;
-    static final int HIGH = 1200;
+    public static final int HIGH = 1200;
     //max is 33
-    static final int MID = 1000;
-    static final int LOW = 700;
-    static final double POSITION4 = 600;
-    static final int INTAKE = 0;
-
-    final int[] TargetPositions = {HIGH, MID, LOW, INTAKE};
+    public static final int MID = 1000;
+    public static final int LOW = 700;
+    public static final int INTAKE = 0;
+    int position;
+    public static double openingMini = 0.6;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
@@ -48,24 +47,25 @@ public class Slides {
 
         leftSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //TODO: SET THESE BACK TO 0
         leftSlide.setTargetPosition(0);
         rightSlide.setTargetPosition(0);
         leftSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlide.setPower(1);
-        rightSlide.setPower(1);
-        miniservo.setPosition(0);
+        leftSlide.setPower(0.6);
+        rightSlide.setPower(0.6);
+        miniservo.setPosition(1);
 
+        position = leftSlide.getCurrentPosition();
+        //No point in other slide as they should be same positions
     }
     public void teleOp() {
-        miniServo();
+        telemetry.addData("Slide-height", position);
+
         if (gamepad2.dpad_down) moveToIntakeLevel();
         else if (gamepad2.dpad_right) moveMid();
         else if (gamepad2.dpad_left) moveLow();
         else if (gamepad2.dpad_up) moveHigh();
-        telemetry.addData("Slide left position", TargetPositions);
-        telemetry.addData("Slide right position", TargetPositions);
-        telemetry.update();
     }
     public void soloTeleOp() {
         if (gamepad1.dpad_down) moveToIntakeLevel();
@@ -73,26 +73,25 @@ public class Slides {
         else if (gamepad1.dpad_left) moveLow();
         else if (gamepad1.dpad_up) moveHigh();
     }
-    public void miniServo() {
-        //0 position is clamping
-        if (gamepad1.dpad_down) miniservo.setPosition(0);
-        if (gamepad1.dpad_left) miniservo.setPosition(1);
-    }
     public void moveHigh() {
         leftSlide.setTargetPosition((int) HIGH);
         rightSlide.setTargetPosition((int) HIGH);
+        miniservo.setPosition(openingMini);
     }
     public void moveMid() {
         leftSlide.setTargetPosition((int) MID);
         rightSlide.setTargetPosition((int) MID);
+        miniservo.setPosition(openingMini);
     }
     public void moveLow() {
         leftSlide.setTargetPosition((int) LOW);
         rightSlide.setTargetPosition((int) LOW);
+        miniservo.setPosition(openingMini);
     }
     public void moveToIntakeLevel() {
         leftSlide.setTargetPosition(INTAKE);
         rightSlide.setTargetPosition(INTAKE);
+        miniservo.setPosition(0);
     }
     public void manualSlideMovement() {
         leftSlide.setPower(gamepad2.left_stick_y);

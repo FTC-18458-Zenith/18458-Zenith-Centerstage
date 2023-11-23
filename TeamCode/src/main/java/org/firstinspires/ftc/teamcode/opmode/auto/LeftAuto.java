@@ -31,53 +31,28 @@ public class LeftAuto extends LinearOpMode {
 
         drive.setPoseEstimate(startPos);
 
-        TrajectorySequence Trajectory1_1 = drive.trajectorySequenceBuilder(startPos)
-                .forward(Park_Distance)
+        TrajectorySequence Trajectory1 = drive.trajectorySequenceBuilder(startPos)
+                .forward(Pixel_Dis)
                 .build();
 
-            TrajectorySequence Trajectory2_1 = drive.trajectorySequenceBuilder(Trajectory1_1.end())
+            TrajectorySequence Trajectory2_1 = drive.trajectorySequenceBuilder(Trajectory1.end())
                     .turn(Math.toRadians(-90))
-                    .forward(Pixel_Dis)
+                    .forward(Park_Distance)
                     .build();
 
             TrajectorySequence Trajectory3_1 = drive.trajectorySequenceBuilder(Trajectory2_1.end())
                     .forward(83)
                     .build();
 
-        TrajectorySequence Trajectory1_2 = drive.trajectorySequenceBuilder(startPos)
-                    .forward(Park_Distance)
-                    .build();
-            TrajectorySequence Trajectory2_2 = drive.trajectorySequenceBuilder(Trajectory1_2.end())
-                    .forward(randomization2)
-                    .build();
-            TrajectorySequence Trajectory2_3 = drive.trajectorySequenceBuilder(Trajectory2_2.end())
-                    .turn(-90)
-                    .forward(Pixel_Dis + randomization2)
-                    .build();
-
-        switch (colorSensor) {
-            case 1:
-                drive.followTrajectorySequence(Trajectory1_1);
+                drive.followTrajectorySequence(Trajectory1);
                 spinner.spinnerAutoThing(-0.5, 250);
 
                 drive.followTrajectorySequence(Trajectory2_1);
 
                 drive.followTrajectorySequence(Trajectory3_1);
                 slides.moveLow();
-                arm.armAutoOuttake(1000);
-
-                break;
-            case 2:
-                drive.followTrajectorySequence(Trajectory1_2);
-
-                drive.followTrajectorySequence(Trajectory2_2);
-                spinner.spinnerAutoThing(-0.5, 250);
-
-                drive.followTrajectorySequence(Trajectory2_3);
-                slides.moveLow();
-                arm.armAutoOuttake(1000);
-
+                arm.armAutoOuttake(250);
 
         }
     }
-}
+

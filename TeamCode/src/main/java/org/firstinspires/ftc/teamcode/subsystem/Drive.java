@@ -381,12 +381,11 @@ public class Drive extends MecanumDrive {
         setMotorPowers(0,0,0,0);
     }
 
-    public void movingMotors(double leftFrontPowers, double rightFrontPowers,
-                             double leftRearPowers, double rightRearPowers, long durationOfAction, int targetPosition) throws InterruptedException {
-        leftFront.setPower(leftFrontPowers);
-        rightFront.setPower(rightFrontPowers);
-        leftRear.setPower(leftRearPowers);
-        rightRear.setPower(rightRearPowers);
+    public void movingMotors(double powers, long durationOfAction, int targetPosition) throws InterruptedException {
+        leftFront.setPower(powers);
+        rightFront.setPower(powers);
+        leftRear.setPower(powers);
+        rightRear.setPower(powers);
 
         leftFront.setTargetPosition(targetPosition);
         leftRear.setTargetPosition(targetPosition);

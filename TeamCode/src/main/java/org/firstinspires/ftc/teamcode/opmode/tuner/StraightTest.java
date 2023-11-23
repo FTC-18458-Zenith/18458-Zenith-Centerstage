@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 @Config
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 60; // in
+    public static double DISTANCE = 180; // in
 
     @Override
     public void runOpMode() throws InterruptedException {

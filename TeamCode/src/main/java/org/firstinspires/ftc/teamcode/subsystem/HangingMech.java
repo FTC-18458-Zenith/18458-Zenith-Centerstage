@@ -5,11 +5,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class HangingMech {
     private final DcMotor hangingMotor;
     private final Gamepad gamepad1;
     private final int hanging = 1000;
     private HardwareMap hardwareMap;
+    private Telemetry telemetry;
+    int position;
 
     public HangingMech(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
@@ -23,8 +27,11 @@ public class HangingMech {
         hangingMotor.setTargetPosition(0);
         hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hangingMotor.setPower(1);
+
+        position = hangingMotor.getCurrentPosition();
     }
     public void teleOp() {
+        telemetry.addData("Hanging-Mech position", position);
         if (gamepad1.left_bumper) hanging();
     }
     public void soloTeleOp() {
