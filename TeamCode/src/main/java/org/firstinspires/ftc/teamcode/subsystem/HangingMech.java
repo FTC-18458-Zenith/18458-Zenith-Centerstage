@@ -31,7 +31,6 @@ public class HangingMech {
         position = hangingMotor.getCurrentPosition();
     }
     public void teleOp() {
-        telemetry.addData("Hanging-Mech position", position);
         if (gamepad1.left_bumper) hanging();
     }
     public void soloTeleOp() {

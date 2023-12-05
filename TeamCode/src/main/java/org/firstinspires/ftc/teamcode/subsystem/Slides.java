@@ -19,6 +19,8 @@ public class Slides {
     //could be RPM
     final static double GEAR_DIAMETER_CENTIMETERS = 9.6;
     public static final int HIGH = 1200;
+    //.76
+    //
     //max is 33
     public static final int MID = 1000;
     public static final int LOW = 700;
@@ -38,8 +40,8 @@ public class Slides {
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
         miniservo = (Servo) hardwareMap.get("mini-servo");
 
-        leftSlide.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         miniservo.setDirection(Servo.Direction.FORWARD);
 
         rightSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -52,15 +54,14 @@ public class Slides {
         rightSlide.setTargetPosition(0);
         leftSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlide.setPower(0.6);
-        rightSlide.setPower(0.6);
+        leftSlide.setPower(1);
+        rightSlide.setPower(1);
         miniservo.setPosition(1);
 
         position = leftSlide.getCurrentPosition();
         //No point in other slide as they should be same positions
     }
     public void teleOp() {
-        telemetry.addData("Slide-height", position);
 
         if (gamepad2.dpad_down) moveToIntakeLevel();
         else if (gamepad2.dpad_right) moveMid();

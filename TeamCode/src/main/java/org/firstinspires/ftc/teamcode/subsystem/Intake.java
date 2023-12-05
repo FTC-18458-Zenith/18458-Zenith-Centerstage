@@ -7,10 +7,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
-    private DcMotor spinner;
-    private final Gamepad gamepad2;
-    private final Gamepad gamepad1;
-    private HardwareMap hardwareMap;
+    public DcMotor spinner;
+    public final Gamepad gamepad2;
+    public final Gamepad gamepad1;
+    public HardwareMap hardwareMap;
+    public static volatile double OUTTAKE = 0.5;
+    public static volatile double INTAKE = -0.5;
     public Intake(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
@@ -20,8 +22,8 @@ public class Intake {
         spinner.setDirection(DcMotorSimple.Direction.FORWARD);
     }
     public void teleOp() {
-        if (gamepad2.right_bumper) spinnerIntakeThing(0.5);
-        else if (gamepad2.left_bumper) spinnerIntakeThing(-0.5);
+        if (gamepad2.right_bumper) spinnerIntakeThing(INTAKE);
+        else if (gamepad2.left_bumper) spinnerIntakeThing(OUTTAKE);
         //0.0000000000005
         //5*10^-12
         else spinnerIntakeThing(0);

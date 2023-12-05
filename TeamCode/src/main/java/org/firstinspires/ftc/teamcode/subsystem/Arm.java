@@ -39,7 +39,6 @@ public class Arm {
         position = leftArmServo.getPosition();
     }
     public void teleOp() throws InterruptedException {
-        telemetry.addData("Arm position", position);
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
         if (gamepad2.triangle) outtake();
         else if (gamepad2.square) intake();
