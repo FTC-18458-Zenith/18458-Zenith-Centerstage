@@ -11,19 +11,19 @@ public class Intake {
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
-    public static volatile double OUTTAKE = 0.5;
-    public static volatile double INTAKE = -0.5;
+    public static volatile double OUTTAKE = -0.45;
+    public static volatile double INTAKE = 0.7;
     public Intake(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
 
         spinner = (DcMotor) hardwareMap.get("Spinner");
-        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
+        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void teleOp() {
-        if (gamepad2.right_bumper) spinnerIntakeThing(INTAKE);
-        else if (gamepad2.left_bumper) spinnerIntakeThing(OUTTAKE);
+        if (gamepad2.right_trigger >= 0.5) spinnerIntakeThing(INTAKE);
+        else if (gamepad2.left_trigger >= 0.5) spinnerIntakeThing(OUTTAKE);
         //0.0000000000005
         //5*10^-12
         else spinnerIntakeThing(0);

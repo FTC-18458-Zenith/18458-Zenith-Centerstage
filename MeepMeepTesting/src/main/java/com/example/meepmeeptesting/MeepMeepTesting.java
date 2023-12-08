@@ -20,10 +20,10 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(14, -60, Math.toRadians(90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(10, -60, Math.toRadians(90)))
                                 .forward(29)
-                                .turn(Math.toRadians(-90))
-                                .forward(30)
+                                .turn(Math.toRadians(90))
+                                .forward(-38)
                                 .build()
                 );
         RoadRunnerBotEntity blueAlliance = new DefaultBotBuilder(meepMeep)
@@ -31,10 +31,10 @@ public class MeepMeepTesting {
                 .setDimensions(13.4,14.8031)
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(10, 68, Math.toRadians(270)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-34, 68, Math.toRadians(270)))
                                 .forward(35)
                                 .turn(Math.toRadians(-90))
-                                .forward(-38)
+                                .forward(-85)
                                 .build()
                 );
 

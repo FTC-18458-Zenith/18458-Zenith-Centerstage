@@ -14,14 +14,14 @@ import org.firstinspires.ftc.teamcode.R;
 
 @Config
 public class Arm {
-    private final Servo leftArmServo, rightArmServo;
-    private final Gamepad gamepad2;
-    private final Gamepad gamepad1;
+    public final Servo leftArmServo, rightArmServo;
+    public final Gamepad gamepad2;
+    public final Gamepad gamepad1;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
     double position;
-    public static volatile double OUTTAKE = 0.5;
-    public static volatile double INTAKE = 0;
+    public static volatile double OUTTAKE = 1;
+    public static volatile double INTAKE = 0.05;
     public Arm(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
@@ -33,10 +33,9 @@ public class Arm {
 
         leftArmServo.setPosition(INTAKE);
         rightArmServo.setPosition(INTAKE);
-        leftArmServo.setDirection(Servo.Direction.REVERSE);
+        leftArmServo.setDirection(Servo.Direction.FORWARD);
         rightArmServo.setDirection(Servo.Direction.REVERSE);
 
-        position = leftArmServo.getPosition();
     }
     public void teleOp() throws InterruptedException {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
@@ -52,25 +51,17 @@ public class Arm {
         rightArmServo.setPosition(position);
     }
     public void outtake() {
-        leftArmServo.setPosition(-OUTTAKE);
+        leftArmServo.setPosition(OUTTAKE);
         rightArmServo.setPosition(OUTTAKE);
     }
     public void intake() {
-        leftArmServo.setPosition(-INTAKE);
+        leftArmServo.setPosition(INTAKE);
         rightArmServo.setPosition(INTAKE);
-    }
-    public void powerZero() {
-        leftArmServo.setPosition(0);
-        rightArmServo.setPosition(0);
     }
     public void armAutoOuttake(long durationOfAction) throws InterruptedException {
         leftArmServo.setPosition(-OUTTAKE);
         rightArmServo.setPosition(OUTTAKE);
         Thread.sleep(durationOfAction);
-        leftArmServo.setPosition(-INTAKE);
-        rightArmServo.setPosition(INTAKE);
-    }
-    public void armAutoIntake() throws InterruptedException {
         leftArmServo.setPosition(-INTAKE);
         rightArmServo.setPosition(INTAKE);
     }
