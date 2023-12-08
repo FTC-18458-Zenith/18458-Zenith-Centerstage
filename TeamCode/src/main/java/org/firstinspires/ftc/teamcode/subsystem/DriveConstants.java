@@ -17,6 +17,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  */
 @Config
 public class DriveConstants {
+    // 13.432227372407938 kF value from max velo
 
     /*
      * These are motor constants that should be listed online for your motors.
@@ -46,7 +47,7 @@ public class DriveConstants {
      */
     public static double WHEEL_RADIUS = 3.77953; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 10.014; // in
+    public static double TRACK_WIDTH = 10.5 ; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -55,6 +56,7 @@ public class DriveConstants {
      * empirically tuned.
      */
     public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
+    //0.00148158 is something
     public static double kA = 0;
     public static double kStatic = 0;
 
@@ -65,7 +67,7 @@ public class DriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 30;
+    public static double MAX_VEL = 87.09665275296578;
     public static double MAX_ACCEL = 30;
     public static double MAX_ANG_VEL = Math.toRadians(60);
     public static double MAX_ANG_ACCEL = Math.toRadians(60);

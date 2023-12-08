@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmode.auto;
+package org.firstinspires.ftc.teamcode.opmode.auto.redAutos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -12,7 +12,9 @@ import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
 @Autonomous
-public class LeftAuto extends LinearOpMode {
+public class LeftRedAuto extends LinearOpMode {
+
+    //TODO: MAKE THIS A RED NOT A BLUE AUTO
     public static double Park_Distance = 35;
     public static double Pixel_Dis = -83;
     public static double randomization2 = -17;

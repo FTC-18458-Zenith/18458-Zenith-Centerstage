@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode.opmode.auto;
+package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,12 +10,9 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
-@Config
-@Autonomous (name = "LeftAutoBlue", group = "RoadRunnerPath")
-
-public class LeftAutoBlue extends LinearOpMode {
-
-    public static double Park_Distance = 30;
+@Autonomous (name = "RightAutoBlue", group = "RoadRunnerPath")
+public class RightAutoBlue extends LinearOpMode {
+    public static double Park_Distance = 80;
     public static double Spike_Dis = 29;
 
     @Override
@@ -38,8 +34,8 @@ public class LeftAutoBlue extends LinearOpMode {
 
         TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
                 .turn(Math.toRadians(90))
-                        .forward(Park_Distance)
-                                .build();
+                .forward(Park_Distance)
+                .build();
         //Run Auto
         drive.followTrajectorySequence(Trajectory1);
         drive.followTrajectorySequence(Trajectory2);
@@ -52,4 +48,3 @@ public class LeftAutoBlue extends LinearOpMode {
         slides.reset();
     }
 }
-
