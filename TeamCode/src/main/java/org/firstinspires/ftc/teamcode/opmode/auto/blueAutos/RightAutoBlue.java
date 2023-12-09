@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -7,13 +8,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
+import org.firstinspires.ftc.teamcode.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
-@Autonomous (name = "RightAutoBlue", group = "RoadRunnerPath")
+@Config
+@Autonomous (name = "LeftAutoBlue", group = "RoadRunnerPath")
+
 public class RightAutoBlue extends LinearOpMode {
-    public static double Park_Distance = 80;
-    public static double Spike_Dis = 29;
+
+    public static double Park_Distance = 20;
+    public static double Spike_Dis = -85;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -22,8 +27,9 @@ public class RightAutoBlue extends LinearOpMode {
         Drive drive = new Drive(this);
         Arm arm = new Arm(this);
         Slides slides = new Slides(this);
+        Intake intake = new Intake(this);
 
-        Pose2d startPos = new Pose2d(-34, 68, Math.toRadians(90));
+        Pose2d startPos = new Pose2d(0, 0, Math.toRadians(0));
         ElapsedTime timer = new ElapsedTime();
 
         drive.setPoseEstimate(startPos);
@@ -34,17 +40,21 @@ public class RightAutoBlue extends LinearOpMode {
 
         TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
                 .turn(Math.toRadians(90))
-                .forward(Park_Distance)
-                .build();
+                        .strafeLeft(Park_Distance)
+                                .build();
+        TrajectorySequence Trajectory3 = drive.trajectorySequenceBuilder(Trajectory2.end())
+                .strafeRight(Park_Distance)
+                        .build();
         //Run Auto
         drive.followTrajectorySequence(Trajectory1);
         drive.followTrajectorySequence(Trajectory2);
         Thread.sleep(500);
-        slides.moveLow();
+        //commands go in here
         Thread.sleep(1000);
-        arm.outtake();
         Thread.sleep(1500);
-        arm.intake();
-        slides.reset();
+        intake.spinnerAutoThing(0.6, 1000);
+        drive.followTrajectorySequence(Trajectory3);
+
     }
 }
+
