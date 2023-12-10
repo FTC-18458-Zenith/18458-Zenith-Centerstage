@@ -14,55 +14,47 @@ import org.firstinspires.ftc.teamcode.R;
 
 @Config
 public class Arm {
-    public final Servo leftArmServo, rightArmServo;
+    //TODO: PROGRAM THE ARM, WHEN THE AXON MOVE IN THE SAME DIRECTION, IT MOVES, BUT IN THE OPPOSITE DIRECTION THE CLAW ROTATES.
+    public final CRServo leftArmServo, rightArmServo;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
     double position;
-    public static volatile double OUTTAKE = 1;
-    public static volatile double INTAKE = 0.05;
+    public static volatile double SAME_DIRECTION = 1;
+    public static volatile double OPP_DIRECTION = -1;
     public Arm(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
         this.telemetry = opMode.telemetry;
 
-        leftArmServo = (Servo) hardwareMap.get("LeftArmServo");
-        rightArmServo = (Servo) hardwareMap.get("RightArmServo");
+        leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
+        rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
 
-        leftArmServo.setPosition(INTAKE);
-        rightArmServo.setPosition(INTAKE);
-        leftArmServo.setDirection(Servo.Direction.FORWARD);
-        rightArmServo.setDirection(Servo.Direction.REVERSE);
+        leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
     public void teleOp() throws InterruptedException {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
-        if (gamepad2.triangle) outtake();
-        else if (gamepad2.square) intake();
+        if (gamepad2.triangle) rotating();
+        else if (gamepad2.square) moving();
     }
     public void soloTeleOp() throws InterruptedException {
-        if (gamepad1.triangle) outtake();
-        else if (gamepad1.square) intake();
+        if (gamepad1.triangle) moving();
+        else if (gamepad1.square) rotating();
     }
     public void setPosition(double position) {
-        leftArmServo.setPosition(position);
-        rightArmServo.setPosition(position);
+        leftArmServo.setPower(position);
+        rightArmServo.setPower(position);
     }
-    public void outtake() {
-        leftArmServo.setPosition(OUTTAKE);
-        rightArmServo.setPosition(OUTTAKE);
+    public void rotating() {
+        leftArmServo.setPower(OPP_DIRECTION);
+        rightArmServo.setPower(OPP_DIRECTION);
     }
-    public void intake() {
-        leftArmServo.setPosition(INTAKE);
-        rightArmServo.setPosition(INTAKE);
-    }
-    public void armAutoOuttake(long durationOfAction) throws InterruptedException {
-        leftArmServo.setPosition(-OUTTAKE);
-        rightArmServo.setPosition(OUTTAKE);
-        Thread.sleep(durationOfAction);
-        leftArmServo.setPosition(-INTAKE);
-        rightArmServo.setPosition(INTAKE);
+    public void moving() {
+        leftArmServo.setPower(SAME_DIRECTION);
+        rightArmServo.setPower(SAME_DIRECTION);
     }
 }

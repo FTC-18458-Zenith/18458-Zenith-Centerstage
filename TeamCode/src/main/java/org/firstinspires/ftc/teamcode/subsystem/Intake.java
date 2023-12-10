@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
+import android.widget.Spinner;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -12,7 +14,7 @@ public class Intake {
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
     public static volatile double OUTTAKE = -0.5;
-    public static volatile double INTAKE = 0.7;
+    public static volatile double INTAKE = 0.65;
     public Intake(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;

@@ -12,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
 public class Slides {
+    // 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     public final DcMotor leftSlide, rightSlide;
     public final Servo miniservo;
     public final Gamepad gamepad2;
@@ -19,7 +20,7 @@ public class Slides {
     public static int HIGH = 1200;
     public static int MID = 1000;
     public static int LOW = 700;
-    public static double INTAKE = 195;
+    public static double INTAKE = 175;
     public static int reset = 0;
     int position;
     public static double openingMini = 0.6;
