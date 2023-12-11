@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.HangingMech;
@@ -20,6 +21,7 @@ public class SoloTeleOp extends LinearOpMode {
         Slides slides = new Slides(this);
         DroneLauncher droneLauncher = new DroneLauncher(this);
         HangingMech hangingMech = new HangingMech(this);
+        Claw claw = new Claw(this);
 
         waitForStart();
         while (opModeIsActive()) {
@@ -29,6 +31,7 @@ public class SoloTeleOp extends LinearOpMode {
             slides.soloTeleOp();
             droneLauncher.soloTeleOp();
             hangingMech.soloTeleOp();
+            claw.teleOp();
         }
     }
 }

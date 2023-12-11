@@ -42,9 +42,7 @@ public class LeftAutoBlue extends LinearOpMode {
         Thread.sleep(500);
         slides.moveLow();
         Thread.sleep(1000);
-        arm.outtake();
         Thread.sleep(1500);
-        arm.intake();
         slides.reset();
     }
 }

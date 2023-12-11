@@ -16,7 +16,6 @@ public class testingAuto extends LinearOpMode {
         Slides slides = new Slides(this);
 
         slides.moveLow();
-        arm.armAutoOuttake(1000);
         sleep(1000);
 
     }

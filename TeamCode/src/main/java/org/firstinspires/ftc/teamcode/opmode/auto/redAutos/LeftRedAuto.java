@@ -53,7 +53,6 @@ public class LeftRedAuto extends LinearOpMode {
 
                 drive.followTrajectorySequence(Trajectory3_1);
                 slides.moveLow();
-                arm.armAutoOuttake(250);
 
         }
     }
