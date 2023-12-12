@@ -14,7 +14,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Slides {
     // 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     public final DcMotor leftSlide, rightSlide;
-    public final Servo miniservo;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
     public static int HIGH = 1200;
@@ -35,11 +34,9 @@ public class Slides {
         
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
-        miniservo = (Servo) hardwareMap.get("mini-servo");
 
         leftSlide.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlide.setDirection(DcMotorSimple.Direction.REVERSE);
-        miniservo.setDirection(Servo.Direction.FORWARD);
 
         rightSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -52,7 +49,6 @@ public class Slides {
         rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlide.setPower(1);
         rightSlide.setPower(1);
-        miniservo.setPosition(1);
 
         position = leftSlide.getCurrentPosition();
         //No point in other slide as they should be same positions
@@ -71,29 +67,24 @@ public class Slides {
         else if (gamepad1.dpad_up) moveHigh();
     }
     public void moveHigh() {
-        leftSlide.setTargetPosition((int) HIGH);
+        leftSlide.setTargetPosition(HIGH);
         rightSlide.setTargetPosition((int) HIGH);
-        miniservo.setPosition(openingMini);
     }
     public void moveMid() {
         leftSlide.setTargetPosition((int) MID);
         rightSlide.setTargetPosition((int) MID);
-        miniservo.setPosition(openingMini);
     }
     public void moveLow() {
         leftSlide.setTargetPosition((int) LOW);
         rightSlide.setTargetPosition((int) LOW);
-        miniservo.setPosition(openingMini);
     }
     public void reset() {
         leftSlide.setTargetPosition(reset);
         rightSlide.setTargetPosition(reset);
-        miniservo.setPosition(0);
     }
     public void moveToIntakeLevel() {
         leftSlide.setTargetPosition((int) INTAKE);
         rightSlide.setTargetPosition((int) INTAKE);
-        miniservo.setPosition(0);
     }
     public void manualSlideMovement() {
         leftSlide.setPower(gamepad2.left_stick_y);

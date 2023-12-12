@@ -18,8 +18,8 @@ public class Arm {
     public final CRServo leftArmServo, rightArmServo;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    public HardwareMap hardwareMap;
+    public Telemetry telemetry;
     double position;
     public static volatile double SAME_DIRECTION = 1;
     public static volatile double OPP_DIRECTION = -1;
