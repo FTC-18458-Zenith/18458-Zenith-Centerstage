@@ -19,7 +19,7 @@ public class Slides {
     public static int HIGH = 1200;
     public static int MID = 1000;
     public static int LOW = 700;
-    public static double INTAKE = 175;
+    public static int INTAKE = 175;
     public static int reset = 0;
     int position;
     public static double openingMini = 0.6;
@@ -68,23 +68,23 @@ public class Slides {
     }
     public void moveHigh() {
         leftSlide.setTargetPosition(HIGH);
-        rightSlide.setTargetPosition((int) HIGH);
+        rightSlide.setTargetPosition(HIGH);
     }
     public void moveMid() {
-        leftSlide.setTargetPosition((int) MID);
-        rightSlide.setTargetPosition((int) MID);
+        leftSlide.setTargetPosition(MID);
+        rightSlide.setTargetPosition(MID);
     }
     public void moveLow() {
-        leftSlide.setTargetPosition((int) LOW);
-        rightSlide.setTargetPosition((int) LOW);
+        leftSlide.setTargetPosition(LOW);
+        rightSlide.setTargetPosition(LOW);
     }
     public void reset() {
         leftSlide.setTargetPosition(reset);
         rightSlide.setTargetPosition(reset);
     }
     public void moveToIntakeLevel() {
-        leftSlide.setTargetPosition((int) INTAKE);
-        rightSlide.setTargetPosition((int) INTAKE);
+        leftSlide.setTargetPosition(INTAKE);
+        rightSlide.setTargetPosition(INTAKE);
     }
     public void manualSlideMovement() {
         leftSlide.setPower(gamepad2.left_stick_y);
