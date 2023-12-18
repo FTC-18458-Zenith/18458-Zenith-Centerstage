@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -11,6 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
+@TeleOp
 public class Slides {
     // 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     public final DcMotor leftSlide, rightSlide;
@@ -22,7 +25,6 @@ public class Slides {
     public static int INTAKE = 175;
     public static int reset = 0;
     int position;
-    public static double openingMini = 0.6;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
@@ -31,7 +33,6 @@ public class Slides {
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
         this.telemetry = opMode.telemetry;
-        
         leftSlide = (DcMotor) hardwareMap.get("leftSlide");
         rightSlide = (DcMotor) hardwareMap.get("rightSlide");
 

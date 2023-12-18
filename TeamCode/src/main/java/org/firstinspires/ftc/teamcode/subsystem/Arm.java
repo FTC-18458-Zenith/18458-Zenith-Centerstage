@@ -21,8 +21,8 @@ public class Arm {
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
     double position;
-    public static volatile double SAME_DIRECTION = 1;
-    public static volatile double OPP_DIRECTION = -1;
+    public static double SAME_DIRECTION = 1;
+    public static double OPP_DIRECTION = -1;
     public Arm(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
@@ -34,7 +34,6 @@ public class Arm {
 
         leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
         rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
-
     }
     public void teleOp() throws InterruptedException {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
@@ -45,9 +44,12 @@ public class Arm {
         if (gamepad1.triangle) moving();
         else if (gamepad1.square) rotating();
     }
-    public void setPosition(double position) {
+    public void setPosition(double position) throws InterruptedException {
         leftArmServo.setPower(position);
         rightArmServo.setPower(position);
+        Thread.sleep(250);
+        leftArmServo.setPower(-position);
+        rightArmServo.setPower(-position);
     }
     public void rotating() {
         leftArmServo.setPower(OPP_DIRECTION);

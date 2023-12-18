@@ -16,11 +16,17 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @Autonomous (name = "RightAutoRed", group = "RoadRunnerPath")
 
 public class RightAutoRed extends LinearOpMode {
-    public static double Park_Distance = 30;
-    public static double Pixel_Dis = 20;
+    public static double Spike_Dis = 28;
+    public static double Park_Distance = 40;
+    public static double right_Strafe = 20.5;
+    public static double Cycle_Dis = 110;
+    public static double Scoring_Dis = 23;
+    public static double Parking = 27.5;
+
     OpenCvWebcam webcam;
     @Override
     public void runOpMode() throws InterruptedException {
+
 
         waitForStart();
         Drive drive = new Drive(this);
@@ -30,12 +36,15 @@ public class RightAutoRed extends LinearOpMode {
 
         drive.setPoseEstimate(startPos);
         TrajectorySequence Trajectory1 = drive.trajectorySequenceBuilder(startPos)
-                .forward(Pixel_Dis)
+                .forward(Spike_Dis)
                 .build();
         TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
                 .turn(Math.toRadians(-90))
                         .forward(Park_Distance)
                                 .build();
+        TrajectorySequence Trajectory3 = drive.trajectorySequenceBuilder(Trajectory2.end())
+                .strafeRight(right_Strafe)
+                        .build();
 
         drive.followTrajectorySequence(Trajectory1);
 

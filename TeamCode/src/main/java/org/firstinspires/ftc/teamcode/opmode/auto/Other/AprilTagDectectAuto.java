@@ -13,10 +13,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
-import org.openftc.easyopencv.OpenCvWebcam;
 
 @Autonomous
-public class Vision extends LinearOpMode {
+public class AprilTagDectectAuto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException{
         WebcamName webcamName  = hardwareMap.get(WebcamName.class, "Camera");

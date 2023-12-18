@@ -15,14 +15,18 @@ public class TeleOpMainV2 extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
         Drive drive = new Drive(this);
-        //Drive code is all the way at the bottom of the Drive class
         Slides slides = new Slides(this);
-        Arm arm = new Arm(this);
         DroneLauncher droneLauncher = new DroneLauncher(this);
         Intake intake = new Intake(this);
         HangingMech hangingMech = new HangingMech(this);
         Claw claw = new Claw(this);
+        Arm arm = new Arm(this);
+
+        while (!isStarted()) {
+
+        }
 
         waitForStart();
         while (opModeIsActive()) {
@@ -33,6 +37,7 @@ public class TeleOpMainV2 extends LinearOpMode {
             intake.teleOp();
             hangingMech.teleOp();
             claw.teleOp();
+
         }
     }
 }
