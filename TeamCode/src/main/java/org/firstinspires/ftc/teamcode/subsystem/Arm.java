@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.R;
 public class Arm {
     //TODO: PROGRAM THE ARM, WHEN THE AXON MOVE IN THE SAME DIRECTION, IT MOVES, BUT IN THE OPPOSITE DIRECTION THE CLAW ROTATES.
     public final CRServo leftArmServo, rightArmServo;
+    public final Servo verticalRotatingServo;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
@@ -31,9 +32,13 @@ public class Arm {
 
         leftArmServo = (CRServo) hardwareMap.get("LeftArmServo");
         rightArmServo = (CRServo) hardwareMap.get("RightArmServo");
+        verticalRotatingServo = (Servo) hardwareMap.get("verticalRotating");
 
         leftArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
         rightArmServo.setDirection(DcMotorSimple.Direction.FORWARD);
+        verticalRotatingServo.setDirection(Servo.Direction.FORWARD);
+
+        verticalRotatingServo.setPosition(0);
     }
     public void teleOp() throws InterruptedException {
         //DEGREES = (GEAR_RATIO * READINGS_PER_REVOLUTION) / (DEGREES_OF_FREEDOM) * DEGREES I WISH, DO NOT DO YET
