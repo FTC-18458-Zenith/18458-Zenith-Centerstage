@@ -39,6 +39,7 @@ public class Arm {
         wrist.setPosition(0);
     }
     public void teleOp() {
+        //TODO: After testing, try to control with the stick
         if (gamepad2.triangle) moving();
         else if (gamepad2.square) rotating();
 

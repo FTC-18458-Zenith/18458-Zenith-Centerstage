@@ -25,8 +25,8 @@ public class Claw {
         clawServo(OPENED);
     }
     public void teleOp() {
-        if (gamepad2.cross) clawServo(OPENED);
-        else if (gamepad2.circle) clawServo(CLOSED);
+        if (gamepad2.left_bumper) clawServo(OPENED);
+        else if (gamepad2.right_bumper) clawServo(CLOSED);
     }
     public void clawServo(double position) {
         rClaw.setPosition(position);
