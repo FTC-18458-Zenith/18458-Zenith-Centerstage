@@ -14,11 +14,11 @@ public class Claw {
     public final double OPENED = 0.42;
     public final double CLOSED = 0.59;
     public Claw(OpMode opMode) {
-        lClaw = (Servo) hardwareMap.get("lClaw");
-        rClaw = (Servo) hardwareMap.get("rClaw");
-
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
+
+        lClaw = (Servo) hardwareMap.get("leftClaw");
+        rClaw = (Servo) hardwareMap.get("rightClaw");
 
         lClaw.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.FORWARD);

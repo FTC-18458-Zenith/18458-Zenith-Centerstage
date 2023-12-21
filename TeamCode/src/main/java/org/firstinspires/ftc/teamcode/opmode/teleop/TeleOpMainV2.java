@@ -24,10 +24,6 @@ public class TeleOpMainV2 extends LinearOpMode {
         Claw claw = new Claw(this);
         Arm arm = new Arm(this);
 
-        while (!isStarted()) {
-
-        }
-
         waitForStart();
         while (opModeIsActive()) {
             arm.teleOp();

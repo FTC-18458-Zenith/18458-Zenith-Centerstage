@@ -13,7 +13,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-@TeleOp
 public class Slides {
     // 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     public final DcMotor leftSlide, rightSlide;

@@ -26,7 +26,6 @@ public class SoloTeleOp extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             drive.teleOp();
-            arm.soloTeleOp();
             intake.soloTeleOp();
             slides.soloTeleOp();
             droneLauncher.soloTeleOp();
