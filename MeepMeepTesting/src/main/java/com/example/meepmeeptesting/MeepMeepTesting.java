@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.ColorScheme;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
@@ -32,9 +33,9 @@ public class MeepMeepTesting {
                                 .waitSeconds(0.5)
                                 .back(40)
                                 .waitSeconds(0.5)
-                                .strafeRight(20.5)
-                                .forward(110)
-                                .waitSeconds(0.25)
+                                .strafeRight(15)
+                                .splineTo(new Vector2d(-60, -11.5), Math.toRadians(180))
+                                .waitSeconds(0.1)
                                 .back(110)
                                 .strafeLeft(23)
                                 .waitSeconds(1)
@@ -47,18 +48,6 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-34, 60, Math.toRadians(270)))
-                                .forward(27)
-                                .waitSeconds(0.25)
-                                .turn(Math.toRadians(-90))
-                                .back(82)
-                                .waitSeconds(0.5)
-                                .strafeLeft(21.5)
-                                .forward(110)
-                                .waitSeconds(0.25)
-                                .back(110)
-                                .strafeRight(23)
-                                .waitSeconds(1)
-                                .strafeRight(27.5)
                                 .build()
                 );
 

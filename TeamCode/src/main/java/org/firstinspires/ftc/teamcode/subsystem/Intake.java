@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import android.widget.Spinner;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+@Config
 public class Intake {
     public DcMotor spinner;
     public final Gamepad gamepad2;
@@ -20,19 +22,17 @@ public class Intake {
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
 
-        spinner = (DcMotor) hardwareMap.get("Spinner");
+        spinner = (DcMotor) hardwareMap.get("Intake");
         spinner.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void teleOp() {
         if (gamepad2.right_trigger >= 0.5) spinnerIntakeThing(INTAKE);
         else if (gamepad2.left_trigger >= 0.5) spinnerIntakeThing(OUTTAKE);
-        //0.0000000000005
-        //5*10^-12
         else spinnerIntakeThing(0);
     }
     public void soloTeleOp() {
-        if (gamepad1.right_bumper && gamepad1.right_trigger <=1) spinnerIntakeThing(0.5);
-        else if (gamepad1.left_bumper && gamepad1.left_trigger <=1) spinnerIntakeThing(-0.5);
+        if (gamepad1.right_bumper && gamepad1.right_trigger <=1) spinnerIntakeThing(INTAKE);
+        else if (gamepad1.left_bumper && gamepad1.left_trigger <=1) spinnerIntakeThing(OUTTAKE);
         else spinnerIntakeThing(0);
     }
     public void spinnerIntakeThing(double powerSpinner) {
