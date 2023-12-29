@@ -17,33 +17,34 @@ public class MeepMeepTesting {
     static int randomization;
     static int MAX = 3;
     public static void main(String[] args) {
-        Vector2d purplePixelRed = new Vector2d(10, -32);
-        Vector2d backdropRed = new Vector2d(50, -32);
-        Vector2d setUpCycle = new Vector2d(50, -19.5);
-        Pose2d beginCycleRed = new Pose2d(-60, -11.5, Math.toRadians(180));
-        Pose2d toBackdropRed = new Pose2d(50, -19.5, Math.toRadians(180));
+        Pose2d purplePixelRed = new Pose2d(10, -32, Math.toRadians(180));
+        Pose2d backdropRed = new Pose2d(50, -32, Math.toRadians(180));
+        Vector2d setUpCycle = new Vector2d(50, -18.5);
+        Pose2d beginCycleRed = new Pose2d(-61, -11.5, Math.toRadians(180));
+        Pose2d toBackdropRed = new Pose2d(50, -18.5, Math.toRadians(180));
         Vector2d outtakeAuto = new Vector2d(50, -34);
 
         Random random = new Random();
         randomization = random.nextInt(MAX) + 1;
-        MeepMeep meepMeep = new MeepMeep(600);
+        MeepMeep meepMeep = new MeepMeep(650);
 
         RoadRunnerBotEntity redAlliance = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
                 .setDimensions(13.4,14.8031)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(10, -60, Math.toRadians(90)))
-                                .strafeTo(purplePixelRed)
-                                .turn(Math.toRadians(90))
-                                .waitSeconds(0.5)
-                                .strafeTo(backdropRed)
+                        drive.trajectorySequenceBuilder(new Pose2d(10, -64, Math.toRadians(180)))
+                                .waitSeconds(5)
+                                .lineToLinearHeading(purplePixelRed)
+                                .waitSeconds(0.15)
+                                .lineToLinearHeading(backdropRed)
                                 .waitSeconds(0.25)
                                 .strafeTo(setUpCycle)
                                 .lineToLinearHeading(beginCycleRed)
                                 .lineToLinearHeading(toBackdropRed)
                                 .strafeTo(outtakeAuto)
+                                .waitSeconds(0.25)
                                 .build()
 
                 );
@@ -57,8 +58,8 @@ public class MeepMeepTesting {
                                 .build()
                 );
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_OFFICIAL)
-                .setDarkMode(false)
+        meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
+                .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(redAlliance)
                 .addEntity(blueAlliance)
