@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetection;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -13,11 +14,10 @@ import java.util.ArrayList;
 
 public class Vision {
     public AprilTagDetection tagOfInterest;
-
     private final OpenCvCamera camera;
     private final AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private final OpMode opMode;
-
+    private final ColorDetection colorDetection;
+    public final OpMode opMode;
     private static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
@@ -39,14 +39,10 @@ public class Vision {
     private static final int LEFT_RED = 4;
     private static final int MIDDLE_RED = 5;
     private static final int RIGHT_RED = 6;
-
-
-
     private boolean tagFound = false;
 
     public Vision(OpMode opMode) {
         this.opMode = opMode;
-
 
         // Obtain camera id to allow for camera preview
         int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());
@@ -54,8 +50,7 @@ public class Vision {
         // Obtain webcam name
         camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
-
-        camera.setPipeline(aprilTagDetectionPipeline);
+        colorDetection = new ColorDetection();
 
         // Initialize OpenCvWebcam with live preview
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -72,7 +67,6 @@ public class Vision {
             }
         });
     }
-
     public void updateTagOfInterest() {
         ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
@@ -90,8 +84,6 @@ public class Vision {
     public AprilTagDetection getTagOfInterest() {
         return tagOfInterest;
     }
-
-
 
     public void printTagData() {
         if (tagOfInterest == null) {
@@ -111,5 +103,14 @@ public class Vision {
 //        opMode.telemetry.addData("Rotation Yaw in degrees", Math.toDegrees(tagOfInterest.pose.yaw));
 //        opMode.telemetry.addData("Rotation Pitch degrees", Math.toDegrees(tagOfInterest.pose.pitch));
 //        opMode.telemetry.addData("Rotation Roll degrees", Math.toDegrees(tagOfInterest.pose.roll));
+    }
+    public void colorDetectionPipelineSetter() {
+        camera.setPipeline(colorDetection);
+    }
+    public void aprilTagDetectionPipelineSetter() {
+        camera.setPipeline(aprilTagDetectionPipeline);
+    }
+    public void stop() {
+        camera.stopStreaming();
     }
 }

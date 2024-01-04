@@ -7,7 +7,6 @@ import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.opmode.testing.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.util.Encoder;
 
 import java.util.Arrays;
@@ -50,7 +49,8 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     // Perpendicular is perpendicular to the forward axis
     private Encoder parallelEncoder, perpendicularEncoder;
 
-    private Drive drive;
+    public Drive drive;
+    public HardwareMap hardwareMap;
 
     public TwoWheelTrackingLocalizer(HardwareMap hardwareMap, Drive drive) {
         super(Arrays.asList(

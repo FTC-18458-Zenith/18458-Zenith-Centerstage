@@ -6,16 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
-import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 @Config
 @Autonomous (name = "RightAutoRed", group = "RoadRunnerPath")
 
-public class RightAutoRed extends LinearOpMode {
+public class LeftAutoRed extends LinearOpMode {
     public static double Spike_Dis = 28;
     public static double Park_Distance = 40;
     public static double right_Strafe = 20.5;

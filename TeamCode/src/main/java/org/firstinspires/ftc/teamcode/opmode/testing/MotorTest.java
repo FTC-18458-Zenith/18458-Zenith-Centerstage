@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class MotorTest extends LinearOpMode {
     DcMotor motorTester;
-    public double testingPower = 0.5;
+    public double testingPower = 0.6;
     @Override
     public void runOpMode() throws InterruptedException {
         motorTester = (DcMotor) hardwareMap.get("motor");

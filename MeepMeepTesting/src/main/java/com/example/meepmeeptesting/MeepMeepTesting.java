@@ -19,10 +19,8 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         Pose2d purplePixelRed = new Pose2d(10, -32, Math.toRadians(180));
         Pose2d backdropRed = new Pose2d(50, -32, Math.toRadians(180));
-        Vector2d setUpCycle = new Vector2d(50, -18.5);
+        Pose2d setUpCycle = new Pose2d(0, -13, Math.toRadians(180));
         Pose2d beginCycleRed = new Pose2d(-61, -11.5, Math.toRadians(180));
-        Pose2d toBackdropRed = new Pose2d(50, -18.5, Math.toRadians(180));
-        Vector2d outtakeAuto = new Vector2d(50, -34);
 
         Random random = new Random();
         randomization = random.nextInt(MAX) + 1;
@@ -32,29 +30,44 @@ public class MeepMeepTesting {
                 .setColorScheme((new ColorSchemeRedDark()))
                 .setDimensions(13.4,14.8031)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 11.15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(10, -64, Math.toRadians(180)))
-                                .waitSeconds(5)
+                        drive.trajectorySequenceBuilder(new Pose2d(10, -63, Math.toRadians(270)))
                                 .lineToLinearHeading(purplePixelRed)
+                                .lineToLinearHeading(new Pose2d(10, -49, Math.toRadians(180)))
                                 .waitSeconds(0.15)
                                 .lineToLinearHeading(backdropRed)
-                                .waitSeconds(0.25)
-                                .strafeTo(setUpCycle)
+                                .waitSeconds(0.15)
+                                .lineToLinearHeading(setUpCycle)
                                 .lineToLinearHeading(beginCycleRed)
-                                .lineToLinearHeading(toBackdropRed)
-                                .strafeTo(outtakeAuto)
-                                .waitSeconds(0.25)
+                                .waitSeconds(0.15)
+                                .lineToLinearHeading(setUpCycle)
+                                .lineToLinearHeading(backdropRed)
+                                .waitSeconds(0.15)
                                 .build()
 
                 );
         RoadRunnerBotEntity blueAlliance = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueDark()))
                 .setDimensions(13.4,14.8031)
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(90), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-34, 60, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(38, 56))
+                        drive.trajectorySequenceBuilder(new Pose2d(-34, 63, Math.toRadians(90)))
+                                /*
+                                What to do for the Farside auto
+                                Do the same for purple pixel, but go to the pixel stack, and continue from there
+                                 */
+                                .lineToLinearHeading(new Pose2d(-34, 30, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-34, 48, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-60, 26, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(0,8, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(50, 41.5, Math.toRadians(180)))
+
+                                .lineToLinearHeading(new Pose2d(0,8, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-60, 24, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(0,8, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(50, 41.5, Math.toRadians(180)))
                                 .build()
                 );
 
