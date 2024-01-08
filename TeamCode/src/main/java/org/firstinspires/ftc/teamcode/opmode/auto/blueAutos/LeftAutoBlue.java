@@ -46,18 +46,18 @@ public class LeftAutoBlue extends LinearOpMode {
                 .build();
         //Run Auto
 
-        drive.followTrajectorySequence(Trajectory1);
-        drive.followTrajectorySequence(Trajectory2);
-        Thread.sleep(500);
-        slides.moveLow();
-        Thread.sleep(1000);
-        Thread.sleep(1500);
-        slides.reset();
         switch (colorDetection.getLocation()) {
-            case "1":
+            case LEFT:
                 drive.followTrajectorySequence(Trajectory1);
-            case "2":
-                 drive.followTrajectorySequence(Trajectory2);
+                break;
+            case CENTER:
+                drive.followTrajectorySequence(Trajectory1);
+                drive.followTrajectorySequence(Trajectory2);
+                break;
+            case RIGHT:
+                drive.followTrajectorySequence(Trajectory2);
+                break;
+
         }
     }
 }
