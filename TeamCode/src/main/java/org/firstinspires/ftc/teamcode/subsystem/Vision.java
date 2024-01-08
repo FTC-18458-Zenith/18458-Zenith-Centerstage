@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetection;
+import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -16,7 +16,7 @@ public class Vision {
     public AprilTagDetection tagOfInterest;
     private final OpenCvCamera camera;
     private final AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private final ColorDetection colorDetection;
+    private final ColorDetectionBlue colorDetectionBlue;
     public final OpMode opMode;
     private static final double FEET_PER_METER = 3.28084;
 
@@ -50,7 +50,7 @@ public class Vision {
         // Obtain webcam name
         camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
-        colorDetection = new ColorDetection();
+        colorDetectionBlue = new ColorDetectionBlue();
 
         // Initialize OpenCvWebcam with live preview
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -105,7 +105,7 @@ public class Vision {
 //        opMode.telemetry.addData("Rotation Roll degrees", Math.toDegrees(tagOfInterest.pose.roll));
     }
     public void colorDetectionPipelineSetter() {
-        camera.setPipeline(colorDetection);
+        camera.setPipeline(colorDetectionBlue);
     }
     public void aprilTagDetectionPipelineSetter() {
         camera.setPipeline(aprilTagDetectionPipeline);

@@ -11,8 +11,8 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @Config
-public class ColorDetection extends OpenCvPipeline {
-    public ColorDetection () {
+public class ColorDetectionBlue extends OpenCvPipeline {
+    public ColorDetectionBlue() {
 
     }
     public static int point1x = 100;
@@ -36,7 +36,6 @@ public class ColorDetection extends OpenCvPipeline {
         RIGHT
     }
     public Scalar BLUE = new Scalar(0, 0, 255);
-    public Scalar RED = new Scalar(255, 0, 0);
     public Scalar GREEN = new Scalar(0, 255, 0);
     Point REGION1 = region1;
     Point REGION2 = region2;
