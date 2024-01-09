@@ -17,7 +17,7 @@ public class MeepMeepTesting {
     static int randomization;
     static int MAX = 3;
     public static void main(String[] args) {
-        Pose2d purplePixelRed = new Pose2d(10, -32, Math.toRadians(180));
+        Pose2d purplePixelRed = new Pose2d(10, -32, Math.toRadians(90));
         Pose2d backdropRed = new Pose2d(50, -32, Math.toRadians(180));
         Pose2d setUpCycle = new Pose2d(0, -13, Math.toRadians(180));
         Pose2d beginCycleRed = new Pose2d(-61, -11.5, Math.toRadians(180));

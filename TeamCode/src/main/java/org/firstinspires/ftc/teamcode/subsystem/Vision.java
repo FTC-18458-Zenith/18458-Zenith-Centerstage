@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.AprilTagDetectionPipeline;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
+import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionRed;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -17,6 +18,7 @@ public class Vision {
     private final OpenCvCamera camera;
     private final AprilTagDetectionPipeline aprilTagDetectionPipeline;
     private final ColorDetectionBlue colorDetectionBlue;
+    private final ColorDetectionRed colorDetectionRed;
     public final OpMode opMode;
     private static final double FEET_PER_METER = 3.28084;
 
@@ -51,6 +53,7 @@ public class Vision {
         camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
         colorDetectionBlue = new ColorDetectionBlue();
+        colorDetectionRed = new ColorDetectionRed();
 
         // Initialize OpenCvWebcam with live preview
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -104,13 +107,22 @@ public class Vision {
 //        opMode.telemetry.addData("Rotation Pitch degrees", Math.toDegrees(tagOfInterest.pose.pitch));
 //        opMode.telemetry.addData("Rotation Roll degrees", Math.toDegrees(tagOfInterest.pose.roll));
     }
-    public void colorDetectionPipelineSetter() {
+    public void ColorDetectionBlue() {
         camera.setPipeline(colorDetectionBlue);
+        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+    }
+    public void ColorDetectionRed() {
+        camera.setPipeline(colorDetectionRed);
+        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
     }
     public void aprilTagDetectionPipelineSetter() {
         camera.setPipeline(aprilTagDetectionPipeline);
+        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
     }
     public void stop() {
         camera.stopStreaming();
+    }
+    public void streaming() {
+        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
     }
 }
