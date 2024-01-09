@@ -18,7 +18,7 @@ public class Arm {
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
     public final double movingForward = 0.5;
-    public final double movingBack = 0;
+    public final double movingBack = 0.05;
     public Arm(OpMode opMode) {
 
         this.hardwareMap = opMode.hardwareMap;
@@ -34,8 +34,8 @@ public class Arm {
         rightArmServo.setDirection(Servo.Direction.REVERSE);
         wrist.setDirection(Servo.Direction.FORWARD);
 
-        leftArmServo.setPosition(0);
-        rightArmServo.setPosition(0);
+        leftArmServo.setPosition(0.14);
+        rightArmServo.setPosition(0.13);
         wrist.setPosition(0);
     }
     public void teleOp() {
@@ -47,8 +47,8 @@ public class Arm {
         else if (gamepad2.circle) intakeWrist();
     }
     public void moving() {
-       leftArmServo.setPosition(movingForward);
-       rightArmServo.setPosition(movingForward);
+        leftArmServo.setPosition(movingForward);
+        rightArmServo.setPosition(movingForward);
     }
     public void rotating() {
         leftArmServo.setPosition(movingBack);

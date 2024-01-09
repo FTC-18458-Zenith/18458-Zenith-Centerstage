@@ -16,18 +16,18 @@ public class LockToTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-    waitForStart();
-    while (opModeIsActive()) {
+        waitForStart();
+        while (opModeIsActive()) {
 
-        Drive drive = new Drive(this);
+            Drive drive = new Drive(this);
 
-        Pose2d startPos = new Pose2d(0, 0, Math.toRadians(0));
+            Pose2d startPos = new Pose2d(0, 0, Math.toRadians(0));
 
-        drive.setPoseEstimate(startPos);
+            drive.setPoseEstimate(startPos);
 
-        lockTo(new Pose2d(5, 5, Math.toRadians(0)));
-        drive.update();
-    }
+            lockTo(new Pose2d(5, 5, Math.toRadians(0)));
+            drive.update();
+        }
     }
 
     public void lockTo (Pose2d targetPos) {
