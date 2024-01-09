@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.subsystem.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.HangingMech;
-import org.firstinspires.ftc.teamcode.subsystem.HorizontalExtension;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.subsystem.Intake;
 @TeleOp
@@ -16,7 +15,6 @@ public class TeleOpMain extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        HorizontalExtension horizontalExtension = new HorizontalExtension(this);
         DroneLauncher droneLauncher = new DroneLauncher(this);
         HangingMech hangingMech = new HangingMech(this);
         Slides slides = new Slides(this);
@@ -34,7 +32,6 @@ public class TeleOpMain extends LinearOpMode {
             intake.teleOp();
             hangingMech.teleOp();
             droneLauncher.teleOp();
-            horizontalExtension.teleOp();
 
         }
     }

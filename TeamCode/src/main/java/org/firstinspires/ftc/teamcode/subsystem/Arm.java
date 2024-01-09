@@ -17,7 +17,7 @@ public class Arm {
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
-    public final double movingForward = 0.5;
+    public final double movingForward = 1;
     public final double movingBack = 0;
     public Arm(OpMode opMode) {
 
@@ -33,7 +33,6 @@ public class Arm {
         leftArmServo.setDirection(Servo.Direction.FORWARD);
         rightArmServo.setDirection(Servo.Direction.REVERSE);
         wrist.setDirection(Servo.Direction.FORWARD);
-
         leftArmServo.setPosition(0);
         rightArmServo.setPosition(0);
         wrist.setPosition(0);
@@ -42,8 +41,7 @@ public class Arm {
         //TODO: After testing, try to control with the stick
         if (gamepad2.triangle) moving();
         else if (gamepad2.square) rotating();
-
-        if (gamepad2.cross) outtakeWrist();
+        else if (gamepad2.cross) outtakeWrist();
         else if (gamepad2.circle) intakeWrist();
     }
     public void moving() {
@@ -55,9 +53,13 @@ public class Arm {
         rightArmServo.setPosition(movingBack);
     }
     public void outtakeWrist() {
-        wrist.setPosition(0.11111111111111);
+        wrist.setPosition(0.5);
+        leftArmServo.setPosition(movingForward);
+        rightArmServo.setPosition(movingBack);
     }
     public void intakeWrist() {
-        wrist.setPosition(0.3333333333333);
+        wrist.setPosition(0);
+        leftArmServo.setPosition(movingBack);
+        rightArmServo.setPosition(movingForward);
     }
 }
