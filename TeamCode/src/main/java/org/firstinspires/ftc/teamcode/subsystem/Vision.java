@@ -54,12 +54,11 @@ public class Vision {
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
         colorDetectionBlue = new ColorDetectionBlue();
         colorDetectionRed = new ColorDetectionRed();
-
+        camera.setViewportRenderer(OpenCvCamera.ViewportRenderer.NATIVE_VIEW);
         // Initialize OpenCvWebcam with live preview
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                camera.setViewportRenderer(OpenCvCamera.ViewportRenderer.GPU_ACCELERATED);
 
                 camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
             }

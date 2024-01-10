@@ -18,7 +18,6 @@ public class TeleOpMain extends LinearOpMode {
         DroneLauncher droneLauncher = new DroneLauncher(this);
         HangingMech hangingMech = new HangingMech(this);
         Slides slides = new Slides(this);
-        Intake intake = new Intake(this);
         Drive drive = new Drive(this);
         Claw claw = new Claw(this);
         Arm arm = new Arm(this);
@@ -29,7 +28,6 @@ public class TeleOpMain extends LinearOpMode {
             claw.teleOp();
             drive.teleOp();
             slides.teleOp();
-            intake.teleOp();
             hangingMech.teleOp();
             droneLauncher.teleOp();
 

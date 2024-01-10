@@ -20,7 +20,6 @@ public class Arm {
     public final double movingForward = 0.5;
     public final double movingBack = 0.05;
     public Arm(OpMode opMode) {
-
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
         this.gamepad1 = opMode.gamepad1;
@@ -43,7 +42,7 @@ public class Arm {
         if (gamepad2.triangle) moving();
         else if (gamepad2.square) rotating();
 
-        if (gamepad2.cross) outtakeWrist();
+        else if (gamepad2.cross) outtakeWrist();
         else if (gamepad2.circle) intakeWrist();
     }
     public void moving() {

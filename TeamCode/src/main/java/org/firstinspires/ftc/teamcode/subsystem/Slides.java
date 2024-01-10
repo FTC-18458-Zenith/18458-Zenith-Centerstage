@@ -65,6 +65,7 @@ public class Slides {
         else if (gamepad1.dpad_right) moveMid();
         else if (gamepad1.dpad_left) moveLow();
         else if (gamepad1.dpad_up) moveHigh();
+        else if (gamepad2.triangle || gamepad2.square) moveMid();
     }
     public void moveHigh() {
         leftSlide.setTargetPosition(HIGH);

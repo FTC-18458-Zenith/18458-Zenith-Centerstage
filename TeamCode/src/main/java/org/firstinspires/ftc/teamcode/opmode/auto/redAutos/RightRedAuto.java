@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 @Autonomous
 public class RightRedAuto extends LinearOpMode {
     Pose2d purplePixelRedLeft = new Pose2d(10, -32, Math.toRadians(180));
-    Pose2d purplePixelRedCenter = new Pose2d(10, -32, Math.toRadians(90));
-    Pose2d purplePixelRedRight = new Pose2d(10, -32, Math.toRadians(0));
+    Pose2d purplePixelRedCenter = new Pose2d(10, -32, Math.toRadians(0));
+    Pose2d purplePixelRedRight = new Pose2d(10, -32, Math.toRadians(90));
     Pose2d backdropRed = new Pose2d(50, -32, Math.toRadians(180));
     Pose2d setUpCycle = new Pose2d(0, -13, Math.toRadians(180));
     Pose2d beginCycleRed = new Pose2d(-61, -11.5, Math.toRadians(180));
@@ -34,11 +34,11 @@ public class RightRedAuto extends LinearOpMode {
         drive.setPoseEstimate(startPos);
 
         TrajectorySequence toSpikeMarks = drive.trajectorySequenceBuilder(startPos)
-                .lineToLinearHeading(purplePixelRedLeft)
+                .lineToLinearHeading(backdropRed)
                 .build();
 
             TrajectorySequence toBackDrop = drive.trajectorySequenceBuilder(toSpikeMarks.end())
-                    .lineToLinearHeading(backdropRed)
+                    .lineToLinearHeading(purplePixelRedLeft)
                     .build();
 
             TrajectorySequence startOfCycle = drive.trajectorySequenceBuilder(toBackDrop.end())
