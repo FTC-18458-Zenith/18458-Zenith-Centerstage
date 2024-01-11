@@ -9,8 +9,11 @@ import org.firstinspires.ftc.teamcode.subsystem.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.subsystem.Vision;
+import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetection;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
+import org.opencv.core.Scalar;
+import org.openftc.easyopencv.OpenCvCamera;
 
 @Autonomous (name = "RightAutoBlue", group = "RoadRunnerPath")
 public class LeftAutoBlue extends LinearOpMode {
@@ -26,8 +29,7 @@ public class LeftAutoBlue extends LinearOpMode {
         Arm arm = new Arm(this);
         Slides slides = new Slides(this);
         ColorDetectionBlue colorDetectionBlue = new ColorDetectionBlue();
-        Vision vision = new Vision(this);
-
+        Vision vision = new Vision(this, Vision.AllianceColor.BLUE);
         Pose2d startPos = new Pose2d(-34, 68, Math.toRadians(90));
         ElapsedTime timer = new ElapsedTime();
 

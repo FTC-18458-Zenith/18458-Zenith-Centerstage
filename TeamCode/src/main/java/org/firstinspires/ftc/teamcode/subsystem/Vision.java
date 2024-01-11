@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetection;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionRed;
 import org.openftc.apriltag.AprilTagDetection;
@@ -12,14 +13,13 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Vision {
-    public AprilTagDetection tagOfInterest;
+    private AprilTagDetection tagOfInterest;
     private final OpenCvCamera camera;
-    private final AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private final ColorDetectionBlue colorDetectionBlue;
-    private final ColorDetectionRed colorDetectionRed;
-    public final OpMode opMode;
+    private final ColorDetection colorDetection;
+    private final OpMode opMode;
     private static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
@@ -43,7 +43,12 @@ public class Vision {
     private static final int RIGHT_RED = 6;
     private boolean tagFound = false;
 
-    public Vision(OpMode opMode) {
+    public enum AllianceColor {
+        RED,
+        BLUE
+    }
+
+    public Vision(OpMode opMode, AllianceColor allianceColor) {
         this.opMode = opMode;
 
         // Obtain camera id to allow for camera preview
@@ -51,11 +56,16 @@ public class Vision {
 
         // Obtain webcam name
         camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
-        colorDetectionBlue = new ColorDetectionBlue();
-        colorDetectionRed = new ColorDetectionRed();
+//        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagSize, fx, fy, cx, cy);
+
+        if (allianceColor == AllianceColor.RED) {
+            colorDetection = new ColorDetectionRed();
+        } else {
+            colorDetection = new ColorDetectionBlue();
+        }
         camera.setViewportRenderer(OpenCvCamera.ViewportRenderer.NATIVE_VIEW);
         // Initialize OpenCvWebcam with live preview
+        camera.setPipeline(colorDetection);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
@@ -68,60 +78,5 @@ public class Vision {
                 opMode.telemetry.addData("OpenCV ran into an error", errorCode);
             }
         });
-    }
-    public void updateTagOfInterest() {
-        ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
-
-        tagFound = false;
-        if (currentDetections.size() == 0) return;
-
-        for(AprilTagDetection tag : currentDetections) {
-            if(tag.id == LEFT_BLUE || tag.id == MIDDLE_BLUE || tag.id == RIGHT_BLUE) {
-                tagFound = true;
-                tagOfInterest = tag;
-            }
-        }
-    }
-
-    public AprilTagDetection getTagOfInterest() {
-        return tagOfInterest;
-    }
-
-    public void printTagData() {
-        if (tagOfInterest == null) {
-            opMode.telemetry.addLine("Tag not found");
-            return;
-        }
-
-        if (tagFound) opMode.telemetry.addLine("Tag in sight");
-        else opMode.telemetry.addLine("Tag seen before but not in sight");
-
-        opMode.telemetry.addLine();
-
-        opMode.telemetry.addData("Detected tag ID", tagOfInterest.id);
-        opMode.telemetry.addData("Translation X in meters", tagOfInterest.pose.x);
-        opMode.telemetry.addData("Translation Y in meters", tagOfInterest.pose.y);
-        opMode.telemetry.addData("Translation Z in meters", tagOfInterest.pose.z);
-//        opMode.telemetry.addData("Rotation Yaw in degrees", Math.toDegrees(tagOfInterest.pose.yaw));
-//        opMode.telemetry.addData("Rotation Pitch degrees", Math.toDegrees(tagOfInterest.pose.pitch));
-//        opMode.telemetry.addData("Rotation Roll degrees", Math.toDegrees(tagOfInterest.pose.roll));
-    }
-    public void ColorDetectionBlue() {
-        camera.setPipeline(colorDetectionBlue);
-        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
-    }
-    public void ColorDetectionRed() {
-        camera.setPipeline(colorDetectionRed);
-        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
-    }
-    public void aprilTagDetectionPipelineSetter() {
-        camera.setPipeline(aprilTagDetectionPipeline);
-        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
-    }
-    public void stop() {
-        camera.stopStreaming();
-    }
-    public void streaming() {
-        camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
     }
 }
