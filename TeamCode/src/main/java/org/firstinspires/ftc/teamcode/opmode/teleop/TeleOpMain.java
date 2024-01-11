@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystem.HangingMech;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
 import org.firstinspires.ftc.teamcode.subsystem.Intake;
 @TeleOp
-public class TeleOpMain extends LinearOpMode {
+public class TeleOpMain extends LinearOpMode  {
 
     @Override
     public void runOpMode() throws InterruptedException {
