@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp
 public class ServoTest extends LinearOpMode {
     Servo servo;
-    public double testingPower = 0.6;
-    public double otherPostion = 0;
+    public static double testingPower = 0.6;
+    public static double otherPostion = 0;
     @Override
     public void runOpMode() throws InterruptedException {
         servo = (Servo) hardwareMap.get("servo");

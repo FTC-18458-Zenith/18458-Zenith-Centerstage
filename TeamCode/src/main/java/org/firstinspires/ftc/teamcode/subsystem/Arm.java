@@ -17,8 +17,8 @@ public class Arm {
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
-    public final double movingForward = 0.5;
-    public final double movingBack = 0.19;
+    public static double movingForward = 0.5;
+    public static double movingBack = 0.19;
     public Arm(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
@@ -58,5 +58,10 @@ public class Arm {
     }
     public void intakeWrist() {
         wrist.setPosition(0.3333333333333);
+    }
+
+    public void periodic() {
+        telemetry.addData("Current Position", (leftArmServo.getPosition() + rightArmServo.getPosition()) / 2);
+
     }
 }

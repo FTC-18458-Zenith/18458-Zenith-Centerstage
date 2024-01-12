@@ -19,6 +19,8 @@ public class ArmTest extends LinearOpMode {
             waitForStart();
             while (opModeIsActive()) {
                 arm.teleOp();
+                arm.periodic();
+                telemetry.update();
             }
         }
     }
