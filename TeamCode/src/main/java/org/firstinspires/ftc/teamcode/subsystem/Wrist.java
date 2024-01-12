@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class Wrist extends SubsystemBase {
 
-    public final static double grabPose = 0.19,
-            scorePose = 0.5,
-            resetPose = 1;
+    public final static double grabPose = 0,
+            scorePose = 0,
+            resetPose = 0;
     Telemetry telemetry;
 
     private final ServoEx Wrist;
