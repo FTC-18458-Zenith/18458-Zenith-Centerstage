@@ -14,12 +14,16 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @Autonomous (name = "RightAutoRed", group = "RoadRunnerPath")
 
 public class LeftAutoRed extends LinearOpMode {
-    public static double Spike_Dis = 28;
-    public static double Park_Distance = 40;
-    public static double right_Strafe = 20.5;
-    public static double Cycle_Dis = 110;
-    public static double Scoring_Dis = 23;
-    public static double Parking = 27.5;
+    Pose2d purplePixelRedLeft = new Pose2d(-38, -32, Math.toRadians(180));
+    //.back(7)
+    //.strafeRight(20)
+    Pose2d purplePixelRedRight = new Pose2d(-32, -32, Math.toRadians(0));
+    //.strafeLeft(10)
+    Pose2d purplePixelRedCenter = new Pose2d(-30, -32, Math.toRadians(90));
+    //.back(15)
+    Pose2d goDownRed = new Pose2d(-56, -20, Math.toRadians(180));
+    Pose2d goingToBackdropRed = new Pose2d(-20, -8, Math.toRadians(180));
+    Pose2d backdropRed = new Pose2d(47, -28, Math.toRadians(180));
 
     OpenCvWebcam webcam;
     @Override
@@ -34,19 +38,9 @@ public class LeftAutoRed extends LinearOpMode {
 
         drive.setPoseEstimate(startPos);
         TrajectorySequence Trajectory1 = drive.trajectorySequenceBuilder(startPos)
-                .forward(Spike_Dis)
                 .build();
-        TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
-                .turn(Math.toRadians(-90))
-                        .forward(Park_Distance)
-                                .build();
-        TrajectorySequence Trajectory3 = drive.trajectorySequenceBuilder(Trajectory2.end())
-                .strafeRight(right_Strafe)
-                        .build();
 
         drive.followTrajectorySequence(Trajectory1);
-
-        drive.followTrajectorySequence(Trajectory2);
     }
 }
 

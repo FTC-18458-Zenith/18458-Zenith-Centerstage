@@ -313,6 +313,7 @@ public class Drive extends MecanumDrive {
         return new ProfileAccelerationConstraint(maxAccel);
     }
     public void teleOp() {
+        //FIELD CENTRIC DRIVETRAIN CODE
         if (gamepad1.right_bumper) moveDrive(0.5);
         else moveDrive(1);
         if (gamepad1.cross) {

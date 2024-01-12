@@ -15,10 +15,10 @@ public class teaching extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         waitForStart();
         while(opModeIsActive()) {
-            backLeft.setPower(gamepad1.left_stick_y);
-            backRight.setPower(gamepad1.left_stick_y);
-            frontRight.setPower(gamepad1.left_stick_y);
-            frontLeft.setPower(gamepad1.left_stick_y);
+            backLeft.setPower(-gamepad1.left_stick_y);
+            backRight.setPower(-gamepad1.left_stick_y);
+            frontRight.setPower(-gamepad1.left_stick_y);
+            frontLeft.setPower(-gamepad1.left_stick_y);
         }
     }
 }

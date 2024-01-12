@@ -8,20 +8,18 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Claw {
-    public Servo lClaw, rClaw;
+    public Servo claw;
     public final Gamepad gamepad2;
     public HardwareMap hardwareMap;
     public final double OPENED = 0.42;
-    public final double CLOSED = 0.59;
+    public final double CLOSED = 0.65;
     public Claw(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
 
-        lClaw = (Servo) hardwareMap.get("leftClaw");
-        rClaw = (Servo) hardwareMap.get("rightClaw");
+        claw = (Servo) hardwareMap.get("Claw");
 
-        lClaw.setDirection(Servo.Direction.REVERSE);
-        rClaw.setDirection(Servo.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
         clawServo(OPENED);
     }
     public void teleOp() {
@@ -29,7 +27,6 @@ public class Claw {
         else if (gamepad2.right_bumper) clawServo(CLOSED);
     }
     public void clawServo(double position) {
-        rClaw.setPosition(position);
-        lClaw.setPosition(position);
+        claw.setPosition(position);
     }
 }
