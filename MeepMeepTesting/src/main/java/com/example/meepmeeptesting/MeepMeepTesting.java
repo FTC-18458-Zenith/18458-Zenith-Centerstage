@@ -86,6 +86,8 @@ public class MeepMeepTesting {
         Pose2d rightBackdropRedCenter = new Pose2d(50, -35, Math.toRadians(180));
         Pose2d rightBackdropRedLeft = new Pose2d(50,-28, Math.toRadians(180));
         Pose2d rightBackdropRedRight = new Pose2d(50, -42, Math.toRadians(180));
+        int backingUpRed = 20;
+        Pose2d parkingRed = new Pose2d(60, -60, Math.toRadians(90));
 
         RoadRunnerBotEntity redAllianceRight = new DefaultBotBuilder(meepMeep)
                 //TODO: MAKE AUTO PARK IN THE CORNER
@@ -96,6 +98,8 @@ public class MeepMeepTesting {
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(180)))
                                 .lineToLinearHeading(rightPurplePixelRedCenter)
                                 .lineToLinearHeading(rightBackdropRedCenter)
+                                .forward(backingUpRed)
+                                .lineToLinearHeading(parkingRed)
                                 .build()
                 );
         Pose2d leftPurplePixelBlueLeft = new Pose2d(15, 30, Math.toRadians(0));
@@ -110,9 +114,10 @@ public class MeepMeepTesting {
         //.strafeLeft(15)
         Pose2d leftSetUpCycleBlue = new Pose2d(0, 11, Math.toRadians(180));
         Pose2d leftBeginCycleBlue = new Pose2d(-61, 11.5, Math.toRadians(180));
+        int backingUpBlue = 20;
+        Pose2d parkingBlue= new Pose2d(60, 60 , Math.toRadians(90));
 
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
-                //TODO: MAKE AUTO PARK IN THE CORNER
                 .setColorScheme((new ColorSchemeBlueLight()))
                 .setDimensions(13.4, 14.8031)
                 .setConstraints(60, 60 , Math.toRadians(180), Math.toRadians(90), 11.15)
@@ -120,13 +125,15 @@ public class MeepMeepTesting {
                         driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(90)))
                                 .lineToLinearHeading(leftPurplePixelBlueCenter)
                                 .lineToLinearHeading(leftBackdropBlueCenter)
+                                .forward(backingUpBlue)
+                                .lineToLinearHeading(parkingBlue)
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(blueAllianceRight)
-                .addEntity(redAllianceLeft)
+                .addEntity(blueAllianceLeft)
+                .addEntity(redAllianceRight)
                 .start();
     }
 }

@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystem;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -6,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
+@Config
 public class HangingMech {
-    private final DcMotor hangingMotor;
+    private final DcMotor leftSlide, rightSlide;
     private final Gamepad gamepad1;
     private final int hanging = 1000;
     private HardwareMap hardwareMap;
@@ -19,24 +20,44 @@ public class HangingMech {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad1 = opMode.gamepad1;
 
-        hangingMotor = (DcMotor) hardwareMap.get("hangingMotor");
+        leftSlide = (DcMotor) hardwareMap.get("leftSlide");
+        rightSlide = (DcMotor) hardwareMap.get("rightSlide");
 
-        hangingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        hangingMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        hangingMotor.setTargetPosition(0);
-        hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hangingMotor.setPower(1);
+        leftSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftSlide.setTargetPosition(0);
+        leftSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlide.setPower(0.5);
 
-        position = hangingMotor.getCurrentPosition();
+        rightSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightSlide.setTargetPosition(0);
+        rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightSlide.setPower(0.5);
+
+        position = leftSlide.getCurrentPosition();
     }
-    public void teleOp() {
-        if (gamepad1.left_bumper) hanging();
+    public void teleOp() throws InterruptedException{
+        if (gamepad1.left_bumper) {
+            hanging();
+            Thread.sleep(500);
+            clamping();
+        }
     }
     public void soloTeleOp() {
-        if (gamepad1.dpad_up && gamepad1.dpad_down) hanging();
+        if (gamepad1.dpad_up && gamepad1.dpad_down)
+            hanging();
     }
     public void hanging() {
-        hangingMotor.setTargetPosition(hanging);
+        leftSlide.setTargetPosition(hanging);
+        rightSlide.setTargetPosition(hanging);
+    }
+    public void clamping() {
+        rightSlide.setPower(0.25);
+        leftSlide.setPower(0.25);
+        rightSlide.setTargetPosition(0);
+        leftSlide.setTargetPosition(0);
     }
 }
