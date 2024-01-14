@@ -18,10 +18,10 @@ public class Slides {
     public final DcMotor leftSlide, rightSlide;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;
-    public static int HIGH = 1000;
-    public static int MID = 750;
-    public static int LOW = 500;
-    public static int INTAKE = 0;
+    public static int HIGH = 550;
+    public static int MID = 490;
+    public static int LOW = 470;
+    public static int INTAKE = 300;
     int position;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
@@ -46,8 +46,10 @@ public class Slides {
         rightSlide.setTargetPosition(0);
         leftSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlide.setPower(0.5);
-        rightSlide.setPower(0.5);
+        leftSlide.setPower(1);
+        rightSlide.setPower(1);
+        rightSlide.setTargetPosition(INTAKE);
+        leftSlide.setTargetPosition(INTAKE);
 
         position = leftSlide.getCurrentPosition();
         //No point in other slide as they should be same positions
