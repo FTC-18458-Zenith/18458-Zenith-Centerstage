@@ -37,7 +37,6 @@ public class Arm {
         // every quarter adds 88.75
         // less than 0.25
         // Need to get into 30 degrees
-
     }
     public void teleOp() {
         if (gamepad2.triangle) outtake();
