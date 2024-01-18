@@ -33,7 +33,7 @@ import java.util.List;
  *    \--------------/
  *
  */
-public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
+public class ThreeWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     public static double TICKS_PER_REV = 8192;
     public static double WHEEL_RADIUS = 2; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
@@ -47,12 +47,12 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     // Parallel/Perpendicular to the forward axis
     // Parallel wheel is parallel to the forward axis
     // Perpendicular is perpendicular to the forward axis
-    private Encoder parallelEncoder, perpendicularEncoder;
+    private Encoder parallelEncoder, perpendicularEncoder, frontEncoder;
 
     public Drive drive;
     public HardwareMap hardwareMap;
 
-    public TwoWheelTrackingLocalizer(HardwareMap hardwareMap, Drive drive) {
+    public ThreeWheelTrackingLocalizer(HardwareMap hardwareMap, Drive drive) {
         super(Arrays.asList(
                 new Pose2d(PARALLEL_X, PARALLEL_Y, 0),
                 new Pose2d(PERPENDICULAR_X, PERPENDICULAR_Y, Math.toRadians(90))
@@ -62,6 +62,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         parallelEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftFront"));
         perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightRear"));
+        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightFront"));
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
         parallelEncoder.setDirection(Encoder.Direction.FORWARD);
