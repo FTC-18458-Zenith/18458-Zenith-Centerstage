@@ -7,9 +7,18 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMoveManual;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
 import org.firstinspires.ftc.teamcode.subsystem.Arm_V2;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
+import org.firstinspires.ftc.teamcode.subsystem.IntakeV2;
+import org.firstinspires.ftc.teamcode.subsystem.SlideV2;
 import org.firstinspires.ftc.teamcode.subsystem.Wrist;
+import org.firstinspires.ftc.teamcode.util.GamepadTrigger;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 
 public class TeleOpMain_V2 extends MatchOpMode {
@@ -18,7 +27,8 @@ public class TeleOpMain_V2 extends MatchOpMode {
     private GamepadEx operatorGamepad; // Driver 2
 
     private Wrist wrist;
-    private Arm_V2 arm;
+    private SlideV2 slide;
+    private IntakeV2 intake;
 
     Drive drive = new Drive(this);
 
@@ -29,20 +39,35 @@ public class TeleOpMain_V2 extends MatchOpMode {
         operatorGamepad = new GamepadEx(gamepad2);
 
         wrist = new Wrist(hardwareMap, telemetry);
-        arm = new Arm_V2(hardwareMap, telemetry);
+        slide = new SlideV2(telemetry, hardwareMap);
+        intake = new IntakeV2(telemetry, hardwareMap);
+
+        drive.teleOp();
 
     }
 
     @Override
     public void configureButtons() {
 
-        Button clawGrab = new GamepadButton(operatorGamepad, GamepadKeys.Button.A);
+        slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getRightY));
 
+        Button slideReset = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)
+                .whenPressed(new SlideReset(slide, wrist));
+
+        Button slideLow = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)
+                .whenPressed(new SlideLow(slide, wrist));
+
+        Button slideMid = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_RIGHT)
+                .whenPressed(new SlideMid(slide, wrist));
+
+        Button slideHigh = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)
+                .whenPressed(new SlideHigh(slide, wrist));
+
+        Button Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
+                .whenHeld(new IntakeOn(intake));
     }
 
     @Override
     public void matchStart() {
-        drive.teleOp();
-
     }
 }

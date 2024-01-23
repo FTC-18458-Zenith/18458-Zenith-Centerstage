@@ -19,7 +19,7 @@ public class Wrist extends SubsystemBase {
             resetPose = 0;
     Telemetry telemetry;
 
-    private final ServoEx Wrist;
+    private static ServoEx Wrist;
 
     public Wrist(final HardwareMap hMap, Telemetry telemetry) {
         this.Wrist = new SimpleServo(hMap, "Wrist", 0, 360);
@@ -40,8 +40,8 @@ public class Wrist extends SubsystemBase {
         Wrist.setPosition(scorePose);
     }
 
-    public void Grab() {
-        Wrist.setPosition(grabPose);
+    public void Reset() {
+        Wrist.setPosition(resetPose);
     }
 
 }
