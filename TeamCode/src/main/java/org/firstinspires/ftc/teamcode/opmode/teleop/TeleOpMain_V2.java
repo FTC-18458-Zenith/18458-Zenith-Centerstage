@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
+import org.firstinspires.ftc.teamcode.opmode.command.drone.launch;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
@@ -16,6 +17,7 @@ import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMoveManual;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
 import org.firstinspires.ftc.teamcode.subsystem.Arm_V2;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
+import org.firstinspires.ftc.teamcode.subsystem.Drone;
 import org.firstinspires.ftc.teamcode.subsystem.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.SlideV2;
@@ -32,6 +34,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
     private SlideV2 slide;
     private IntakeV2 intake;
     private Outtake outtake;
+    private Drone drone;
 
     Drive drive = new Drive(this);
 
@@ -45,6 +48,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
         slide = new SlideV2(telemetry, hardwareMap);
         intake = new IntakeV2(telemetry, hardwareMap);
         outtake = new Outtake(hardwareMap, telemetry);
+        drone = new Drone(hardwareMap, telemetry);
 
         drive.teleOp();
 
@@ -72,6 +76,9 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
                 .whenPressed(new Score(outtake));
+
+        Button Drone = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
+                .whenPressed(new launch(drone));
     }
 
     @Override
