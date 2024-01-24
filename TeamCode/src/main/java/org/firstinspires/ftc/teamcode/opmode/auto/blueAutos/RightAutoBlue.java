@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Slides;
-import org.firstinspires.ftc.teamcode.subsystem.Vision;
+import org.firstinspires.ftc.teamcode.subsystem.vision;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
@@ -31,7 +31,7 @@ public class RightAutoBlue extends LinearOpMode {
         Arm arm = new Arm(this);
         Slides slides = new Slides(this);
         ColorDetectionBlue colorDetectionBlue = new ColorDetectionBlue();
-        Vision vision = new Vision(this, Vision.AllianceColor.BLUE);
+        vision vision = new vision(this, org.firstinspires.ftc.teamcode.subsystem.vision.AllianceColor.BLUE);
         Pose2d startPos = new Pose2d(-30, 64, Math.toRadians(90));
 
         drive.setPoseEstimate(startPos);

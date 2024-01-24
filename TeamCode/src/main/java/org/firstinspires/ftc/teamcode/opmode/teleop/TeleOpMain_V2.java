@@ -8,6 +8,7 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
+import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
@@ -16,6 +17,7 @@ import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
 import org.firstinspires.ftc.teamcode.subsystem.Arm_V2;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.IntakeV2;
+import org.firstinspires.ftc.teamcode.subsystem.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.SlideV2;
 import org.firstinspires.ftc.teamcode.subsystem.Wrist;
 import org.firstinspires.ftc.teamcode.util.GamepadTrigger;
@@ -29,6 +31,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
     private Wrist wrist;
     private SlideV2 slide;
     private IntakeV2 intake;
+    private Outtake outtake;
 
     Drive drive = new Drive(this);
 
@@ -41,6 +44,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
         wrist = new Wrist(hardwareMap, telemetry);
         slide = new SlideV2(telemetry, hardwareMap);
         intake = new IntakeV2(telemetry, hardwareMap);
+        outtake = new Outtake(hardwareMap, telemetry);
 
         drive.teleOp();
 
@@ -52,7 +56,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
         slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getRightY));
 
         Button slideReset = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)
-                .whenPressed(new SlideReset(slide, wrist));
+                .whenPressed(new SlideReset(slide, wrist, outtake));
 
         Button slideLow = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)
                 .whenPressed(new SlideLow(slide, wrist));
@@ -65,6 +69,9 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
         Button Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whenHeld(new IntakeOn(intake));
+
+        Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
+                .whenPressed(new Score(outtake));
     }
 
     @Override

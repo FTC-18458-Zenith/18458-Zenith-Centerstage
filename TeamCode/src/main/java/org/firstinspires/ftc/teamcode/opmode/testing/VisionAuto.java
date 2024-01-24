@@ -1,11 +1,8 @@
 package org.firstinspires.ftc.teamcode.opmode.testing;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.opmode.testing.Vision.FFVision;
+import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 @Autonomous
 public class VisionAuto extends MatchOpMode {

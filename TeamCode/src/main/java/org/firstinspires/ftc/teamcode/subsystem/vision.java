@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.subsystem;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.subsystem.pipelines.AprilTagDetectionPipeline;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetection;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionBlue;
 import org.firstinspires.ftc.teamcode.subsystem.pipelines.ColorDetectionRed;
@@ -12,10 +11,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-public class Vision {
+public class vision {
     private AprilTagDetection tagOfInterest;
     private final OpenCvCamera camera;
     private final ColorDetection colorDetection;
@@ -48,7 +44,7 @@ public class Vision {
         BLUE
     }
 
-    public Vision(OpMode opMode, AllianceColor allianceColor) {
+    public vision(OpMode opMode, AllianceColor allianceColor) {
         this.opMode = opMode;
 
         // Obtain camera id to allow for camera preview
