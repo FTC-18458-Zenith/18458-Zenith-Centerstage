@@ -19,29 +19,34 @@ public class Wrist extends SubsystemBase {
             resetPose = 0;
     Telemetry telemetry;
 
-    private static ServoEx Wrist;
+    private static ServoEx leftArmServo, rightArmServo;
 
     public Wrist(final HardwareMap hMap, Telemetry telemetry) {
-        this.Wrist = new SimpleServo(hMap, "Wrist", 0, 360);
+        leftArmServo = new SimpleServo(hMap, "leftArmServo", 0, 360);
+        rightArmServo = new SimpleServo(hMap, "rightArmServo", 0, 360);
 
-        Wrist.setInverted(REVERSED);
+        leftArmServo.setInverted(REVERSED);
+        rightArmServo.setInverted(true);
 
-        Wrist.setPosition(resetPose);
+        leftArmServo.setPosition(resetPose);
+        rightArmServo.setPosition(resetPose);
 
         this.telemetry = telemetry;
     }
 
     @Override
     public void periodic() {
-        telemetry.addData("WristPose", Wrist.getPosition());
+        telemetry.addData("WristPose", leftArmServo.getPosition());
     }
 
     public void Score() {
-        Wrist.setPosition(scorePose);
+        leftArmServo.setPosition(scorePose);
+        rightArmServo.setPosition(scorePose);
     }
 
     public void Reset() {
-        Wrist.setPosition(resetPose);
+        leftArmServo.setPosition(resetPose);
+        rightArmServo.setPosition(resetPose);
     }
 
 }

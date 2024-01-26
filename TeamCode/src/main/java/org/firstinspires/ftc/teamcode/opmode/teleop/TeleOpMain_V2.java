@@ -2,10 +2,8 @@ package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
-import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
@@ -15,12 +13,12 @@ import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMoveManual;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
-import org.firstinspires.ftc.teamcode.subsystem.Arm_V2;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Drone;
 import org.firstinspires.ftc.teamcode.subsystem.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.SlideV2;
+import org.firstinspires.ftc.teamcode.subsystem.Wheel;
 import org.firstinspires.ftc.teamcode.subsystem.Wrist;
 import org.firstinspires.ftc.teamcode.util.GamepadTrigger;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
@@ -32,9 +30,10 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
     private Wrist wrist;
     private SlideV2 slide;
-    private IntakeV2 intake;
+    private IntakeV2 intakeV2;
     private Outtake outtake;
     private Drone drone;
+    private Wheel wheel;
 
     Drive drive = new Drive(this);
 
@@ -46,12 +45,11 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
         wrist = new Wrist(hardwareMap, telemetry);
         slide = new SlideV2(telemetry, hardwareMap);
-        intake = new IntakeV2(telemetry, hardwareMap);
+        intakeV2 = new IntakeV2(telemetry, hardwareMap);
         outtake = new Outtake(hardwareMap, telemetry);
         drone = new Drone(hardwareMap, telemetry);
-
+        wheel = new Wheel(hardwareMap, telemetry);
         drive.teleOp();
-
     }
 
     @Override
@@ -72,10 +70,10 @@ public class TeleOpMain_V2 extends MatchOpMode {
                 .whenPressed(new SlideHigh(slide, wrist));
 
         Button Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
-                .whenHeld(new IntakeOn(intake));
+                .whenHeld(new IntakeOn(intakeV2, wheel));
 
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
-                .whenPressed(new Score(outtake));
+                .whenPressed(new Score(outtake, intakeV2));
 
         Button Drone = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
                 .whenPressed(new launch(drone));
@@ -83,5 +81,6 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
     @Override
     public void matchStart() {
+
     }
 }
