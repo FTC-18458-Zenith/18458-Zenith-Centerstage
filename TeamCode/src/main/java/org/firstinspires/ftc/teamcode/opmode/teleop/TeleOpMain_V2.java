@@ -14,12 +14,12 @@ import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMoveManual;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
-import org.firstinspires.ftc.teamcode.subsystem.Drone;
-import org.firstinspires.ftc.teamcode.subsystem.IntakeV2;
-import org.firstinspires.ftc.teamcode.subsystem.Outtake;
-import org.firstinspires.ftc.teamcode.subsystem.SlideV2;
-import org.firstinspires.ftc.teamcode.subsystem.Wheel;
-import org.firstinspires.ftc.teamcode.subsystem.Wrist;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Drone;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 import org.firstinspires.ftc.teamcode.util.GamepadTrigger;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 
@@ -81,6 +81,5 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
     @Override
     public void matchStart() {
-
     }
 }
