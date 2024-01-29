@@ -7,10 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
-import org.firstinspires.ftc.teamcode.subsystem.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
-import org.firstinspires.ftc.teamcode.subsystem.Intake;
-import org.firstinspires.ftc.teamcode.subsystem.Slides;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Intake;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
 @Config

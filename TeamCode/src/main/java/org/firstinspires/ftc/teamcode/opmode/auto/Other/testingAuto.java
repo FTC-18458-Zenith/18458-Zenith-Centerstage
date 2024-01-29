@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.opmode.auto.Other;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.subsystem.Arm;
-import org.firstinspires.ftc.teamcode.subsystem.Slides;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
 
 @Autonomous
 public class testingAuto extends LinearOpMode {

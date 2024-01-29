@@ -5,11 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.subsystem.Arm;
-import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
-import org.firstinspires.ftc.teamcode.subsystem.HangingMech;
-import org.firstinspires.ftc.teamcode.subsystem.Intake;
-import org.firstinspires.ftc.teamcode.subsystem.Slides;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.DroneLauncher;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.HangingMech;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Intake;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
 
 @TeleOp
 public class DigitalDrive extends LinearOpMode {
