@@ -7,13 +7,13 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 
 @TeleOp
 public class drivetrainTeleOp extends LinearOpMode {
-    Drive drive = new Drive(this);
+
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();
+        Drive drive = new Drive(this);
         while (opModeIsActive()) {
             drive.teleOp();
-
         }
     }
 }

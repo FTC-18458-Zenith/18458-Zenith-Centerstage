@@ -35,7 +35,6 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceRunner;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +56,7 @@ import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.kV;
  */
 @Config
 public class Drive extends MecanumDrive {
+    private final Gamepad gamepad1;
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
 
@@ -76,11 +76,9 @@ public class Drive extends MecanumDrive {
 
     private final List<Integer> lastEncPositions = new ArrayList<>();
     private final List<Integer> lastEncVels = new ArrayList<>();
-    private final HardwareMap hardwareMap;
-    private final Gamepad gamepad1;
     public Drive(OpMode opMode) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
-        this.hardwareMap = opMode.hardwareMap;
+        HardwareMap hardwareMap = opMode.hardwareMap;
         this.gamepad1 = opMode.gamepad1;
 
         TrajectoryFollower follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
