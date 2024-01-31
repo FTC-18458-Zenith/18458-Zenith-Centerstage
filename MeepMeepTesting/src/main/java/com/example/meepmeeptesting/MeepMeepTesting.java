@@ -27,18 +27,22 @@ public class MeepMeepTesting {
 
         Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
 
+        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
+
         RoadRunnerBotEntity redAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
                 .setDimensions(16,16)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(270)))
                                 //.forward(15)
                                 .lineToLinearHeading(RightPose)
                                 .lineToLinearHeading(ResetPose)
+                                //.waitSeconds(10)
                                 .back(82)
-                                .strafeRight(20)
+                                .lineToLinearHeading(scorePose)
+                                .strafeLeft(25)
                                 .build()
 
                 );
@@ -49,19 +53,21 @@ public class MeepMeepTesting {
         Pose2d leftPose = new Pose2d(10, -30, Math.toRadians(180));
         Pose2d midPose = new Pose2d(24, -24, Math.toRadians(180));
 
-        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
 
         RoadRunnerBotEntity redAllianceRight = new DefaultBotBuilder(meepMeep)
                 //TODO: MAKE AUTO PARK IN THE CORNER
                 .setColorScheme((new ColorSchemeRedLight()))
                 .setDimensions(16, 16)
-                .setConstraints(60, 60 , Math.toRadians(180), Math.toRadians(180), 11.15)
+                .setConstraints(30, 40 , Math.toRadians(180), Math.toRadians(180), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(180)))
                                 .back(20)
                                 .lineToLinearHeading(resetPose)
-                                .lineToLinearHeading(midPose)
+                                .lineToLinearHeading(leftPose)
                                 .lineToLinearHeading(scorePose)
+
+                                .strafeRight(28)
+                                .back(10)
                                 .build()
                 );
 
