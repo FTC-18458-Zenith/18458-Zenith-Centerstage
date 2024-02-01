@@ -58,6 +58,15 @@ public class IntakeV2 extends SubsystemBase {
         rightIntake.setPosition(intakeDropDown);
     }
 
+    public void IntakeReverse() {
+        spinner.set(-Power);
+        intakeOn = true;
+        intakePower = intakePower.ON;
+
+        leftIntake.setPosition(outtakeDropDowm);
+        rightIntake.setPosition(outtakeDropDowm);
+    }
+
     public void IntakeOff() {
         spinner.set(-Power);
         intakeOn = false;

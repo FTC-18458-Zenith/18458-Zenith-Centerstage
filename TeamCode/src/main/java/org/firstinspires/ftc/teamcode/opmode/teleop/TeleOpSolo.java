@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 
+import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOff;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.drone.launch;
@@ -72,6 +73,9 @@ public class TeleOpSolo extends MatchOpMode {
 
         Button Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whenHeld(new IntakeOn(intakeV2, wheel));
+
+        Button Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
+                .whenHeld(new IntakeOff(intakeV2, wheel));
 
         Button Score = new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)
                 .whenPressed(new Score(outtake, intakeV2));
