@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Basic.Arm;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.Claw;
+import org.firstinspires.ftc.teamcode.subsystem.Basic.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.HangingMech;
@@ -15,8 +16,10 @@ public class TeleOpMain extends LinearOpMode  {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
         DroneLauncher droneLauncher = new DroneLauncher(this);
         HangingMech hangingMech = new HangingMech(this);
+        Intake intake = new Intake(this);
         Slides slides = new Slides(this);
         Drive drive = new Drive(this);
         Claw claw = new Claw(this);
@@ -28,6 +31,7 @@ public class TeleOpMain extends LinearOpMode  {
             claw.teleOp();
             drive.teleOp();
             slides.teleOp();
+            intake.teleOp();
             hangingMech.teleOp();
             droneLauncher.teleOp();
 
