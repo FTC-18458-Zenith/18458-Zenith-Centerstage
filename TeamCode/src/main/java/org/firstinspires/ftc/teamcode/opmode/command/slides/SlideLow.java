@@ -9,9 +9,11 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 
 public class SlideLow extends SequentialCommandGroup {
     public SlideLow(SlideV2 slideV2, Wrist wrist) {
-        new InstantCommand(slideV2::liftLow);
-
-        new WaitCommand(100);
-        new InstantCommand(wrist::Score);
+        addCommands(
+                new InstantCommand(slideV2::liftLow)
+        );
+        addCommands(
+                new InstantCommand(wrist::Score)
+        );
     }
 }
