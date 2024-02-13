@@ -69,7 +69,7 @@ public class TeleOpSolo extends MatchOpMode {
                 .whenPressed(new SlideMid(slide, wrist));
 
         Button slideHigh = new GamepadButton(driverGamepad, GamepadKeys.Button.Y)
-                .whenPressed(new SlideHigh(slide, wrist));
+                .whenPressed(new SlideHigh(slide, wrist, wheel));
 
         Button Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whenHeld(new IntakeOn(intakeV2, wheel));

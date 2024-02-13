@@ -87,9 +87,10 @@ public class MeepMeepTesting {
                                 .lineToLinearHeading(blueRightScoringPose)
                                 .build()
                 );
-        Pose2d blueRightPoseL = new Pose2d(34, 30, Math.toRadians(180));
-        Pose2d leftBackdropBlueCenter = new Pose2d(10, 30, Math.toRadians(180));
+        Pose2d blueClosePoseLeft = new Pose2d(34, 30, Math.toRadians(180));
+        Pose2d leftBackdropBlueCenter =  new Pose2d(50, 30, Math.toRadians(0));
         Pose2d parkingBlue = new Pose2d(60, 60, Math.toRadians(90));
+        Pose2d blueClosePoseRight = new Pose2d(32, 30, Math.toRadians(180));
 
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
@@ -97,8 +98,9 @@ public class MeepMeepTesting {
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(0)))
-                                .lineToLinearHeading(blueRightPoseL)
                                 .lineToLinearHeading(leftBackdropBlueCenter)
+                                .lineToLinearHeading(blueClosePoseRight)
+                                .back(10)
                                 .lineToLinearHeading(new Pose2d(47, 40, Math.toRadians(180)))
                                 .strafeRight(20)
                                 .back(10)

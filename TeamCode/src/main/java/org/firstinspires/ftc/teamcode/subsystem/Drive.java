@@ -313,7 +313,8 @@ public class Drive extends MecanumDrive {
         //FIELD CENTRIC DRIVETRAIN CODE
         if (gamepad1.right_bumper) moveDrive(0.5);
         else moveDrive(1);
-        if (gamepad1.touchpad) imu.resetYaw();
+        if (gamepad1.b) imu.resetYaw();
+        //TODO: CHANGE TO TOUCH PAD LATER
     }
     public void moveDrive(double driveTrainPower) {
         final double yAxisMovement = -gamepad1.left_stick_y;

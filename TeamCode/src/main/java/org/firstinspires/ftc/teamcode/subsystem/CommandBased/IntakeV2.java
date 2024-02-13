@@ -51,6 +51,8 @@ public class IntakeV2 extends SubsystemBase {
         telemetry.addData("Servo positions", leftIntake.getPosition());
     }
 
+    
+
     public void IntakeOn() {
         Intake.set(Power);
         intakeOn = true;

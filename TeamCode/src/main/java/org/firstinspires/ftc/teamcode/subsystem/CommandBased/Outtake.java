@@ -14,8 +14,8 @@ public class Outtake extends SubsystemBase {
 
     public static boolean REVERSED = true;
 
-    public final static double holdingPose = 0,
-                                scorePose = 0;
+    public final static double holdingPose = 0.7,
+                                scorePose = 0.3;
 
     Telemetry telemetry;
 
