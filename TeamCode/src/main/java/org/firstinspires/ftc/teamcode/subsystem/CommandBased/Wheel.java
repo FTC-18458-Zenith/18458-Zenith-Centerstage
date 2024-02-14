@@ -27,5 +27,8 @@ public class Wheel extends SubsystemBase {
     public void outtake() {
         wheel.set(-1);
     }
+    public void off() {
+        wheel.set(0);
+    }
 
 }
