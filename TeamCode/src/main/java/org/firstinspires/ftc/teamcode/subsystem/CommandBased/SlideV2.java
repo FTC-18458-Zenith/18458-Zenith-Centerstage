@@ -29,8 +29,8 @@ public class SlideV2 extends SubsystemBase {
 
     //Make sure to test positions with manual
     public static int restingPose = 0;
-    public static int lowPose = 100;
-    public static int midPose = 200;
+    public static int lowPose = 450;
+    public static int midPose = 900;
     public static int highPose = 1800;
     double output = 0;
 

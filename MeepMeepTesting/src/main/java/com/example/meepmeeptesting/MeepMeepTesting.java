@@ -27,7 +27,7 @@ public class MeepMeepTesting {
         Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(180));
 
         Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
-        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
+        Pose2d redScorePose = new Pose2d(47, -39, Math.toRadians(180));
 
         RoadRunnerBotEntity redAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
@@ -40,7 +40,7 @@ public class MeepMeepTesting {
                                 .lineToLinearHeading(MidPose)
                                 .lineToLinearHeading(ResetPose)
                                 .back(82)
-                                .lineToLinearHeading(scorePose)
+                                .lineToLinearHeading(redScorePose)
                                 .strafeLeft(25)
                                 .build()
 
@@ -63,9 +63,9 @@ public class MeepMeepTesting {
                                 .back(20)
                                 .lineToLinearHeading(resetPose)
                                 .lineToLinearHeading(leftPose)
-                                .lineToLinearHeading(scorePose)
+                                .lineToLinearHeading(redScorePose)
                                 .strafeRight(28)
-                                .back(10)
+                                .splineToConstantHeading(new Vector2d(60, -9), Math.toRadians(180))
                                 .build()
                 );
 
@@ -110,7 +110,7 @@ public class MeepMeepTesting {
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(redAllianceRight)
-                .addEntity(blueAllianceLeft)
+                .addEntity(blueAllianceRight)
                 .start();
     }
 };
