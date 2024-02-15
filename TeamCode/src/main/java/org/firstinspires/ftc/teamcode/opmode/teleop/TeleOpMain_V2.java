@@ -102,7 +102,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
 
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
-                .whenPressed(new Score(outtake, intakeV2));
+                .whenPressed(new Score(outtake, wheel));
 
         Button Drone = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
                 .whenPressed(new launch(drone));

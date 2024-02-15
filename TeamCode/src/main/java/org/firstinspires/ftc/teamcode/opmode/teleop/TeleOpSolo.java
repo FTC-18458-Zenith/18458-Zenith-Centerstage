@@ -78,7 +78,7 @@ public class TeleOpSolo extends MatchOpMode {
                 .whenHeld(new IntakeOff(intakeV2, wheel));
 
         Button Score = new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)
-                .whenPressed(new Score(outtake, intakeV2));
+                .whenPressed(new Score(outtake, wheel));
 
         Button Drone = new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)
                 .whenPressed(new launch(drone));

@@ -69,7 +69,7 @@ public class IntakeV2 extends SubsystemBase {
         intakePower = intakePower.ON;
 
         leftIntake.setPosition(outtakeDropDowm);
-        rightIntake.setPosition(outtakeDropDowm);
+        rightIntake.setPosition(outtakeDropDowm1);
     }
 
     public void IntakeOff() {
