@@ -19,7 +19,7 @@ public class IntakeV2 extends SubsystemBase {
 
     private boolean intakeOn;
 
-    public static double Power = 1;
+    public static double Power = 0.7;
     public static double intakeDropDown = 0.8;
     public static double intakeDropDown1 = 0.9;
     public static double outtakeDropDowm = 0;

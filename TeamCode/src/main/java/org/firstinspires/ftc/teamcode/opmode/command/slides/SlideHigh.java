@@ -17,7 +17,7 @@ public class SlideHigh extends SequentialCommandGroup {
                 new InstantCommand(wrist::Score)
         );
         addCommands(
-                new InstantCommand(wheel::outtake)
+                new InstantCommand(wheel::off)
         );
     }
 }

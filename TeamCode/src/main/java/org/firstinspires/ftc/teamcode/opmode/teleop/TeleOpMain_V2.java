@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOff;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
+import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeReverse;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.SlowDriveCommand;
@@ -84,7 +85,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
         slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getRightY));
 
         Button slideReset = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)
-                .whenPressed(new SlideReset(slide, wrist, outtake));
+                .whenPressed(new SlideReset(slide, wrist, outtake, wheel));
 
         Button slideLow = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)
                 .whenPressed(new SlideLow(slide, wrist));
@@ -97,6 +98,10 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
         Trigger Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whileActiveContinuous(new IntakeOn(intakeV2, wheel))
+                .whenInactive(new IntakeOff(intakeV2, wheel));
+
+        Trigger Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
+                .whileActiveContinuous(new IntakeReverse(intakeV2, wheel))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
 
 
