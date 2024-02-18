@@ -39,7 +39,7 @@ public class IntakeV2 extends SubsystemBase {
         leftIntake.setInverted(false);
         rightIntake.setInverted(true);
 
-        Intake.setInverted(false);
+        Intake.setInverted(true);
 
         this.telemetry = telemetry;
         intakePower = intakePower.OFF;
