@@ -37,7 +37,7 @@ public class IntakeV2 extends SubsystemBase {
         rightIntake = new SimpleServo(hardwareMap, "rightIntakeServo", 0 , 360);
 
         leftIntake.setInverted(false);
-        rightIntake.setInverted(true);
+        rightIntake.setInverted(false);
 
         Intake.setInverted(true);
 
