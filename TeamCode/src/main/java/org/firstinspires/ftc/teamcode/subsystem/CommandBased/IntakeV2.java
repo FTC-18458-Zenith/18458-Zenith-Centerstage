@@ -19,7 +19,7 @@ public class IntakeV2 extends SubsystemBase {
 
     private boolean intakeOn;
 
-    public static double Power = 0.7;
+    public static double Power = 1;
     public static double intakeDropDown = 0.8;
     public static double intakeDropDown1 = 0.9;
     public static double outtakeDropDowm = 0;
@@ -37,9 +37,9 @@ public class IntakeV2 extends SubsystemBase {
         rightIntake = new SimpleServo(hardwareMap, "rightIntakeServo", 0 , 360);
 
         leftIntake.setInverted(false);
-        rightIntake.setInverted(false);
+        rightIntake.setInverted(true);
 
-        Intake.setInverted(true);
+        Intake.setInverted(false);
 
         this.telemetry = telemetry;
         intakePower = intakePower.OFF;
@@ -52,7 +52,7 @@ public class IntakeV2 extends SubsystemBase {
         telemetry.addData("Servo positions", leftIntake.getPosition());
     }
 
-    
+
 
     public void IntakeOn() {
         Intake.set(Power);
