@@ -18,8 +18,8 @@ public class Intake {
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
     public static volatile double OUTTAKE = -0.5;
-    public static volatile double INTAKE = 0.65;
-    public static volatile double DROPED_DOWN = 0;
+    public static volatile double INTAKE = 0.5;
+    public static volatile double DROPPED_DOWN = 0;
     public static volatile double DROPPED_UP = 1;
     public double NOTHING = 0;
     public double WHEEL = 1;
@@ -37,17 +37,17 @@ public class Intake {
         rightServoIntake.setDirection(Servo.Direction.FORWARD);
 
         wheel = (CRServo) hardwareMap.get("wheel");
-        wheel.setDirection(DcMotorSimple.Direction.FORWARD);
+        wheel.setDirection(DcMotorSimple.Direction.FORWARD );
     }
     public void teleOp() {
-        if (gamepad2.right_trigger >= 0.5) dropDownIntake(INTAKE, DROPED_DOWN, WHEEL);
-        else if (gamepad2.left_trigger >= 0.5) dropDownIntake(OUTTAKE, DROPED_DOWN, NOTHING);
+        if (gamepad2.right_trigger >= 0.5) dropDownIntake(INTAKE, DROPPED_DOWN, WHEEL);
+        else if (gamepad2.left_trigger >= 0.5) dropDownIntake(OUTTAKE, NOTHING, NOTHING);
         else dropDownIntake(DROPPED_UP, NOTHING, NOTHING);
 
     }
     public void soloTeleOp() {
-        if (gamepad1.right_bumper && gamepad1.right_trigger <=1) dropDownIntake(INTAKE, DROPED_DOWN, WHEEL);
-        else if (gamepad1.left_bumper && gamepad1.left_trigger <=1) dropDownIntake(OUTTAKE, DROPED_DOWN, NOTHING);
+        if (gamepad1.right_bumper && gamepad1.right_trigger <=1) dropDownIntake(INTAKE, DROPPED_DOWN, WHEEL);
+        else if (gamepad1.left_bumper && gamepad1.left_trigger <=1) dropDownIntake(OUTTAKE, DROPPED_DOWN, NOTHING);
         else dropDownIntake(DROPPED_UP, NOTHING, NOTHING);
     }
     public void dropDownIntake(double position, double speed, double spin) {

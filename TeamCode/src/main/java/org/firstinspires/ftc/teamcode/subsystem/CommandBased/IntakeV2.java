@@ -23,7 +23,7 @@ public class IntakeV2 extends SubsystemBase {
     public static double intakeDropDown = 0.8;
     public static double intakeDropDown1 = 0.9;
     public static double outtakeDropDowm = 0;
-    public static double outtakeDropDowm1 = 0.1;
+    public static double outtakeDropDowm1 = 0;
 
     public enum intakePower {
         ON, OFF
@@ -55,7 +55,7 @@ public class IntakeV2 extends SubsystemBase {
 
 
     public void IntakeOn() {
-        Intake.set(Power);
+        Intake.set(-Power);
         intakeOn = true;
         intakePower = intakePower.ON;
 
@@ -64,7 +64,7 @@ public class IntakeV2 extends SubsystemBase {
     }
 
     public void IntakeReverse() {
-        Intake.set(-Power);
+        Intake.set(Power);
         intakeOn = true;
         intakePower = intakePower.ON;
 
