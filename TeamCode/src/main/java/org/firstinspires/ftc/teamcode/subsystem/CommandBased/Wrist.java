@@ -15,8 +15,9 @@ public class Wrist extends SubsystemBase {
     public static boolean REVERSED = false;
 
     public final static double grabPose = 0,
-            scorePose = 0.5,
-            resetPose = 1;
+            scorePose = 0;
+
+    public final static double resetPose = 0.79;
     Telemetry telemetry;
 
     private static ServoEx leftArmServo, rightArmServo;
@@ -25,7 +26,7 @@ public class Wrist extends SubsystemBase {
         leftArmServo = new SimpleServo(hMap, "leftArmServo", 0, 360);
         rightArmServo = new SimpleServo(hMap, "rightArmServo", 0, 360);
 
-        leftArmServo.setInverted(REVERSED);
+        leftArmServo.setInverted(false);
         rightArmServo.setInverted(true);
 
         leftArmServo.setPosition(resetPose);
