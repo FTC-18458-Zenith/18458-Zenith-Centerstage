@@ -14,7 +14,6 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous
 public class AprilTagDectectAuto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException{

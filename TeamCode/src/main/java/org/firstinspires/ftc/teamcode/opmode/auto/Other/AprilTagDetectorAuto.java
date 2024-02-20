@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystem.vision;
 
-@Autonomous
 public class AprilTagDetectorAuto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.subsystem.Drive;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
 @Config
-@Autonomous (name = "LeftAutoPark", group = "RoadRunnerPath")
 
 public class Park extends LinearOpMode {
     public static double Park_Distance = 30;

@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.subsystem.Basic.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.HangingMech;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
 
-@TeleOp
 public class TeleOpMain extends LinearOpMode  {
 
     @Override
