@@ -60,8 +60,9 @@ public class MeepMeepTesting {
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(180)))
-                                .back(20)
-                                .lineToLinearHeading(resetPose)
+//                                .back(20)
+//                                .lineToLinearHeading(resetPose)
+                                .splineToConstantHeading(new Vector2d(35, -30), Math.toRadians(180))
                                 .lineToLinearHeading(leftPose)
                                 .lineToLinearHeading(redScorePose)
                                 .strafeRight(28)
@@ -69,9 +70,9 @@ public class MeepMeepTesting {
                                 .build()
                 );
 
-        Pose2d blueRightPose = new Pose2d(-36, 30, Math.toRadians(180));
+        Pose2d blueRightPose = new Pose2d(-35, 35, Math.toRadians(180));
         Pose2d blueResetPose = new Pose2d(-30, 58, Math.toRadians(180));
-        Pose2d blueBackdropPose = new Pose2d(47, 58, Math.toRadians(180));
+        Pose2d blueBackdropPose = new Pose2d(47, 35, Math.toRadians(180));
         Pose2d blueRightScoringPose = new Pose2d(47, 28, Math.toRadians(180));
 
         RoadRunnerBotEntity blueAllianceRight = new DefaultBotBuilder(meepMeep)
@@ -82,13 +83,13 @@ public class MeepMeepTesting {
                         drive.trajectorySequenceBuilder(new Pose2d(-30, 62, Math.toRadians(0)))
                                 .waitSeconds(10)
                                 .lineToLinearHeading(blueRightPose)
-                                .lineToLinearHeading(blueResetPose)
                                 .lineToLinearHeading(blueBackdropPose)
+
                                 .lineToLinearHeading(blueRightScoringPose)
                                 .build()
                 );
-        Pose2d blueClosePoseLeft = new Pose2d(34, 30, Math.toRadians(180));
-        Pose2d leftBackdropBlueCenter =  new Pose2d(50, 30, Math.toRadians(0));
+        Pose2d blueClosePoseLeft = new Pose2d(34, 30, Math.toRadians(0));
+        Pose2d leftBackdropBlueCenter =  new Pose2d(50, 30, Math.toRadians(180));
         Pose2d parkingBlue = new Pose2d(60, 60, Math.toRadians(90));
         Pose2d blueClosePoseRight = new Pose2d(32, 30, Math.toRadians(180));
 
@@ -100,17 +101,15 @@ public class MeepMeepTesting {
                         driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(0)))
                                 .lineToLinearHeading(leftBackdropBlueCenter)
                                 .lineToLinearHeading(blueClosePoseRight)
-                                .back(10)
-                                .lineToLinearHeading(new Pose2d(47, 40, Math.toRadians(180)))
-                                .strafeRight(20)
-                                .back(10)
+//                                .lineToLinearHeading(new Pose2d(47, 40, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(50, 62), Math.toRadians(90))
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(redAllianceRight)
-                .addEntity(blueAllianceRight)
+                .addEntity(blueAllianceLeft)
                 .start();
     }
 };

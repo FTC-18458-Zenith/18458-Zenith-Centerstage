@@ -22,8 +22,7 @@ public class IntakeV2 extends SubsystemBase {
     public static double Power = 1;
     public static double intakeDropDown = 0.8;
     public static double intakeDropDown1 = 0.9;
-    public static double outtakeDropDowm = 0;
-    public static double outtakeDropDowm1 = 0;
+    public static double outtakeDropDown = 0;
 
     public enum intakePower {
         ON, OFF
@@ -44,15 +43,12 @@ public class IntakeV2 extends SubsystemBase {
         this.telemetry = telemetry;
         intakePower = intakePower.OFF;
     }
-
     @Override
     public void periodic() {
         telemetry.addLine("Motor Power");
         telemetry.addData("Motor Output", Intake.getVelocity());
         telemetry.addData("Servo positions", leftIntake.getPosition());
     }
-
-
 
     public void IntakeOn() {
         Intake.set(-Power);
@@ -68,8 +64,8 @@ public class IntakeV2 extends SubsystemBase {
         intakeOn = true;
         intakePower = intakePower.ON;
 
-        leftIntake.setPosition(outtakeDropDowm);
-        rightIntake.setPosition(outtakeDropDowm1);
+        leftIntake.setPosition(outtakeDropDown);
+        rightIntake.setPosition(outtakeDropDown);
     }
 
     public void IntakeOff() {
@@ -77,7 +73,7 @@ public class IntakeV2 extends SubsystemBase {
         intakeOn = false;
         intakePower = intakePower.OFF;
 
-        leftIntake.setPosition(outtakeDropDowm1);
-        rightIntake.setPosition(outtakeDropDowm);
+        leftIntake.setPosition(outtakeDropDown);
+        rightIntake.setPosition(outtakeDropDown);
     }
 }

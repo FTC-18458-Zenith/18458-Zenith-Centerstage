@@ -19,8 +19,8 @@ public class Arm {
     public final Gamepad gamepad1;
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
-    public static double OUTTAKE = 0.20846;
-    public static double INTAKE = 0.85;
+    public static double OUTTAKE = 0.5;
+    public static double INTAKE = 0;
     public Arm(OpMode opMode) {
         this.hardwareMap = opMode.hardwareMap;
         this.gamepad2 = opMode.gamepad2;
