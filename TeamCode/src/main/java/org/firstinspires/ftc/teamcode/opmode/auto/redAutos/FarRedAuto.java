@@ -13,17 +13,13 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @Config
 @Autonomous (name = "RightAutoRed", group = "RoadRunnerPath")
 
-public class LeftAutoRed extends LinearOpMode {
-    Pose2d purplePixelRedLeft = new Pose2d(-38, -32, Math.toRadians(180));
-    //.back(7)
-    //.strafeRight(20)
-    Pose2d purplePixelRedRight = new Pose2d(-32, -32, Math.toRadians(0));
-    //.strafeLeft(10)
-    Pose2d purplePixelRedCenter = new Pose2d(-30, -32, Math.toRadians(90));
-    //.back(15)
-    Pose2d goDownRed = new Pose2d(-56, -20, Math.toRadians(180));
-    Pose2d goingToBackdropRed = new Pose2d(-20, -8, Math.toRadians(180));
-    Pose2d backdropRed = new Pose2d(47, -28, Math.toRadians(180));
+public class FarRedAuto extends LinearOpMode {
+    Pose2d LeftPose = new Pose2d(-47, -35, Math.toRadians(270));
+    Pose2d MidPose = new Pose2d(-35, -32, Math.toRadians(90));
+    Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(180));
+
+    Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
+    Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
 
     OpenCvWebcam webcam;
     @Override

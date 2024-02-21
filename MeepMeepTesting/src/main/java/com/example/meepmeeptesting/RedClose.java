@@ -18,7 +18,7 @@ public class RedClose {
         MeepMeep meepMeep = new MeepMeep(650);
 
 
-        Pose2d redScorePose = new Pose2d(47, -39, Math.toRadians(180));
+        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
         Pose2d resetPose = new Pose2d(35, -35, Math.toRadians(180));
         Pose2d rightPose = new Pose2d(32, -30, Math.toRadians(180));
         Pose2d leftPose = new Pose2d(10, -30, Math.toRadians(180));
@@ -32,11 +32,10 @@ public class RedClose {
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(180)))
-//                                .back(20)
-//                                .lineToLinearHeading(resetPose)
-                                .splineToConstantHeading(new Vector2d(35, -30), Math.toRadians(180))
+                                .back(20)
+                                .lineToLinearHeading(resetPose)
                                 .lineToLinearHeading(leftPose)
-                                .lineToLinearHeading(redScorePose)
+                                .lineToLinearHeading(scorePose)
                                 .strafeRight(28)
                                 .splineToConstantHeading(new Vector2d(60, -9), Math.toRadians(180))
                                 .build()

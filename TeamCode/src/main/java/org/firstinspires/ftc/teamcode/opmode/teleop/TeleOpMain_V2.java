@@ -57,8 +57,8 @@ public class TeleOpMain_V2 extends MatchOpMode {
         operatorGamepad = new GamepadEx(gamepad2);
 
         wrist = new Wrist(hardwareMap, telemetry);
-        slide = new SlideV2(telemetry, hardwareMap);
-        intakeV2 = new IntakeV2(telemetry, hardwareMap);
+        slide = new SlideV2(hardwareMap, telemetry);
+        intakeV2 = new IntakeV2(hardwareMap, telemetry);
         outtake = new Outtake(hardwareMap, telemetry);
         drone = new Drone(hardwareMap, telemetry);
         wheel = new Wheel(hardwareMap, telemetry);

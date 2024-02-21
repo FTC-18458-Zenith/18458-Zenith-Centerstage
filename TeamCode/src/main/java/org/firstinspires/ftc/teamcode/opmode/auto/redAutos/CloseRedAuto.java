@@ -12,15 +12,12 @@ import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 
 @Autonomous
-public class RightRedAuto extends LinearOpMode {
-    Pose2d rightPurplePixelRedLeft = new Pose2d(-38, 30, Math.toRadians(180));
-    //.strafeLeft(10)
-    Pose2d rightPurplePixelRedRight = new Pose2d(-31, 30, Math.toRadians(0));
-    Pose2d rightPurplePixelRedCenter = new Pose2d(-36, 32, Math.toRadians(270));
-    //.back(10)
-    Pose2d rightGoDownRed = new Pose2d(-60, 18, Math.toRadians(180));
-    Pose2d rightGoingToBackdropRed = new Pose2d(-20,8, Math.toRadians(180));
-    Pose2d rightBackdropRed = new Pose2d(50, 41.5, Math.toRadians(180));
+public class CloseRedAuto extends LinearOpMode {
+    Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
+    Pose2d resetPose = new Pose2d(35, -35, Math.toRadians(180));
+    Pose2d rightPose = new Pose2d(32, -30, Math.toRadians(180));
+    Pose2d leftPose = new Pose2d(10, -30, Math.toRadians(180));
+    Pose2d midPose = new Pose2d(24, -24, Math.toRadians(180));
     @Override
     public void runOpMode() throws InterruptedException {
 

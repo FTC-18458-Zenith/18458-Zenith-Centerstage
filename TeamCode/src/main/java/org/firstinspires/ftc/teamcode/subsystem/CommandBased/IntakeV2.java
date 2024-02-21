@@ -28,7 +28,7 @@ public class IntakeV2 extends SubsystemBase {
     }
     intakePower intakePower;
 
-    public IntakeV2 (Telemetry telemetry, HardwareMap hardwareMap) {
+    public IntakeV2 (HardwareMap hardwareMap, Telemetry telemetry) {
 
         Intake = new MotorEx(hardwareMap, "Intake");
         leftIntake = new SimpleServo(hardwareMap, "leftIntakeServo", 0, 360);

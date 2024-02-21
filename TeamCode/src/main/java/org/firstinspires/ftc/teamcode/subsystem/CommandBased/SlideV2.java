@@ -40,7 +40,7 @@ public class SlideV2 extends SubsystemBase {
     }
     LiftPos liftPos;
 
-    public SlideV2 (Telemetry telemetry, HardwareMap hardwareMap) {
+    public SlideV2 ( HardwareMap hardwareMap,Telemetry telemetry) {
 
         leftSlide = new MotorEx(hardwareMap, "leftSlide");
         rightSlide = new MotorEx(hardwareMap, "rightSlide");
