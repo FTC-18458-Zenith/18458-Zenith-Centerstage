@@ -16,8 +16,12 @@ public class BlueFar {
 
         public static void main(String[] args) {
             MeepMeep meepMeep = new MeepMeep(650);
-            Pose2d rightPose = new Pose2d(-38, 32, Math.toRadians(180));
-            Pose2d reset = new Pose2d(-30, 58, Math.toRadians(180));
+            Pose2d rightPoseSpike = new Pose2d(-38, 32, Math.toRadians(180));
+            Pose2d leftPoseSpike = new Pose2d(-34, 32, Math.toRadians(0));
+            // Use reset pose 2 times
+            Pose2d centerPoseSpike = new Pose2d(-34, 32 , Math.toRadians(270));
+            // Use reset pose 2 times
+            Pose2d reset = new Pose2d(-40, 58, Math.toRadians(180));
             Pose2d backdropPose = new Pose2d(47, 60, Math.toRadians(180));
             Pose2d rightScoringPose = new Pose2d(47, 28, Math.toRadians(180));
 
@@ -27,7 +31,9 @@ public class BlueFar {
                     .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                     .followTrajectorySequence(drive ->
                             drive.trajectorySequenceBuilder(new Pose2d(-30, 62, Math.toRadians(180)))
-                                    .lineToLinearHeading(rightPose)
+                                    .lineToLinearHeading(reset)
+                                    .lineToLinearHeading(centerPoseSpike)
+                                    .lineToLinearHeading(reset)
                                     .lineToLinearHeading(new Pose2d(-30, 60, Math.toRadians(180)))
                                     .waitSeconds(10)
                                     .lineToLinearHeading(backdropPose)
