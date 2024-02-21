@@ -24,14 +24,14 @@ public class SlideV2 extends SubsystemBase {
 
     public static double CPR = 537.7; //Counts Per Revolution (312 RPM)
 
-    public double upSpeed = 0.8;
-    public double downSpeed= -0.8;
+    public double upSpeed = 1;
+    public double downSpeed= -1;
 
     //Make sure to test positions with manual
     public static int restingPose = 0;
     public static int lowPose = 450;
     public static int midPose = 900;
-    public static int highPose = 1800;
+    public static int highPose = 1780;
     double output = 0;
 
     public enum LiftPos{

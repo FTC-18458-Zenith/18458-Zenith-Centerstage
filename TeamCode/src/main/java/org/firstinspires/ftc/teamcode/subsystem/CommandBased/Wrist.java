@@ -14,10 +14,10 @@ public class Wrist extends SubsystemBase {
     // testing to see if you can change booleans
     public static boolean REVERSED = false;
 
-    public final static double grabPose = 0,
-            scorePose = 0;
+    public static double grabPose = 0,
+            scorePose = 0.22;
 
-    public final static double resetPose = 0.79;
+    public static double resetPose = 0.78;
     Telemetry telemetry;
 
     private static ServoEx leftArmServo, rightArmServo;
