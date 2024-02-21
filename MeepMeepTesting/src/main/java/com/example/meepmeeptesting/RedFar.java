@@ -17,9 +17,9 @@ public class RedFar {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(650);
 
-        Pose2d LeftPose = new Pose2d(-47, -35, Math.toRadians(270));
+        Pose2d LeftPose = new Pose2d(-47, -35, Math.toRadians(90));
         Pose2d MidPose = new Pose2d(-35, -32, Math.toRadians(90));
-        Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(180));
+        Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(0));
 
         Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
         Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
@@ -30,8 +30,8 @@ public class RedFar {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(180)))
-                                .lineToLinearHeading(MidPose)
+                        drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(90)))
+                                .lineToLinearHeading(RightPose)
                                 .lineToLinearHeading(ResetPose)
                                 .waitSeconds(10)
                                 .back(82)

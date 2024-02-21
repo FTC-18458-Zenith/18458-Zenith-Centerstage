@@ -31,8 +31,8 @@ public class RedClose {
                 .setDimensions(16, 16)
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(180)))
-                                .back(20)
+                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
+                                .strafeRight(20)
                                 .lineToLinearHeading(resetPose)
                                 .lineToLinearHeading(leftPose)
                                 .lineToLinearHeading(scorePose)

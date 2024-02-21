@@ -22,8 +22,8 @@ public class BlueClose {
 
         Pose2d scorePose = new Pose2d(47, 39, Math.toRadians(180));
         Pose2d resetPose = new Pose2d(35, 35, Math.toRadians(180));
-        Pose2d rightPose = new Pose2d(32, 30, Math.toRadians(180));
-        Pose2d leftPose = new Pose2d(10, 30, Math.toRadians(180));
+        Pose2d leftPose = new Pose2d(32, 30, Math.toRadians(180));
+        Pose2d rightPose = new Pose2d(10, 30, Math.toRadians(180));
         Pose2d midPose = new Pose2d(24, 24, Math.toRadians(180));
 
 
@@ -32,14 +32,14 @@ public class BlueClose {
                 .setDimensions(16, 16)
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                                driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(180)))
+                                driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(270)))
 //                                        .lineToLinearHeading(leftBackdropBlueCenter)
 //                                        .lineToLinearHeading(blueClosePoseRight)
 ////                                .lineToLinearHeading(new Pose2d(47, 40, Math.toRadians(180)))
 //                                        .splineToConstantHeading(new Vector2d(50, 62), Math.toRadians(90))
-                                        .back(20)
+                                        .strafeLeft(20)
                                         .lineToLinearHeading(resetPose)
-                                        .lineToLinearHeading(leftPose)
+                                        .lineToLinearHeading(rightPose)
                                         .lineToLinearHeading(scorePose)
                                         .strafeLeft(10)
                                         .splineToConstantHeading(new Vector2d(60, 12), Math.toRadians(0))

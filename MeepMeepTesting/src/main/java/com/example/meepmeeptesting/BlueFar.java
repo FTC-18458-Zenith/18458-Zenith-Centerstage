@@ -30,7 +30,7 @@ public class BlueFar {
                     .setDimensions(16, 16)
                     .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                     .followTrajectorySequence(drive ->
-                            drive.trajectorySequenceBuilder(new Pose2d(-30, 62, Math.toRadians(180)))
+                            drive.trajectorySequenceBuilder(new Pose2d(-30, 62, Math.toRadians(270)))
                                     .lineToLinearHeading(reset)
                                     .lineToLinearHeading(centerPoseSpike)
                                     .lineToLinearHeading(reset)
