@@ -31,9 +31,9 @@ public class RedFar {
                 .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(180)))
-                                .waitSeconds(10)
                                 .lineToLinearHeading(MidPose)
                                 .lineToLinearHeading(ResetPose)
+                                .waitSeconds(10)
                                 .back(82)
                                 .lineToLinearHeading(scorePose)
                                 .strafeLeft(25)
