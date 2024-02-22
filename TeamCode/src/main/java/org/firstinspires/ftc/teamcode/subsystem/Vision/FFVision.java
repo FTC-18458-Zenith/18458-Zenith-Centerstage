@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.subsystem.Vision;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-
+@Config
 public class FFVision extends SubsystemBase {
     private final Telemetry telemetry;
     private final FFRectDetector duckDetector;
@@ -19,9 +20,9 @@ public class FFVision extends SubsystemBase {
 
         //x- <---> x+
 
-        duckDetector.setLeftRectangle(0.1, 0.4);
-        duckDetector.setCenterRectangle(0.5, 0.5);
-        duckDetector.setRightRectangle(.9, 0.5);
+        duckDetector.setLeftRectangle(0.3, 0.7);
+        duckDetector.setCenterRectangle(0.5, 0.7);
+        duckDetector.setRightRectangle(.9, 0.7);
         duckDetector.setRectangleSize(40,50);
         telemetry = tl;
 //        currentPos = duckDetector.getPosition();

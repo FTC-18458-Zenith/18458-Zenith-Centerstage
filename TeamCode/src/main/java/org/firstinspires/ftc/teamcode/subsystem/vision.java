@@ -65,7 +65,6 @@ public class vision {
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-
                 camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
             }
 
@@ -74,5 +73,6 @@ public class vision {
                 opMode.telemetry.addData("OpenCV ran into an error", errorCode);
             }
         });
+
     }
 }
