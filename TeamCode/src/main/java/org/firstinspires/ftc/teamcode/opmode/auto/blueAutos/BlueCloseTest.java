@@ -1,10 +1,17 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest.BlueAucienceConstants.Speed.Path.PurplePixel.tse;
+import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest.BlueAucienceConstants.Path.PurplePixel.box;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeReverse;
+import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
@@ -15,7 +22,9 @@ import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
+import org.firstinspires.ftc.teamcode.util.PoseStorage;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceContainerFollowCommand;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToLinearHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.SplineToConstantHeading;
@@ -34,32 +43,6 @@ public class BlueCloseTest extends MatchOpMode {
     private Wheel wheel;
     private Outtake outtake;
     private Drivetrain drivetrain;
-
-    @Override
-    public void robotInit() {
-
-        wrist = new Wrist(hardwareMap, telemetry);
-        slide = new SlideV2(hardwareMap, telemetry);
-        intake = new IntakeV2(hardwareMap, telemetry);
-        outtake = new Outtake(hardwareMap, telemetry);
-        wheel = new Wheel(hardwareMap, telemetry);
-
-        drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
-        drivetrain.init();
-
-        vision = new FFVision(hardwareMap, telemetry);
-
-        while (!isStarted() && !isStopRequested()) {
-            
-        }
-
-        this.matchStart();
-    }
-
-    @Override
-    public void matchStart() {
-
-    }
 
     @Config
     public static class BlueAucienceConstants {
@@ -91,6 +74,7 @@ public class BlueCloseTest extends MatchOpMode {
                         turnAccel
                 );
             }
+        }
 
 
             public static Path path;
@@ -116,16 +100,17 @@ public class BlueCloseTest extends MatchOpMode {
                     public static double rightX = 10,
                                         rightY = 30;
                     public static double heading = 180;
+                    public static PurplePixel.AutoPosition AutoPosition;
 
-                    public enum TsePose {
+                    public enum AutoPosition {
                         LEFT,
                         MID,
                         RIGHT
                     }
 
-                    public static TsePose tse = TsePose.MID;
+                    public static AutoPosition box = AutoPosition.MID;
                     static TrajectorySequenceContainer PurplePixel(double x, double y) {
-                        switch (tse) {
+                        switch (box) {
 
                             case LEFT:
                                 return new TrajectorySequenceContainer(
@@ -161,9 +146,9 @@ public class BlueCloseTest extends MatchOpMode {
                             rightY = 28;
                     public static double heading = 180;
 
-                static TrajectorySequenceContainer YellowPixel(double x, double y) {
+                static TrajectorySequenceContainer YellowPixel(double y) {
                     {
-                        switch (tse) {
+                        switch (box) {
 
                             case LEFT:
                                 return new TrajectorySequenceContainer(
@@ -197,6 +182,83 @@ public class BlueCloseTest extends MatchOpMode {
                 }
 
             }
+
+    }
+
+    @Override
+    public void robotInit() {
+
+        wrist = new Wrist(hardwareMap, telemetry);
+        slide = new SlideV2(hardwareMap, telemetry);
+        intake = new IntakeV2(hardwareMap, telemetry);
+        outtake = new Outtake(hardwareMap, telemetry);
+        wheel = new Wheel(hardwareMap, telemetry);
+
+        drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
+        drivetrain.init();
+
+        vision = new FFVision(hardwareMap, telemetry);
+
+        while (!isStarted() && !isStopRequested()) {
+            vision.getPosition(); //May or may not work
         }
+
+        this.matchStart();
+    }
+
+    @Override
+    public void matchStart() {
+        double finalX = 0;
+        double finalY = 0;
+
+        switch (vision.getFinalPosition()) {
+            case LEFT:
+                BlueAucienceConstants.Path.PurplePixel.AutoPosition = BlueAucienceConstants.Path.PurplePixel.AutoPosition.LEFT;
+                break;
+            case MIDDLE:
+                BlueAucienceConstants.Path.PurplePixel.AutoPosition = BlueAucienceConstants.Path.PurplePixel.AutoPosition.MID;
+               break;
+            case RIGHT:
+                BlueAucienceConstants.Path.PurplePixel.AutoPosition = BlueAucienceConstants.Path.PurplePixel.AutoPosition.RIGHT;
+                break;
+        }
+
+        drivetrain.setPoseEstimate(BlueAucienceConstants.Path.Purple.startPose.getPose());
+        PoseStorage.trajectoryPose = BlueAucienceConstants.Path.Purple.startPose.getPose();
+        schedule(
+                new SequentialCommandGroup(
+
+                        //Line Up to Purple Pixel
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueAucienceConstants.Path.Purple.purple)
+                        ),
+
+                        //Drop Purple Pixel
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueAucienceConstants.Path.PurplePixel.PurplePixel(finalX, finalY)),
+                                new IntakeReverse(intake, wheel, true)
+                        ),
+                            new WaitCommand(100),
+
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueAucienceConstants.Path.YellowPixel.YellowPixel(finalY)),
+                                new SlideHigh(slide, wrist, wheel),
+                                new WaitCommand(200),
+                                new Score(outtake, wheel)
+                        ),
+
+                        new WaitCommand(200),
+                        new SlideReset(slide, wrist, outtake, wheel),
+
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueAucienceConstants.Path.Park.park)
+                        )
+                ),
+
+                run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
+
+                run(this::stop)
+        );
+
     }
 }
