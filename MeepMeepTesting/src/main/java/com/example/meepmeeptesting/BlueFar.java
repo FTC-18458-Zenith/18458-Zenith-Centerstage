@@ -23,7 +23,9 @@ public class BlueFar {
             // Use reset pose 2 times
             Pose2d reset = new Pose2d(-40, 58, Math.toRadians(180));
             Pose2d backdropPose = new Pose2d(47, 60, Math.toRadians(180));
-            Pose2d rightScoringPose = new Pose2d(47, 28, Math.toRadians(180));
+            Pose2d rightScoringPose = new Pose2d(49, 28, Math.toRadians(180));
+            Pose2d midScoringPose = new Pose2d(49,34, Math.toRadians(180));
+            Pose2d leftScoringPose = new Pose2d(49, 40, Math.toRadians(180));
 
             RoadRunnerBotEntity blueAllianceRight = new DefaultBotBuilder(meepMeep)
                     .setColorScheme((new ColorSchemeBlueDark()))

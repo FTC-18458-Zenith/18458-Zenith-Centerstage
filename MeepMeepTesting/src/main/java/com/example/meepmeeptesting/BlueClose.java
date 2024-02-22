@@ -14,13 +14,11 @@ public class BlueClose {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(650);
 
-        Pose2d blueClosePoseLeft = new Pose2d(34, 30, Math.toRadians(0));
-        Pose2d leftBackdropBlueCenter = new Pose2d(50, 30, Math.toRadians(180));
-        Pose2d parkingBlue = new Pose2d(60, 60, Math.toRadians(90));
-        Pose2d blueClosePoseRight = new Pose2d(32, 30, Math.toRadians(180));
-        // IDK WHAT THIS IS
 
-        Pose2d scorePose = new Pose2d(47, 39, Math.toRadians(180));
+        // IDK WHAT THIS IS
+        Pose2d rightScoringPose = new Pose2d(49, 28, Math.toRadians(180));
+        Pose2d midScoringPose = new Pose2d(49,34, Math.toRadians(180));
+        Pose2d leftScoringPose = new Pose2d(49, 40, Math.toRadians(180));
         Pose2d resetPose = new Pose2d(35, 35, Math.toRadians(180));
         Pose2d leftPose = new Pose2d(32, 30, Math.toRadians(180));
         Pose2d rightPose = new Pose2d(10, 30, Math.toRadians(180));
@@ -40,7 +38,7 @@ public class BlueClose {
                                         .strafeLeft(20)
                                         .lineToLinearHeading(resetPose)
                                         .lineToLinearHeading(rightPose)
-                                        .lineToLinearHeading(scorePose)
+                                        .lineToLinearHeading(midScoringPose)
                                         .strafeLeft(10)
                                         .splineToConstantHeading(new Vector2d(60, 12), Math.toRadians(0))
                                         .build()

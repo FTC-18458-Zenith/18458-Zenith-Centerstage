@@ -18,11 +18,13 @@ public class RedClose {
         MeepMeep meepMeep = new MeepMeep(650);
 
 
-        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
+        Pose2d leftScoringPose = new Pose2d(49, -28, Math.toRadians(180));
+        Pose2d midScoringPose = new Pose2d(49,-34, Math.toRadians(180));
+        Pose2d rightScoringPose = new Pose2d(49, -41, Math.toRadians(180));
         Pose2d resetPose = new Pose2d(35, -35, Math.toRadians(180));
-        Pose2d rightPose = new Pose2d(32, -30, Math.toRadians(180));
-        Pose2d leftPose = new Pose2d(10, -30, Math.toRadians(180));
-        Pose2d midPose = new Pose2d(24, -24, Math.toRadians(180));
+        Pose2d rightPoseSpike = new Pose2d(32, -30, Math.toRadians(180));
+        Pose2d leftPoseSpike = new Pose2d(10, -30, Math.toRadians(180));
+        Pose2d midPoseSpike = new Pose2d(24, -24, Math.toRadians(180));
 
 
         RoadRunnerBotEntity redAllianceRight = new DefaultBotBuilder(meepMeep)
@@ -34,8 +36,8 @@ public class RedClose {
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
                                 .strafeRight(20)
                                 .lineToLinearHeading(resetPose)
-                                .lineToLinearHeading(leftPose)
-                                .lineToLinearHeading(scorePose)
+                                .lineToLinearHeading(leftPoseSpike)
+                                .lineToLinearHeading(leftScoringPose)
                                 .strafeRight(28)
                                 .splineToConstantHeading(new Vector2d(60, -9), Math.toRadians(180))
                                 .build()

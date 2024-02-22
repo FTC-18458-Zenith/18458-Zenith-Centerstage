@@ -23,6 +23,9 @@ public class RedFar {
 
         Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
         Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
+        Pose2d leftScoringPose = new Pose2d(49, -28, Math.toRadians(180));
+        Pose2d midScoringPose = new Pose2d(49,-34, Math.toRadians(180));
+        Pose2d rightScoringPose = new Pose2d(49, -41, Math.toRadians(180));
 
         RoadRunnerBotEntity redAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
@@ -35,7 +38,7 @@ public class RedFar {
                                 .lineToLinearHeading(ResetPose)
                                 .waitSeconds(10)
                                 .back(82)
-                                .lineToLinearHeading(scorePose)
+                                .lineToLinearHeading(rightScoringPose)
                                 .strafeLeft(25)
                                 .build()
                 );
