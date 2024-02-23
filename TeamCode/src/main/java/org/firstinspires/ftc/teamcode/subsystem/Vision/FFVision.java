@@ -20,9 +20,9 @@ public class FFVision extends SubsystemBase {
 
         //x- <---> x+
 
-        duckDetector.setLeftRectangle(0.3, 0.7);
-        duckDetector.setCenterRectangle(0.5, 0.7);
-        duckDetector.setRightRectangle(.9, 0.7);
+        duckDetector.setLeftRectangle(0.2, 0.5);
+        duckDetector.setCenterRectangle(0.5, 0.4);
+        duckDetector.setRightRectangle(.9, 0.5);
         duckDetector.setRectangleSize(40,50);
         telemetry = tl;
 //        currentPos = duckDetector.getPosition();
