@@ -143,6 +143,12 @@ public class SlideV2 extends SubsystemBase {
         liftPos = liftPos.HIGH;
     }
 
+    public void liftAuto() {
+        slideAutomatic = true;
+        upController.setSetPoint(1350);
+        liftPos = liftPos.HIGH;
+    }
+
     public void setPosition(double position) {
         upController.setSetPoint(position);
     }
