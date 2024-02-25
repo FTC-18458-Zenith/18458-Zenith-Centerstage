@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.SlowDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drone.launch;
+import org.firstinspires.ftc.teamcode.opmode.command.drone.reset;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
@@ -107,8 +108,9 @@ public class TeleOpMain_V2 extends MatchOpMode {
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
                 .whenPressed(new Score(outtake, wheel));
 
-        Button Drone = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
-                .whenPressed(new launch(drone));
+        Trigger Drone = new GamepadTrigger(operatorGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
+                .whileActiveContinuous(new launch(drone))
+                .whenInactive(new reset(drone));
     }
 
     @Override

@@ -145,7 +145,7 @@ public class SlideV2 extends SubsystemBase {
 
     public void liftAuto() {
         slideAutomatic = true;
-        upController.setSetPoint(1350);
+        upController.setSetPoint(1400);
         liftPos = liftPos.HIGH;
     }
 

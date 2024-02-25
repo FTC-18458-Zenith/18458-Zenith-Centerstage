@@ -27,6 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.TeamMarkerPipeline;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceContainerFollowCommand;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToConstantHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToLinearHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeLeft;
@@ -35,6 +36,7 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Trajecto
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 import org.firstinspires.ftc.teamcode.util.PoseStorage;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceContainer;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Turn;
 
 @Autonomous
 public class RedCloseTest extends MatchOpMode {
@@ -128,9 +130,9 @@ public class RedCloseTest extends MatchOpMode {
                                 new SlideReset(slide, wrist, outtake, wheel)
                         ),*/
 
-                        new ParallelCommandGroup(
+                       /* new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
-                        ),
+                        ),*/
 
 
                         run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
@@ -178,22 +180,23 @@ public class RedCloseTest extends MatchOpMode {
             public static class Path {
                 public static PurpleLine PurpleLineUp;
                 public static class PurpleLine {
-                    public static Pose2dContainer startPose = new Pose2dContainer(7, -63, 270);
+                    public static Pose2dContainer startPose = new Pose2dContainer(7, -63, 0);
                     public static StrafeRight a = new StrafeRight(20);
-                    public static LineToLinearHeading b = new LineToLinearHeading(35, -35, 180);
+                    //public static Turn b = new Turn(90);
+                    public static LineToLinearHeading b = new LineToLinearHeading(35, -120, 90);
                     static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(Speed::getBaseConstraints, a, b);
                 }
 
                 public static PurplePixel purplePixel;
                 public static class PurplePixel {
-                    public static double leftY = -30,
-                            leftX = 48;
-                    public static double midY = -4,
+                    public static double leftY = -80,
+                            leftX = 10;
+                    public static double midY = -90,
                             midX = 24;
-                    public static double rightY = -30,
-                            rightX = 16;
+                    public static double rightY = -100,
+                            rightX = 32;
                     //public static double X = 40;
-                    public static double heading = 180;
+                    public static double heading = 90;
                     public enum AutoPosition {
                         lEFT,
                         MID,
@@ -224,11 +227,11 @@ public class RedCloseTest extends MatchOpMode {
 
                 }
 
-                public static double leftY = -40;
-                public static double midY = -34;
-                public static double rightY = -16;
-                public static double X = 72;
-                public static double heading = 180;
+                public static double leftY = -120;
+                public static double midY = -120;
+                public static double rightY = -120;
+                public static double X = 35;
+                public static double heading = 0;
 
                 public static TrajectorySequenceContainer getYellow (double Y) {
                     switch (autoPosition) {

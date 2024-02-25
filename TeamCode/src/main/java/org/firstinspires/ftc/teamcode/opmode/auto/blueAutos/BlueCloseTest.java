@@ -31,6 +31,7 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToLinearHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeLeft;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeRight;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceConstraints;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 import org.firstinspires.ftc.teamcode.util.PoseStorage;
@@ -271,7 +272,7 @@ public class BlueCloseTest extends MatchOpMode {
 
                 public static double leftPark = 40;
                 public static double rightPark = 34;
-                public static double midPark = 16;
+                public static double midPark = 32;
 
                 public static TrajectorySequenceContainer getPark(double Y) {
                     switch (autoPosition) {
