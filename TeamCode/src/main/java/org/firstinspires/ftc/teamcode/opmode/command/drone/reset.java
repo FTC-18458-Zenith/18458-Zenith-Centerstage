@@ -5,10 +5,10 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Drone;
 
-public class launch extends SequentialCommandGroup {
-    public launch (Drone drone) {
+public class reset extends SequentialCommandGroup {
+    public reset (Drone drone) {
         addCommands(
-                new InstantCommand(drone::score)
+                new InstantCommand(drone::reset)
         );
     }
 }

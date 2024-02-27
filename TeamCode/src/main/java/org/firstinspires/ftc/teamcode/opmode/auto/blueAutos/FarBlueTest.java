@@ -123,7 +123,7 @@ public class FarBlueTest extends MatchOpMode {
                         ),
 
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseTest.BlueCLoseConstants.Speed.Path.Park.park)
+                              //  new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseTest.BlueCLoseConstants.Speed.Path.Park.park)
                         ),
 
 
@@ -245,7 +245,7 @@ public class FarBlueTest extends MatchOpMode {
                     return null;
                 }
 
-                public static BlueCloseTest.BlueCLoseConstants.Speed.Path.Park park;
+               // public static BlueCloseTest.BlueCLoseConstants.Speed.Path. park;
                 public static class Park {
                     public static StrafeLeft a = new StrafeLeft(20);
                     static TrajectorySequenceContainer park = new TrajectorySequenceContainer(BlueCloseTest.BlueCLoseConstants.Speed::getBaseConstraints, a);

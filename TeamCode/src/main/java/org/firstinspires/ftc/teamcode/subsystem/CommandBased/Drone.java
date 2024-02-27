@@ -14,8 +14,8 @@ public class Drone extends SubsystemBase {
 
     public static boolean REVERSED = true;
 
-    public final static double holdingPose = 0,
-            scorePose = 0;
+    public static double holdingPose = 0,
+            scorePose = 1;
 
     Telemetry telemetry;
 
@@ -24,7 +24,7 @@ public class Drone extends SubsystemBase {
     public Drone(final HardwareMap hMap, Telemetry telemetry) {
         this.Drone = new SimpleServo(hMap, "Drone", 0, 360);
 
-        Drone.setInverted(REVERSED);
+        Drone.setInverted(false);
 
         Drone.setPosition(holdingPose);
 
