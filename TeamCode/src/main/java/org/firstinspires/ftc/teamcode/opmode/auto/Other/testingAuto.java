@@ -29,12 +29,16 @@ public class testingAuto extends LinearOpMode {
         Pose2d startPos = new Pose2d(0, 0, Math.toRadians(0));
         drive.setPoseEstimate(startPos);
         TrajectorySequence Trajectory1 = drive.trajectorySequenceBuilder(startPos)
+                .forward(10)
+                .build();
+        TrajectorySequence Trajectory2 = drive.trajectorySequenceBuilder(Trajectory1.end())
+                .turn(100)
                 .build();
         if (gamepad1.b) {
             drive.followTrajectorySequence(Trajectory1);
         }
         else if (gamepad1.a) {
-            drive.followTrajectorySequence();
+            drive.followTrajectorySequence(Trajectory1);
         }
     }
 }
