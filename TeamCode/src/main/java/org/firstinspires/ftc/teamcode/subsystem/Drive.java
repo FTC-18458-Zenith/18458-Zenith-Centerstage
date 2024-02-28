@@ -38,8 +38,10 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ACCEL;
 import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ANG_ACCEL;
 import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ANG_VEL;
@@ -60,9 +62,6 @@ public class Drive extends MecanumDrive {
     private final Gamepad gamepad1;
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
-    public static double MIN_HEADING_P = 0.05;
-    public static double MAX_HEADING_P = 1.0;
-    public static double STICK_THRESHOLD = 0.05;
     public static double LATERAL_MULTIPLIER = 1;
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
@@ -315,28 +314,9 @@ public class Drive extends MecanumDrive {
         return new ProfileAccelerationConstraint(maxAccel);
     }
     public void teleOp() {
-        double rightY = -gamepad1.right_stick_y;
-        double rightX = gamepad1.right_stick_x;
-        double turn;
-
-        //FIELD CENTRIC DRIVETRAIN CODE
-        if (gamepad1.right_bumper) moveDrive(0.5);
+        if (gamepad1.left_bumper) moveDrive(0.5);
         else moveDrive(1);
         if (gamepad1.b) imu.resetYaw();
-        if (gamepad1.left_stick_button) {
-            double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-            Vector2d turn2d = new Vector2d(rightX, rightY);
-            double stickHeading = turn2d
-                    .rotated(Math.PI / 2) // Rotate by Pi / 2 Radians (90 degrees) to move from right to top
-                    .angle() - Math.PI;
-            double headingError = (botHeading - stickHeading);
-            double distance = turn2d.distTo(new Vector2d(0,0));
-
-            double headingP = MIN_HEADING_P + ((MAX_HEADING_P - MIN_HEADING_P) * distance);
-            turn = headingError * headingP;
-
-            if (distance < STICK_THRESHOLD) turn = 0;
-        } else turn = rightX;
     }
     public void moveDrive(double driveTrainPower) {
         final double yAxisMovement = -gamepad1.left_stick_y;
