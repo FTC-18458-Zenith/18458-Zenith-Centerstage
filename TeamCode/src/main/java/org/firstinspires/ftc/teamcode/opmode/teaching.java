@@ -21,7 +21,7 @@ public class teaching extends LinearOpMode {
             backRight.setPower(-gamepad1.left_stick_y);
             frontRight.setPower(-gamepad1.left_stick_y);
             frontLeft.setPower(-gamepad1.left_stick_y);
-            servo.setPosition(1);
+            servo.setPosition(0);
         }
     }
 }
