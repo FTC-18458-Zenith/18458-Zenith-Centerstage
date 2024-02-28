@@ -89,7 +89,6 @@ public class FieldCentricDrive {
             imu.resetYaw();
         }
 
-
         if (gamepad1.left_stick_button && !leftStickPressed) {
             FIELD_CENTRIC_DRIVING = !FIELD_CENTRIC_DRIVING;
             leftStickPressed = true;

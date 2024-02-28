@@ -7,9 +7,14 @@ import org.firstinspires.ftc.teamcode.subsystem.FieldCentricDrive;
 
 @TeleOp
 public class FieldCentricTurning extends LinearOpMode {
-    FieldCentricDrive fieldCentricDrive = new FieldCentricDrive(this);
+
     @Override
     public void runOpMode() throws InterruptedException {
-        fieldCentricDrive.teleOp();
+        FieldCentricDrive fieldCentricDrive = new FieldCentricDrive(this);
+
+        waitForStart();
+        while (opModeIsActive()){
+            fieldCentricDrive.teleOp();
+        }
     }
 }

@@ -302,11 +302,4 @@ public class Drivetrain extends SubsystemBase {
         drive.followTrajectorySequence(trajectorySequence);
     }
 
-//    public int getRightAngle(){
-//        return drive.getRightAngle();
-//    }
-//    public int getLeftAngle(){
-//        return drive.getLeftAngle();
-//    }
-
 }
