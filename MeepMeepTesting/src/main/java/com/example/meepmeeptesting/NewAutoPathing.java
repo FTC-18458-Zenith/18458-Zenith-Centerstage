@@ -31,9 +31,17 @@ public class NewAutoPathing {
                 .setConstraints(30,40, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(-30, 63, Math.toRadians(270)))
+//                                .setReversed(true)
+//                                .lineToLinearHeading(new Pose2d(-44,24))
+//                                .strafeRight(13)
+//                                .back(17)
+//                                .waitSeconds(10)
+//                                .forward(110)
+//                                .strafeLeft(50)
+//                                .forward(10)
+
                                 .lineToLinearHeading(new Pose2d(-38, 39, Math.toRadians(225)))
-                                .lineToLinearHeading(new Pose2d(-38, 34, Math.toRadians(215)))
-                                .lineToLinearHeading(new Pose2d(50, 36, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(-33, 28, Math.toRadians(220)))
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
