@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueLight;
+import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeRedLight;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
@@ -24,10 +25,21 @@ public class NewAutoPathing {
                                 .build()
 
                 );
+        RoadRunnerBotEntity Robot2 = new DefaultBotBuilder(meepMeep)
+                .setColorScheme(new ColorSchemeRedLight())
+                .setDimensions(13, 16)
+                .setConstraints(30,40, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .followTrajectorySequence(driveShim ->
+                        driveShim.trajectorySequenceBuilder(new Pose2d(-30, 63, Math.toRadians(270)))
+                                .lineToLinearHeading(new Pose2d(-38, 39, Math.toRadians(225)))
+                                .lineToLinearHeading(new Pose2d(-38, 34, Math.toRadians(215)))
+                                .lineToLinearHeading(new Pose2d(50, 36, Math.toRadians(180)))
+                                .build()
+                );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(Robot)
+                .addEntity(Robot2)
                 .start();
     }
 }
