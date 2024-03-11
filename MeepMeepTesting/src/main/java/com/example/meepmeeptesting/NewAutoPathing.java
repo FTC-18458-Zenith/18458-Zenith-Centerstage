@@ -23,7 +23,7 @@ public class NewAutoPathing {
                 .setDimensions(14, 16)
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
+                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(0)))
                                 .lineToLinearHeading(closeRightSpike)
                                 .lineToLinearHeading(closeRightScore)
                                 .waitSeconds(1)
@@ -49,11 +49,13 @@ public class NewAutoPathing {
                 .setDimensions(13, 16)
                 .setConstraints(45,45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(-30, 63, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(-49, 50, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(-30, 40, Math.toRadians(315)))
-                                .lineToLinearHeading(new Pose2d(-60,23, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(-41, 18, Math.toRadians(180)))
+                        driveShim.trajectorySequenceBuilder(new Pose2d(-30, 63, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(-55, 30, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(-30, 30, Math.toRadians(0)))
+                                .back(10)
+                                .turn(Math.toRadians(180))
+                                //TODO: FUCKING FIX THIS
+                                .lineToLinearHeading(new Pose2d(-45, 25, Math.toRadians(180)))
                                 .splineToConstantHeading(new Vector2d(49, 43), Math.toRadians(90))
                                 .build()
                 );
