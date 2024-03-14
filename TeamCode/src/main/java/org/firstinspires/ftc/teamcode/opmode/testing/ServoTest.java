@@ -10,9 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp
 public class ServoTest extends LinearOpMode {
     Servo servo1, servo2;
-    public static double testingPower1 = 0.3;
-    public static double testingPower2 = 0.7;
-    public static double otherPostion = 1;
+    public static double testingPower1 = 0.9;
+    public static double testingPower2 = 0;
     @Override
     public void runOpMode() throws InterruptedException {
         servo1 = (Servo) hardwareMap.get("servo1");
@@ -22,9 +21,12 @@ public class ServoTest extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-            if (gamepad1.a) servo1.setPosition(testingPower1);
-            if (gamepad1.b) servo1.setPosition(testingPower2);
+            if (gamepad1.a) servoTesting(testingPower1);
+            if (gamepad1.b) servoTesting(testingPower2);
         }
     }
-
+    public void servoTesting(double position) {
+        servo1.setPosition(position);
+        servo2.setPosition(position);
+    }
 }

@@ -5,7 +5,6 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -19,29 +18,29 @@ public class Outtake extends SubsystemBase {
 
     Telemetry telemetry;
 
-    private final ServoEx Outtake;
+    private final ServoEx clampServo;
 
     public Outtake(final HardwareMap hMap, Telemetry telemetry) {
-        this.Outtake = new SimpleServo(hMap, "Outtake", 0, 360);
+        this.clampServo = new SimpleServo(hMap, "Outtake", 0, 360);
 
-        Outtake.setInverted(REVERSED);
+        clampServo.setInverted(REVERSED);
 
-        Outtake.setPosition(holdingPose);
+        clampServo.setPosition(holdingPose);
 
         this.telemetry = telemetry;
     }
 
     @Override
     public void periodic() {
-        telemetry.addData("Outtake", Outtake.getPosition());
+        telemetry.addData("Outtake", clampServo.getPosition());
     }
 
     public void score() {
-        Outtake.setPosition(scorePose);
+        clampServo.setPosition(scorePose);
     }
 
     public void reset() {
-        Outtake.setPosition(holdingPose);
+        clampServo.setPosition(holdingPose);
     }
 
 }
