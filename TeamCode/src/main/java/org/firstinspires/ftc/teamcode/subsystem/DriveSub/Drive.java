@@ -9,7 +9,6 @@ import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.acmerobotics.roadrunner.followers.HolonomicPIDVAFollower;
 import com.acmerobotics.roadrunner.followers.TrajectoryFollower;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstraint;
@@ -32,7 +31,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.subsystem.DriveConstants;
+import org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants;
 import org.firstinspires.ftc.teamcode.subsystem.ThreeWheelTrackingLocalizer;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceBuilder;
@@ -40,21 +39,19 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ACCEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ANG_ACCEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ANG_VEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_VEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MOTOR_VELO_PID;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.encoderTicksToInches;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.kA;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.kStatic;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_ACCEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_ANG_ACCEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_ANG_VEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_VEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.TRACK_WIDTH;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.kA;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.kStatic;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.kV;
 
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
@@ -100,7 +97,7 @@ public class Drive extends MecanumDrive {
 
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                org.firstinspires.ftc.teamcode.subsystem.DriveConstants.LOGO_FACING_DIR, DriveConstants.USB_FACING_DIR));
+                WhyDoWeHave2DriveConstants.LOGO_FACING_DIR, WhyDoWeHave2DriveConstants.USB_FACING_DIR));
         imu.initialize(parameters);
 
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");

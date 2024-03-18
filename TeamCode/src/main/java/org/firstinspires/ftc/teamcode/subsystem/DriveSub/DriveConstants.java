@@ -23,8 +23,8 @@ public class DriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
-    public static final double TICKS_PER_REV = 384.5;
-    public static final double MAX_RPM = 312;   //435 Motors - Changed from 430
+    public static final double TICKS_PER_REV = 537.6;
+    public static final double MAX_RPM = 312;
 
     /*
      * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
@@ -46,23 +46,24 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.889;  //(96/25.4)/2; // in  (96mm/25.4) = in
-    public static double GEAR_RATIO = 1;    // 28/25 - output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 17;    // in - 10.5Tuner Track Width = 8.55
+    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 11; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
-     * the built-in velocity PID,
-     * *these values are fine as is*. However, if you do not have drive
+     * the built-in velocity PID, *these values are fine as is*. However, if you do not have drive
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-//    public static double kV = 0.011; //1.0 / rpmToVelocity(MAX_RPM);
-//    public static double kA = 0.0025;
-//    public static double kStatic = 0.01;
-    public static double kV = 0.015;//0.0185
-    public static double kA = 0.003; //0.01610 //0.0030
-    public static double kStatic = 0.02; //0.00013 //0.009
+    public static double kV = 0.0175;
+
+
+// 1.0 / rpmToVelocity(MAX_RPM);
+    public static double kA = 0.00145;
+    // 0.01635
+    public static double kStatic = 0.0001;
+    //0.10081
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -92,21 +93,14 @@ public class DriveConstants {
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
 
      */
-    public static double MAX_VEL = 30;  //57-54
-    public static double MAX_ACCEL = 30;    //57-54
-    public static double MAX_ANG_VEL = Math.toRadians(60);  //According to guide make 180 deg - 300.704976 // were did this 300 number come from? can it really turn that fast?
-    public static double MAX_ANG_ACCEL = Math.toRadians(609);  //According to guide make 180 deg - 300.704976
-
-    /*
-     * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
-     */
+    public static double MAX_VEL = 52.48291908330528;
+    public static double MAX_ACCEL = 52.48291908330528;
+    public static double MAX_ANG_VEL = Math.toRadians(273.36816);
+    public static double MAX_ANG_ACCEL = Math.toRadians(273.36816);
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
-            RevHubOrientationOnRobot.LogoFacingDirection.UP;
+            RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
     public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
-            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
-
-    public static double NOMINAL_VOLTAGE = 12.0;
-
+            RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
     public static double encoderTicksToInches(double ticks) {
         return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;

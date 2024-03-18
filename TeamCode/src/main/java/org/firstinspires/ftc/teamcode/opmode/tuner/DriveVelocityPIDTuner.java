@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmode.tuner;
 
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_ACCEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MAX_VEL;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.MOTOR_VELO_PID;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.subsystem.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_ACCEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MAX_VEL;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.teamcode.subsystem.WhyDoWeHave2DriveConstants.kV;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
