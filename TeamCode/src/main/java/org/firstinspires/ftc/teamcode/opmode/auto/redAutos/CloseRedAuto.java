@@ -16,11 +16,21 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 
 @Autonomous
 public class CloseRedAuto extends LinearOpMode {
-    Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
-    Pose2d resetPose = new Pose2d(35, -35, Math.toRadians(180));
-    Pose2d rightPose = new Pose2d(32, -30, Math.toRadians(180));
-    Pose2d leftPose = new Pose2d(10, -30, Math.toRadians(180));
-    Pose2d midPose = new Pose2d(24, -24, Math.toRadians(180));
+    Double leftCycleScore = -28.0;
+    Double rightCycleScore = -44.0;
+    Double centerCycleScore = -36.0;
+
+    Pose2d rightSpike = new Pose2d(15, -39, Math.toRadians(45));
+    Pose2d centerSpike = new Pose2d(21, -32, Math.toRadians(180 - 45));
+    Pose2d leftSpike = new Pose2d(6, -39, Math.toRadians(180 - 45));
+
+    Pose2d rightScore = new Pose2d(49, -44, Math.toRadians(180));
+    Pose2d centerScore = new Pose2d(49, -36, Math.toRadians(180));
+    Pose2d leftScore = new Pose2d(49, -28, Math.toRadians(180));
+
+    Pose2d rightStartCycle = new Pose2d(30, -25, Math.toRadians(180));
+    Pose2d leftStartCycle = new Pose2d(30, -20, Math.toRadians(180));
+
     @Override
     public void runOpMode() throws InterruptedException {
 

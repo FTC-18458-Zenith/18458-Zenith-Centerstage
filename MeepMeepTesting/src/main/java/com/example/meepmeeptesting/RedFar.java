@@ -16,30 +16,27 @@ public class RedFar {
 
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(650);
+        Double farLeftScore = -28.0;
+        Double farRightScore = -44.0;
+        Double farCenterScore = -36.0;
 
-        Pose2d LeftPose = new Pose2d(-47, -35, Math.toRadians(90));
-        Pose2d MidPose = new Pose2d(-35, -32, Math.toRadians(90));
-        Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(0));
+        Pose2d farLeftSpike = new Pose2d(-36, -30, Math.toRadians(180));
+        Pose2d farCenterSpike = new Pose2d(-47,-28, Math.toRadians(180));
 
-        Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
-        Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
-        Pose2d leftScoringPose = new Pose2d(49, -28, Math.toRadians(180));
-        Pose2d midScoringPose = new Pose2d(49,-34, Math.toRadians(180));
-        Pose2d rightScoringPose = new Pose2d(49, -41, Math.toRadians(180));
+        Pose2d farCenterSpline = new Pose2d(-50, -25, Math.toRadians(180));
+        Pose2d farLeftSpline = new Pose2d(-45, -25, Math.toRadians(180));
 
         RoadRunnerBotEntity redAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
-                .setDimensions(16, 16)
+                .setDimensions(14, 16)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(90)))
-                                .lineToLinearHeading(RightPose)
-                                .lineToLinearHeading(ResetPose)
-                                .waitSeconds(10)
-                                .back(82)
-                                .lineToLinearHeading(rightScoringPose)
-                                .strafeLeft(25)
+                                .back(10)
+                                .lineToLinearHeading(farLeftSpike)
+                                .lineToLinearHeading(farLeftSpline)
+                                .splineToConstantHeading(new Vector2d(49, farLeftScore), Math.toRadians(270))
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)

@@ -32,7 +32,6 @@ public class RedClose {
         Pose2d rightStartCycle = new Pose2d(30, -25, Math.toRadians(180));
         Pose2d leftStartCycle = new Pose2d(30, -20, Math.toRadians(180));
 
-
         RoadRunnerBotEntity redAllianceRight = new DefaultBotBuilder(meepMeep)
                 //TODO: MAKE AUTO PARK IN THE CORNER
                 .setColorScheme((new ColorSchemeRedLight()))

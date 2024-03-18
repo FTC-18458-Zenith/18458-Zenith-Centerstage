@@ -19,16 +19,14 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence
 @Autonomous (name = "LeftAutoBlue", group = "RoadRunnerPath")
 
 public class FarBlueAuto extends LinearOpMode {
-    Pose2d rightPoseSpike = new Pose2d(-38, 32, Math.toRadians(180));
-    Pose2d leftPoseSpike = new Pose2d(-34, 32, Math.toRadians(0));
-    // Use reset pose 2 times
-    Pose2d centerPoseSpike = new Pose2d(-34, 32 , Math.toRadians(270));
-    // Use reset pose 2 times
-    Pose2d reset = new Pose2d(-40, 58, Math.toRadians(180));
-    Pose2d backdropPose = new Pose2d(47, 60, Math.toRadians(180));
-    Pose2d rightScoringPose = new Pose2d(47, 28, Math.toRadians(180));
+    Double farLeftScore = 28.0;
+    Double farRightScore = 44.0;
+    Double farCenterScore = 36.0;
+    Pose2d farLeftSpike = new Pose2d(-36, 30, Math.toRadians(180));
+    Pose2d farCenterSpike = new Pose2d(-47,28, Math.toRadians(180));
 
-
+    Pose2d farCenterSpline = new Pose2d(-50, 25, Math.toRadians(180));
+    Pose2d farLeftSpline = new Pose2d(-45, 25, Math.toRadians(180));
 
     @Override
     public void runOpMode() throws InterruptedException {

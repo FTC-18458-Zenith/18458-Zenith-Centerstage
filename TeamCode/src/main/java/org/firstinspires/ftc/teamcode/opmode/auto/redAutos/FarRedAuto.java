@@ -20,13 +20,15 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @Autonomous (name = "RightAutoRed", group = "RoadRunnerPath")
 
 public class FarRedAuto extends LinearOpMode {
-    Pose2d LeftPose = new Pose2d(-47, -35, Math.toRadians(270));
-    Pose2d MidPose = new Pose2d(-35, -32, Math.toRadians(90));
-    Pose2d RightPose = new Pose2d(-34, -34, Math.toRadians(180));
+    Double farLeftScore = -28.0;
+    Double farRightScore = -44.0;
+    Double farCenterScore = -36.0;
+    Pose2d farLeftSpike = new Pose2d(-36, -30, Math.toRadians(180));
+    Pose2d farCenterSpike = new Pose2d(-47,-28, Math.toRadians(180));
 
-    Pose2d ResetPose = new Pose2d(-35, -60, Math.toRadians(180));
-    Pose2d scorePose = new Pose2d(47, -39, Math.toRadians(180));
-
+    Pose2d farCenterSpline = new Pose2d(-50, -25, Math.toRadians(180));
+    Pose2d farLeftSpline = new Pose2d(-45, -25, Math.toRadians(180));
+    //FORWARD.(10)
     OpenCvWebcam webcam;
     @Override
     public void runOpMode() throws InterruptedException {
