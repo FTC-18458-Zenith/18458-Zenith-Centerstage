@@ -53,8 +53,9 @@ public class NewAutoPathing {
         Pose2d farLeftSpike = new Pose2d(-36, 30, Math.toRadians(180));
         Pose2d farCenterSpike = new Pose2d(-47,28, Math.toRadians(180));
 
-        Pose2d farCenterSpline = new Pose2d(-50, 25, Math.toRadians(180));
+        Pose2d farCenterSpline = new Pose2d(-45, 10, Math.toRadians(180));
         Pose2d farLeftSpline = new Pose2d(-45, 25, Math.toRadians(180));
+        Pose2d moving = new Pose2d(0, 10, Math.toRadians(180));
 
         RoadRunnerBotEntity Robot2 = new DefaultBotBuilder(meepMeep)
                 .setColorScheme(new ColorSchemeRedLight())
@@ -66,6 +67,7 @@ public class NewAutoPathing {
                                 .lineToLinearHeading(farCenterSpike)
 //                                .turn(Math.toRadians(180))
                                 .lineToLinearHeading(farCenterSpline)
+                                .lineToLinearHeading(moving)
                                 .splineToConstantHeading(new Vector2d(49, farCenterScore), Math.toRadians(90))
                                 .build()
                 );

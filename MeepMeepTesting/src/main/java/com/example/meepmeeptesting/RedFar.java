@@ -24,7 +24,8 @@ public class RedFar {
         Pose2d farCenterSpike = new Pose2d(-47,-28, Math.toRadians(180));
 
         Pose2d farCenterSpline = new Pose2d(-50, -25, Math.toRadians(180));
-        Pose2d farLeftSpline = new Pose2d(-45, -25, Math.toRadians(180));
+        Pose2d farLeftSpline = new Pose2d(-45, -10, Math.toRadians(180));
+        Pose2d moving = new Pose2d(0, -10, Math.toRadians(180));
 
         RoadRunnerBotEntity redAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeRedDark()))
@@ -32,10 +33,11 @@ public class RedFar {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-40, -63, Math.toRadians(90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-30, -63, Math.toRadians(0)))
                                 .back(10)
                                 .lineToLinearHeading(farLeftSpike)
                                 .lineToLinearHeading(farLeftSpline)
+                                .lineToLinearHeading(moving)
                                 .splineToConstantHeading(new Vector2d(49, farLeftScore), Math.toRadians(270))
                                 .build()
                 );

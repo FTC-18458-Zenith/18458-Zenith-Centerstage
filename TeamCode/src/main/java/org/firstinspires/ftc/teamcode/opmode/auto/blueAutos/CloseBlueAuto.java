@@ -46,7 +46,7 @@ public class CloseBlueAuto extends LinearOpMode {
 
         ColorDetectionBlue colorDetectionBlue = new ColorDetectionBlue();
         vision vision = new vision(this, org.firstinspires.ftc.teamcode.subsystem.vision.AllianceColor.BLUE);
-        Pose2d startPos = new Pose2d(17, 63, Math.toRadians(0));
+        Pose2d startPos = new Pose2d(7, 63, Math.toRadians(0));
 
         drive.setPoseEstimate(startPos);
 

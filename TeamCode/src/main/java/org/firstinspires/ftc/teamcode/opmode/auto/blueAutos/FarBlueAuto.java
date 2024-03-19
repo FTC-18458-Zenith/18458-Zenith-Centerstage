@@ -25,8 +25,9 @@ public class FarBlueAuto extends LinearOpMode {
     Pose2d farLeftSpike = new Pose2d(-36, 30, Math.toRadians(180));
     Pose2d farCenterSpike = new Pose2d(-47,28, Math.toRadians(180));
 
-    Pose2d farCenterSpline = new Pose2d(-50, 25, Math.toRadians(180));
+    Pose2d farCenterSpline = new Pose2d(-45, 10, Math.toRadians(180));
     Pose2d farLeftSpline = new Pose2d(-45, 25, Math.toRadians(180));
+    Pose2d moving = new Pose2d(0, 10, Math.toRadians(180));
 
     @Override
     public void runOpMode() throws InterruptedException {
