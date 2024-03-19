@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOff;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeOn;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeReverse;
+import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Hold;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.SlowDriveCommand;
@@ -94,22 +95,25 @@ public class TeleOpMain_V2 extends MatchOpMode {
                 .whenPressed(new SlideMid(slide, wrist));
 
         Button slideHigh = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)
-                .whenPressed(new SlideHigh(slide, wrist, wheel));
+                .whenPressed(new SlideHigh(slide, wrist));
 
         Trigger Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whileActiveContinuous(new IntakeOn(intakeV2, wheel))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
 
-        Trigger Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
+        /*Trigger Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
                 .whileActiveContinuous(new IntakeReverse(intakeV2, wheel, false))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
-
+*/
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
                 .whenPressed(new Score(outtake, wheel));
 
-        Trigger Drone = new GamepadTrigger(operatorGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
+        Button Hold = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
+                .whenPressed(new Hold(outtake));
+
+        /*Trigger Drone = new GamepadTrigger(operatorGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whileActiveContinuous(new launch(drone))
-                .whenInactive(new reset(drone));
+                .whenInactive(new reset(drone));*/
     }
 
     @Override

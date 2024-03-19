@@ -31,7 +31,7 @@ public class SlideV2 extends SubsystemBase {
     public static int restingPose = 0;
     public static int lowPose = 450;
     public static int midPose = 900;
-    public static int highPose = 1780;
+    public static int highPose = 1000;
     double output = 0;
 
     public enum LiftPos{
@@ -45,8 +45,8 @@ public class SlideV2 extends SubsystemBase {
         leftSlide = new MotorEx(hardwareMap, "leftSlide");
         rightSlide = new MotorEx(hardwareMap, "rightSlide");
 
-        rightSlide.setInverted(true);
-        leftSlide.setInverted(true);
+        rightSlide.setInverted(false);
+        leftSlide.setInverted(false);
 
         leftSlide.resetEncoder();
         rightSlide.resetEncoder();

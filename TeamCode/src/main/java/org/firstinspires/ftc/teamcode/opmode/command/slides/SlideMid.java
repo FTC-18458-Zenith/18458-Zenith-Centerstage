@@ -12,8 +12,8 @@ public class SlideMid extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(slideV2::liftMid)
         );
-        addCommands(
+        /*addCommands(
                 new InstantCommand(wrist::Score)
-        );
+        );*/
     }
 }

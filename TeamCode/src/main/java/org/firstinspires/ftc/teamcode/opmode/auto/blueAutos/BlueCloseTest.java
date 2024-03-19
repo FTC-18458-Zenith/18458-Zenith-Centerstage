@@ -139,7 +139,7 @@ public class BlueCloseTest extends MatchOpMode {
                         new WaitCommand(1000),
 
                         new SequentialCommandGroup(
-                                new SlideHigh(slide, wrist, wheel),
+                                new SlideHigh(slide, wrist),
                                 new WaitCommand(1000),
                                 new Score(outtake, wheel),
                                 new WaitCommand(1000),

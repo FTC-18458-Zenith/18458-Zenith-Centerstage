@@ -17,10 +17,7 @@ public class SlideReset extends SequentialCommandGroup {
                 new InstantCommand(wrist::Reset)
         );
         addCommands(
-                new InstantCommand(outtake::reset)
-        );
-        addCommands(
-                new InstantCommand(wheel::off)
+                new InstantCommand(outtake::score)
         );
     }
 }

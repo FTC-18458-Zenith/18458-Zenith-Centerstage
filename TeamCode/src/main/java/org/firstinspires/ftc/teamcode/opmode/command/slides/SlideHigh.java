@@ -9,15 +9,13 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 
 public class SlideHigh extends SequentialCommandGroup {
-    public SlideHigh(SlideV2 slideV2, Wrist wrist, Wheel wheel) {
+    public SlideHigh(SlideV2 slideV2, Wrist wrist) {
         addCommands(
                 new InstantCommand(slideV2::liftHigh)
         );
+        new WaitCommand(1000);
         addCommands(
                 new InstantCommand(wrist::Score)
-        );
-        addCommands(
-                new InstantCommand(wheel::off)
         );
     }
 }

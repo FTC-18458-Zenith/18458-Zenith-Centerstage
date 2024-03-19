@@ -19,9 +19,9 @@ public class IntakeV2 extends SubsystemBase {
 
     private boolean intakeOn;
 
-    public static double Power = 0.7;
-    public static double intakeDropDown = 0;
-    public static double outtakeDropDown = 0.9;
+    public static double Power = 0.6;
+    public static double intakeDropDown = 0.03;
+    public static double outtakeDropDown = 0.6;
     //Value can be lower than this, such as 0.6 or smth
     public enum intakePower {
         ON, OFF
@@ -34,8 +34,8 @@ public class IntakeV2 extends SubsystemBase {
         leftIntake = new SimpleServo(hardwareMap, "leftIntakeServo", 0, 360);
         rightIntake = new SimpleServo(hardwareMap, "rightIntakeServo", 0 , 360);
 
-        leftIntake.setInverted(false);
-        rightIntake.setInverted(true);
+        leftIntake.setInverted(true);
+        rightIntake.setInverted(false);
 
         Intake.setInverted(false);
 
@@ -50,7 +50,7 @@ public class IntakeV2 extends SubsystemBase {
     }
 
     public void IntakeOn() {
-        Intake.set(-Power);
+        Intake.set(Power);
         intakeOn = true;
         intakePower = intakePower.ON;
 
@@ -59,7 +59,7 @@ public class IntakeV2 extends SubsystemBase {
     }
 
     public void IntakeReverse() {
-        Intake.set(Power);
+        Intake.set(-Power);
         intakeOn = true;
         intakePower = intakePower.ON;
 

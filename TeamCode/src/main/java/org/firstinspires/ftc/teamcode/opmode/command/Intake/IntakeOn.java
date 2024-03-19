@@ -11,8 +11,6 @@ public class IntakeOn extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(intakeV2::IntakeOn)
         );
-        addCommands(
-                new InstantCommand(wheel::intake)
-        );
+
     }
 }

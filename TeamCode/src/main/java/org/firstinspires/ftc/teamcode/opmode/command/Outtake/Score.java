@@ -12,9 +12,6 @@ public class Score extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(outtake::score)
         );
-        addCommands(
-                new InstantCommand(wheel::intake)
-        );
 
     }
 }

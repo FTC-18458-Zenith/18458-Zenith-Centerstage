@@ -111,13 +111,13 @@ public class FarRedTest extends MatchOpMode {
                         new WaitCommand(1000),
 
                         new SequentialCommandGroup(
-                                new SlideHigh(slide, wrist, wheel),
+                                //new SlideHigh(slide),
                                 new WaitCommand(1000),
                                 new Score(outtake, wheel),
                                 new WaitCommand(200),
                                 new SlideMid(slide, wrist),
                                 new WaitCommand(100),
-                                new SlideHigh(slide, wrist, wheel),
+                                //new SlideHigh(slide),
                                 new WaitCommand(1000),
                                 new SlideReset(slide, wrist, outtake, wheel)
                         ),
