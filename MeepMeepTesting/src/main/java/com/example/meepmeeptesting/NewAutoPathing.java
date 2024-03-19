@@ -32,7 +32,7 @@ public class NewAutoPathing {
                 .setDimensions(14, 16)
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(0)))
+                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
                                 .lineToLinearHeading(closeRightSpike)
                                 .lineToLinearHeading(closeRightScore)
                                 .waitSeconds(1)
@@ -51,9 +51,9 @@ public class NewAutoPathing {
         Double farRightScore = 44.0;
         Double farCenterScore = 36.0;
         Pose2d farLeftSpike = new Pose2d(-36, 30, Math.toRadians(180));
-        Pose2d farCenterSpike = new Pose2d(-47,28, Math.toRadians(180));
+        Pose2d farCenterSpike = new Pose2d(-55,23, Math.toRadians(180));
 
-        Pose2d farCenterSpline = new Pose2d(-45, 10, Math.toRadians(180));
+        Pose2d farCenterSpline = new Pose2d(-46, 10, Math.toRadians(180));
         Pose2d farLeftSpline = new Pose2d(-45, 25, Math.toRadians(180));
         Pose2d moving = new Pose2d(0, 10, Math.toRadians(180));
 
@@ -62,9 +62,9 @@ public class NewAutoPathing {
                 .setDimensions(13, 16)
                 .setConstraints(45,45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(-30, 63, Math.toRadians(180)))
-                                .forward(10)
+                        driveShim.trajectorySequenceBuilder(new Pose2d(-40, 63, Math.toRadians(270)))
                                 .lineToLinearHeading(farCenterSpike)
+                                .back(15)
 //                                .turn(Math.toRadians(180))
                                 .lineToLinearHeading(farCenterSpline)
                                 .lineToLinearHeading(moving)
