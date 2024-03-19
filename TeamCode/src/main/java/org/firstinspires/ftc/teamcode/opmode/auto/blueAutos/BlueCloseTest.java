@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
@@ -48,6 +49,20 @@ public class BlueCloseTest extends MatchOpMode {
     private FFVision vision;
     private Outtake outtake;
     private Wheel wheel;
+    Double leftCycleScore = 28.0;
+    Double rightCycleScore = 44.0;
+    Double centerCycleScore = 36.0;
+
+    Pose2d rightSpike = new Pose2d(15, 39, Math.toRadians(45));
+    Pose2d centerSpike = new Pose2d(21, 32, Math.toRadians(180 - 45));
+    Pose2d leftSpike = new Pose2d(6, 39, Math.toRadians(180 - 45));
+
+    Pose2d rightScore = new Pose2d(49, 44, Math.toRadians(180));
+    Pose2d centerScore = new Pose2d(49, 36, Math.toRadians(180));
+    Pose2d leftScore = new Pose2d(49, 28, Math.toRadians(180));
+
+    Pose2d rightStartCycle = new Pose2d(30, 25, Math.toRadians(180));
+    Pose2d leftStartCycle = new Pose2d(30, 20, Math.toRadians(180));
 
     @Override
     public void robotInit() {
@@ -71,7 +86,6 @@ public class BlueCloseTest extends MatchOpMode {
         this.matchStart();
 
     }
-
     /*@Override
     public void disabledPeriodic() {
         vision.setPosition(vision.getPosition());

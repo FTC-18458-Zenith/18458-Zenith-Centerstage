@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmode.tuner;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -33,6 +34,7 @@ public class BackAndForth extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         MecanumDrive drive = new MecanumDrive(hardwareMap, telemetry, false);
+        TelemetryPacket packet = new TelemetryPacket();
 
         Trajectory trajectoryForward = drive.trajectoryBuilder(new Pose2d())
                 .forward(DISTANCE)
@@ -43,6 +45,9 @@ public class BackAndForth extends LinearOpMode {
                 .build();
 
         waitForStart();
+        packet.fieldOverlay()
+                .setFill("blue")
+                .fillRect(-20,-20,40,40);
 
         while (opModeIsActive() && !isStopRequested()) {
             drive.followTrajectory(trajectoryForward);

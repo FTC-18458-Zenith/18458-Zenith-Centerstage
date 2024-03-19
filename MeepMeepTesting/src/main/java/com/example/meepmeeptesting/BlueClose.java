@@ -13,34 +13,38 @@ import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 public class BlueClose {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(650);
+        Double leftScore = 28.0;
+        Double rightScore = 44.0;
+        Double centerScore = 36.0;
 
+        Pose2d closeRightSpike = new Pose2d(15, 39, Math.toRadians(45));
+        Pose2d closeCenterSpike = new Pose2d(21, 32, Math.toRadians(180 - 45));
+        Pose2d closeLeftSpike = new Pose2d(6, 39, Math.toRadians(180 - 45));
 
-        // IDK WHAT THIS IS
-        Pose2d rightScoringPose = new Pose2d(49, 28, Math.toRadians(180));
-        Pose2d midScoringPose = new Pose2d(49,34, Math.toRadians(180));
-        Pose2d leftScoringPose = new Pose2d(49, 40, Math.toRadians(180));
-        Pose2d resetPose = new Pose2d(35, 35, Math.toRadians(180));
-        Pose2d leftPose = new Pose2d(32, 30, Math.toRadians(180));
-        Pose2d rightPose = new Pose2d(10, 30, Math.toRadians(180));
-        Pose2d midPose = new Pose2d(24, 24, Math.toRadians(180));
+        Pose2d closeRightScore = new Pose2d(49, 44, Math.toRadians(180));
+        Pose2d closeCenterScore = new Pose2d(49, 36, Math.toRadians(180));
+        Pose2d closeLeftScore = new Pose2d(49, 28, Math.toRadians(180));
 
+        Pose2d closeRightStartCycle = new Pose2d(30, 25, Math.toRadians(180));
+        Pose2d closeLeftStartCycle = new Pose2d(30, 20, Math.toRadians(180));
 
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
-                .setDimensions(16, 16)
-                .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setDimensions(14, 16)
+                .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                                driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(270)))
-//                                        .lineToLinearHeading(leftBackdropBlueCenter)
-//                                        .lineToLinearHeading(blueClosePoseRight)
-////                                .lineToLinearHeading(new Pose2d(47, 40, Math.toRadians(180)))
-//                                        .splineToConstantHeading(new Vector2d(50, 62), Math.toRadians(90))
-                                        .strafeLeft(20)
-                                        .lineToLinearHeading(resetPose)
-                                        .lineToLinearHeading(rightPose)
-                                        .lineToLinearHeading(midScoringPose)
-                                        .strafeLeft(10)
-                                        .splineToConstantHeading(new Vector2d(60, 12), Math.toRadians(0))
+                                driveShim.trajectorySequenceBuilder(new Pose2d(7, 63, Math.toRadians(0)))
+                                        .lineToLinearHeading(closeRightSpike)
+                                        .lineToLinearHeading(closeRightScore)
+                                        .waitSeconds(1)
+//                                        //Cycle 1 start
+//                                        .lineToLinearHeading(closeRightStartCycle)
+//                                        .splineToConstantHeading(new Vector2d(59, 11), Math.toRadians(180))
+//                                        .waitSeconds(1)
+//                                        //Cycle 1 end
+//                                        .lineToLinearHeading(new Pose2d(0, 14, Math.toRadians(180)))
+//                                        .splineToConstantHeading(new Vector2d(49, rightScore), Math.toRadians(270))
+//                                        .waitSeconds(1)
                                         .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
