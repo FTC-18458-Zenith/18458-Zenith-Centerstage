@@ -180,7 +180,7 @@ public class FarRedTest extends MatchOpMode {
 
                 public static RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel purplePixel;
                 public static class PurplePixel {
-                    public static double leftY = -30,
+                    public static double leftY = -31,
                             leftX = -10;
                     public static double midY = -24,
                             midX = -24;
