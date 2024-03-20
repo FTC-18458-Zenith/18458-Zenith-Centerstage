@@ -82,7 +82,6 @@ public class NewAutoPathing {
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(Robot)
-                .addEntity(Robot2)
                 .start();
     }
 }
