@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.redAutos;
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
+import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -32,7 +32,7 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeRi
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceConstraints;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceContainer;
 
-public class FarRedTest extends MatchOpMode {
+public class RedFar extends MatchOpMode {
     private IntakeV2 intake;
     private Wrist wrist;
     private Drivetrain drivetrain;
@@ -74,38 +74,38 @@ public class FarRedTest extends MatchOpMode {
         double finalX = 0;
         switch (vision.getFinalPosition()) {
             case LEFT:
-                finalY = RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.leftY;
+                finalY = RedClose.RedCloseConstants.Speed.Path.PurplePixel.leftY;
                 autoPosition = autoPosition.lEFT;
                 break;
             case MIDDLE:
-                finalY = RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.midY;
+                finalY = RedClose.RedCloseConstants.Speed.Path.PurplePixel.midY;
                 autoPosition = autoPosition.MID;
                 break;
             case RIGHT:
-                finalY = RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.rightY;
+                finalY = RedClose.RedCloseConstants.Speed.Path.PurplePixel.rightY;
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose());
-        PoseStorage.trajectoryPose = RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose();
+        drivetrain.setPoseEstimate(RedClose.RedCloseConstants.Speed.Path.Start.startPose.getPose());
+        PoseStorage.trajectoryPose = RedClose.RedCloseConstants.Speed.Path.Start.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
                         /* Purple Line Up */
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine.purpleLineup)
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.Start.Start)
                         ),
                         new WaitCommand(100),
 
                         /* Purple Pixel */
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                         ),
                         new SequentialCommandGroup(
                                 new IntakeReverse(intake, wheel, true)
                         ),
 
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseTest.RedCloseConstants.Speed.Path.getYellow(finalY))
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.getYellow(finalY))
                         ),
 
                         new WaitCommand(1000),
@@ -123,7 +123,7 @@ public class FarRedTest extends MatchOpMode {
                         ),
 
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseTest.RedCloseConstants.Speed.Path.Park.park)
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.Park.park)
                         ),
 
 
@@ -141,7 +141,7 @@ public class FarRedTest extends MatchOpMode {
     @Config
     public static class BlueCLoseConstants {
 
-        public static RedCloseTest.RedCloseConstants.Speed speed;
+        public static RedClose.RedCloseConstants.Speed speed;
         public static class Speed {
             public static double baseVel = DriveConstants.MAX_VEL; // value
             public static double baseAccel = DriveConstants.MAX_ACCEL; // value
@@ -168,17 +168,17 @@ public class FarRedTest extends MatchOpMode {
                 return new TrajectorySequenceConstraints(baseVel, baseAccel, turnVel, turnAccel);
             }
 
-            public static RedCloseTest.RedCloseConstants.Speed.Path path;
+            public static RedClose.RedCloseConstants.Speed.Path path;
             public static class Path {
-                public static RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine PurpleLineUp;
+                public static RedClose.RedCloseConstants.Speed.Path.Start PurpleLineUp;
                 public static class PurpleLine {
                     public static Pose2dContainer startPose = new Pose2dContainer(7, -63, 270);
                     public static StrafeRight a = new StrafeRight(20);
                     public static LineToLinearHeading b = new LineToLinearHeading(35, -35, 180);
-                    static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(RedCloseTest.RedCloseConstants.Speed::getBaseConstraints, a, b);
+                    static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(RedClose.RedCloseConstants.Speed::getBaseConstraints, a, b);
                 }
 
-                public static RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel purplePixel;
+                public static RedClose.RedCloseConstants.Speed.Path.PurplePixel purplePixel;
                 public static class PurplePixel {
                     public static double leftY = -31,
                             leftX = -10;
@@ -193,24 +193,24 @@ public class FarRedTest extends MatchOpMode {
                         MID,
                         RIGHT
                     }
-                    public static RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.AutoPosition autoPosition = RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel.AutoPosition.MID;
+                    public static RedClose.RedCloseConstants.Speed.Path.PurplePixel.AutoPosition autoPosition = RedClose.RedCloseConstants.Speed.Path.PurplePixel.AutoPosition.MID;
                     static TrajectorySequenceContainer getPurple(double Y) {
                         switch (autoPosition) {
                             case lEFT:
                                 return new TrajectorySequenceContainer(
-                                        RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                        RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(leftX, leftY, heading)
                                 );
 
                             case MID:
                                 return new TrajectorySequenceContainer(
-                                        RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                        RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(midX, midY, heading)
                                 );
                             default:
                             case RIGHT:
                                 return new TrajectorySequenceContainer(
-                                        RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                        RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(rightX, rightY, heading)
                                 );
                         }
@@ -228,27 +228,27 @@ public class FarRedTest extends MatchOpMode {
                     switch (autoPosition) {
                         case lEFT:
                             return new TrajectorySequenceContainer(
-                                    RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                    RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, leftY, heading)
                             );
                         case MID:
                             return new TrajectorySequenceContainer(
-                                    RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                    RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, midY, heading)
                             );
                         case RIGHT:
                             return new TrajectorySequenceContainer(
-                                    RedCloseTest.RedCloseConstants.Speed::getBaseConstraints,
+                                    RedClose.RedCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, rightY, heading)
                             );
                     }
                     return null;
                 }
 
-                public static RedCloseTest.RedCloseConstants.Speed.Path.Park park;
+                public static RedClose.RedCloseConstants.Speed.Path.Park park;
                 public static class Park {
                     public static StrafeLeft a = new StrafeLeft(20);
-                    static TrajectorySequenceContainer park = new TrajectorySequenceContainer(RedCloseTest.RedCloseConstants.Speed::getBaseConstraints, a);
+                    static TrajectorySequenceContainer park = new TrajectorySequenceContainer(RedClose.RedCloseConstants.Speed::getBaseConstraints, a);
                 }
             }
         }

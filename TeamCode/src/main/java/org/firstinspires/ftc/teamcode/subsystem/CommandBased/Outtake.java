@@ -25,7 +25,7 @@ public class Outtake extends SubsystemBase {
 
         clampServo.setInverted(REVERSED);
 
-        clampServo.setPosition(holdingPose);
+        clampServo.setPosition(scorePose);
 
         this.telemetry = telemetry;
     }

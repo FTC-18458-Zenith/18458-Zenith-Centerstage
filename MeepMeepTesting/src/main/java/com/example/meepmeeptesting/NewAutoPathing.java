@@ -33,18 +33,18 @@ public class NewAutoPathing {
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
-                                .lineToLinearHeading(closeRightSpike)
-                                .lineToLinearHeading(closeRightScore)
+                                .lineToLinearHeading(closeCenterSpike)
+                                .lineToLinearHeading(closeCenterScore)
+                                .waitSeconds(1)
+//
+                                .lineToLinearHeading(closeRightStartCycle)
+                                .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
+                                .waitSeconds(1)
+                                //Cycle 1 end
+                                .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(49, centerScore), Math.toRadians(270))
                                 .waitSeconds(1)
                                 .splineToConstantHeading(new Vector2d(60, -60), Math.toRadians(0))
-                                //Cycle 1 start
-//                                .lineToLinearHeading(closeRightStartCycle)
-//                                .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
-//                                .waitSeconds(1)
-//                                //Cycle 1 end
-//                                .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
-//                                .splineToConstantHeading(new Vector2d(49, leftScore), Math.toRadians(270))
-//                                .waitSeconds(1)
                                 .build()
 
                 );
@@ -70,13 +70,19 @@ public class NewAutoPathing {
                                 .lineToLinearHeading(farCenterSpline)
                                 .lineToLinearHeading(moving)
                                 .splineToConstantHeading(new Vector2d(49, farCenterScore), Math.toRadians(90))
+                                //Cycle 1
+                                .lineToLinearHeading(moving)
+                                .splineToConstantHeading(new Vector2d(-52, 10 ), Math.toRadians(0))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(moving)
+                                .splineToConstantHeading(new Vector2d(49, farCenterScore), Math.toRadians(90))
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(Robot2)
                 .addEntity(Robot)
+                .addEntity(Robot2)
                 .start();
     }
 }

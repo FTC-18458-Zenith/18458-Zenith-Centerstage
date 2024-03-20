@@ -1,22 +1,19 @@
-package org.firstinspires.ftc.teamcode.opmode.auto.redAutos;
+package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
+import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueCloseTest;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeReverse;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
+import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideAuto;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
-import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Drone;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
@@ -28,21 +25,16 @@ import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.TeamMarkerPipeline;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceContainerFollowCommand;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToConstantHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToLinearHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.SplineTo;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.SplineToConstantHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeLeft;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeRight;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceConstraints;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 import org.firstinspires.ftc.teamcode.util.PoseStorage;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceContainer;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Turn;
 
 @Autonomous
-public class RedCloseTest extends MatchOpMode {
+public class BlueClose extends MatchOpMode {
 
     // Subsystems
     private IntakeV2 intake;
@@ -52,6 +44,20 @@ public class RedCloseTest extends MatchOpMode {
     private FFVision vision;
     private Outtake outtake;
     private Wheel wheel;
+    Double leftCycleScore = 28.0;
+    Double rightCycleScore = 44.0;
+    Double centerCycleScore = 36.0;
+
+    Pose2d rightSpike = new Pose2d(15, 39, Math.toRadians(45));
+    Pose2d centerSpike = new Pose2d(21, 32, Math.toRadians(180 - 45));
+    Pose2d leftSpike = new Pose2d(6, 39, Math.toRadians(180 - 45));
+
+    Pose2d rightScore = new Pose2d(49, 44, Math.toRadians(180));
+    Pose2d centerScore = new Pose2d(49, 36, Math.toRadians(180));
+    Pose2d leftScore = new Pose2d(49, 28, Math.toRadians(180));
+
+    Pose2d rightStartCycle = new Pose2d(30, 25, Math.toRadians(180));
+    Pose2d leftStartCycle = new Pose2d(30, 20, Math.toRadians(180));
 
     @Override
     public void robotInit() {
@@ -66,13 +72,22 @@ public class RedCloseTest extends MatchOpMode {
 
         drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
         drivetrain.init();
+
         while (!isStarted() & !isStopRequested()) {
             vision.setPosition(vision.getPosition());
             vision.periodic();
             telemetry.update();
         }
         this.matchStart();
+
     }
+    /*@Override
+    public void disabledPeriodic() {
+        vision.setPosition(vision.getPosition());
+        vision.periodic();
+        telemetry.update();
+    }*/
+
     @Override
     public void matchStart() {
 
@@ -82,67 +97,79 @@ public class RedCloseTest extends MatchOpMode {
         double finalX = 0;
         switch (vision.getFinalPosition()) {
             case LEFT:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.leftY;
+                finalY = BlueCLoseConstants.Speed.Path.PurplePixel.leftY;
                 autoPosition = autoPosition.lEFT;
                 break;
             case MIDDLE:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.midY;
+                finalY = BlueCLoseConstants.Speed.Path.PurplePixel.midY;
                 autoPosition = autoPosition.MID;
                 break;
             case RIGHT:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.rightY;
+                finalY = BlueCLoseConstants.Speed.Path.PurplePixel.rightY;
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose());
-        PoseStorage.trajectoryPose = RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose();
+        drivetrain.setPoseEstimate(BlueCLoseConstants.Speed.Path.PurpleLine.startPose.getPose());
+        PoseStorage.trajectoryPose = BlueCLoseConstants.Speed.Path.PurpleLine.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
+                        /* Purple Line Up */
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCLoseConstants.Speed.Path.PurpleLine.purpleLineup)
+                        ),
+                        new WaitCommand(100),
+
                         /* Purple Pixel */
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCLoseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                         ),
-//                        new SequentialCommandGroup(
-//                                new IntakeReverse(intake, wheel, true)
-//                        ),
+                        new SequentialCommandGroup(
+                                new IntakeReverse(intake, wheel, true)
+                        ),
 
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.getYellow(finalY))
-                        ),
-                        new ParallelCommandGroup(
-                               new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCLoseConstants.Speed.Path.getYellow(finalY))
                         ),
 
                         new WaitCommand(1000),
 
-                        /*new SequentialCommandGroup(
-                                new SlideHigh(slide, wrist, wheel),
+                        new SequentialCommandGroup(
+                                new SlideHigh(slide, wrist),
                                 new WaitCommand(1000),
                                 new Score(outtake, wheel),
-                                new WaitCommand(200),
-                                new SlideMid(slide, wrist),
-                                new WaitCommand(100),
-                                new SlideHigh(slide, wrist, wheel),
                                 new WaitCommand(1000),
-                                new SlideReset(slide, wrist, outtake, wheel)
-                        ),*/
+                                new SlideAuto(slide, wrist, wheel)
+                                //new WaitCommand(100),
+                                //new SlideHigh(slide, wrist, wheel),
+                                //new WaitCommand(1000),
+                                //new SlideReset(slide, wrist, outtake, wheel)
+                        ),
 
-                       /* new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
-                        ),*/
+                        new WaitCommand(1000),
+
+                        new SlideReset(slide, wrist, outtake, wheel),
+
+                        new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCLoseConstants.Speed.Path.getPark(finalY))
+                        ),
 
 
                         run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
 
+                        /* Save Pose and end opmode*/
 
                         run(this::stop)
                 )
         );
+
+
     }
+
     @Config
-    public static class RedCloseConstants {
+    public static class BlueCLoseConstants {
 
         public static Speed speed;
+
         public static class Speed {
             public static double baseVel = DriveConstants.MAX_VEL; // value
             public static double baseAccel = DriveConstants.MAX_ACCEL; // value
@@ -157,6 +184,7 @@ public class RedCloseTest extends MatchOpMode {
                             } else {
                                 return baseVel;
                             }
+
                         },
                         (s, a, b, c) -> baseAccel,
                         turnVel,
@@ -169,64 +197,68 @@ public class RedCloseTest extends MatchOpMode {
             }
 
             public static Path path;
+
             public static class Path {
                 public static PurpleLine PurpleLineUp;
+
                 public static class PurpleLine {
-                    public static Pose2dContainer startPose = new Pose2dContainer(7, -63, 90);
-                    public static StrafeRight a = new StrafeRight(20);
-                    //public static Turn b = new Turn(90);
-                    public static LineToLinearHeading b = new LineToLinearHeading(35, -120, 90);
+                    public static Pose2dContainer startPose = new Pose2dContainer(17, 63, 270);
+                    public static StrafeLeft a = new StrafeLeft(20);
+                    public static LineToLinearHeading b = new LineToLinearHeading(35, 35, 180);
                     static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(Speed::getBaseConstraints, a, b);
                 }
+
                 public static PurplePixel purplePixel;
+
                 public static class PurplePixel {
-                    public static double leftY = -39,
-                            leftX = 6,
-                            headingLeft = 180-45;
-                    public static double midY = -32,
-                            midX = 21,
-                            headingMid = 180-45;
-                    public static double rightY = -39,
-                            rightX = 15,
-                            headingRight = 180 - 45;
+                    public static double leftY = 30,
+                            leftX = 48;
+                    public static double midY = 4,
+                            midX = 24;
+                    public static double rightY = 30,
+                            rightX = 16;
                     //public static double X = 40;
-                    public static double heading = 90;
+                    public static double heading = 180;
+
                     public enum AutoPosition {
                         lEFT,
                         MID,
                         RIGHT
                     }
+
                     public static AutoPosition autoPosition = AutoPosition.MID;
+
                     static TrajectorySequenceContainer getPurple(double Y) {
                         switch (autoPosition) {
                             case lEFT:
                                 return new TrajectorySequenceContainer(
                                         Speed::getBaseConstraints,
-                                        new LineToLinearHeading(leftX, leftY, headingLeft)
+                                        new LineToLinearHeading(leftX, leftY, heading)
                                 );
 
                             case MID:
                                 return new TrajectorySequenceContainer(
                                         Speed::getBaseConstraints,
-                                        new LineToLinearHeading(midX, midY, headingMid)
+                                        new LineToLinearHeading(midX, midY, heading)
                                 );
                             default:
                             case RIGHT:
                                 return new TrajectorySequenceContainer(
                                         Speed::getBaseConstraints,
-                                        new LineToLinearHeading(rightX, rightY, headingRight)
+                                        new LineToLinearHeading(rightX, rightY, heading)
                                 );
                         }
                     }
 
                 }
-                public static double leftY = -28;
-                public static double midY = -36;
-                public static double rightY = -44;
-                public static double X = 49;
+
+                public static double leftY = 40;
+                public static double midY = 34;
+                public static double rightY = 16;
+                public static double X = 72;
                 public static double heading = 180;
 
-                public static TrajectorySequenceContainer getYellow (double Y) {
+                public static TrajectorySequenceContainer getYellow(double Y) {
                     switch (autoPosition) {
                         case lEFT:
                             return new TrajectorySequenceContainer(
@@ -246,12 +278,35 @@ public class RedCloseTest extends MatchOpMode {
                     }
                     return null;
                 }
-                public static Park park;
-                public static class Park {
-                    public static SplineToConstantHeading a = new SplineToConstantHeading(60,-60, Math.toRadians(0));
-                    static TrajectorySequenceContainer park = new TrajectorySequenceContainer(Speed::getBaseConstraints, a);
+
+                public static double leftPark = 40;
+                public static double rightPark = 34;
+                public static double midPark = 32;
+
+                public static TrajectorySequenceContainer getPark(double Y) {
+                    switch (autoPosition) {
+                        case lEFT:
+                            return new TrajectorySequenceContainer(
+                                    Speed::getBaseConstraints,
+                                    new StrafeLeft(leftPark)
+
+                            );
+                        case MID:
+                            return new TrajectorySequenceContainer(
+                                    Speed::getBaseConstraints,
+                                    new StrafeLeft(midPark)
+                            );
+                        case RIGHT:
+                            return new TrajectorySequenceContainer(
+                                    Speed::getBaseConstraints,
+                                    new StrafeLeft(rightPark)
+                            );
+                    }
+                    return null;
                 }
             }
+
+
         }
     }
 }
