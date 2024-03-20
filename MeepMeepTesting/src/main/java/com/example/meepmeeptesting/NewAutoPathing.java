@@ -36,14 +36,15 @@ public class NewAutoPathing {
                                 .lineToLinearHeading(closeRightSpike)
                                 .lineToLinearHeading(closeRightScore)
                                 .waitSeconds(1)
+                                .splineToConstantHeading(new Vector2d(60, -60), Math.toRadians(0))
                                 //Cycle 1 start
-                                .lineToLinearHeading(closeRightStartCycle)
-                                .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
-                                .waitSeconds(1)
-                                //Cycle 1 end
-                                .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(49, leftScore), Math.toRadians(270))
-                                .waitSeconds(1)
+//                                .lineToLinearHeading(closeRightStartCycle)
+//                                .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
+//                                .waitSeconds(1)
+//                                //Cycle 1 end
+//                                .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
+//                                .splineToConstantHeading(new Vector2d(49, leftScore), Math.toRadians(270))
+//                                .waitSeconds(1)
                                 .build()
 
                 );

@@ -86,8 +86,8 @@ public class FarRedTest extends MatchOpMode {
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine.startPose.getPose());
-        PoseStorage.trajectoryPose = RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine.startPose.getPose();
+        drivetrain.setPoseEstimate(RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose());
+        PoseStorage.trajectoryPose = RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
                         /* Purple Line Up */
