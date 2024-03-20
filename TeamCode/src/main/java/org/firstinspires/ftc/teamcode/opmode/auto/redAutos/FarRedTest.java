@@ -86,8 +86,8 @@ public class FarRedTest extends MatchOpMode {
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine.startPose.getPose());
-        PoseStorage.trajectoryPose = RedCloseTest.RedCloseConstants.Speed.Path.PurpleLine.startPose.getPose();
+        drivetrain.setPoseEstimate(RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose());
+        PoseStorage.trajectoryPose = RedCloseTest.RedCloseConstants.Speed.Path.PurpleLineUp.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
                         /* Purple Line Up */
@@ -180,7 +180,7 @@ public class FarRedTest extends MatchOpMode {
 
                 public static RedCloseTest.RedCloseConstants.Speed.Path.PurplePixel purplePixel;
                 public static class PurplePixel {
-                    public static double leftY = -30,
+                    public static double leftY = -31,
                             leftX = -10;
                     public static double midY = -24,
                             midX = -24;
