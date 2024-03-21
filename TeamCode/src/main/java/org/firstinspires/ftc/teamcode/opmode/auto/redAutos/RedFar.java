@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.opmode.auto.redAutos;
 
 import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
@@ -90,13 +91,17 @@ public class RedFar extends MatchOpMode {
         PoseStorage.trajectoryPose = RedClose.RedCloseConstants.Speed.Path.Start.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
-                        /* Purple Line Up */
+                        */
+/* Purple Line Up *//*
+
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.Start.Start)
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.Start.start)
                         ),
                         new WaitCommand(100),
 
-                        /* Purple Pixel */
+                        */
+/* Purple Pixel *//*
+
                         new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                         ),
@@ -122,14 +127,18 @@ public class RedFar extends MatchOpMode {
                                 new SlideReset(slide, wrist, outtake, wheel)
                         ),
 
-                        new ParallelCommandGroup(
+                        */
+/*new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedClose.RedCloseConstants.Speed.Path.Park.park)
                         ),
+*//*
 
 
                         run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
 
-                        /* Save Pose and end opmode*/
+                        */
+/* Save Pose and end opmode*//*
+
 
                         run(this::stop)
                 )
@@ -139,7 +148,7 @@ public class RedFar extends MatchOpMode {
     }
 
     @Config
-    public static class BlueCLoseConstants {
+    public static class RedFarConstants {
 
         public static RedClose.RedCloseConstants.Speed speed;
         public static class Speed {
@@ -245,14 +254,17 @@ public class RedFar extends MatchOpMode {
                     return null;
                 }
 
-                public static RedClose.RedCloseConstants.Speed.Path.Park park;
+                */
+/*public static RedClose.RedCloseConstants.Speed.Path.Park park;
                 public static class Park {
                     public static StrafeLeft a = new StrafeLeft(20);
                     static TrajectorySequenceContainer park = new TrajectorySequenceContainer(RedClose.RedCloseConstants.Speed::getBaseConstraints, a);
-                }
+                }*//*
+
             }
         }
 
 
     }
 }
+*/

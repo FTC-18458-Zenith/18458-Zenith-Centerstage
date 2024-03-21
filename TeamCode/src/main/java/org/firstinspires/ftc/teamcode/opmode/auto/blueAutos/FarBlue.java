@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.autoPosition;
+import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -74,38 +74,38 @@ public class FarBlue extends MatchOpMode {
         double finalX = 0;
         switch (vision.getFinalPosition()) {
             case LEFT:
-                finalY = BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.leftY;
+                finalY = BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.leftY;
                 autoPosition = autoPosition.lEFT;
                 break;
             case MIDDLE:
-                finalY = BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.midY;
+                finalY = BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.midY;
                 autoPosition = autoPosition.MID;
                 break;
             case RIGHT:
-                finalY = BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.rightY;
+                finalY = BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.rightY;
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(BlueClose.BlueCLoseConstants.Speed.Path.PurpleLine.startPose.getPose());
-        PoseStorage.trajectoryPose = BlueClose.BlueCLoseConstants.Speed.Path.PurpleLine.startPose.getPose();
+        drivetrain.setPoseEstimate(BlueClose.BlueCloseConstants.Speed.Path.Start.startPose.getPose());
+        PoseStorage.trajectoryPose = BlueClose.BlueCloseConstants.Speed.Path.Start.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
                         /* Purple Line Up */
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCLoseConstants.Speed.Path.PurpleLine.purpleLineup)
+                       /* new ParallelCommandGroup(
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCloseConstants.Speed.Path.PurpleLine.purpleLineup)
                         ),
                         new WaitCommand(100),
 
-                        /* Purple Pixel */
+                        *//* Purple Pixel *//*
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.getPurple(finalY))
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                         ),
                         new SequentialCommandGroup(
                                 new IntakeReverse(intake, wheel, true)
                         ),
 
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCLoseConstants.Speed.Path.getYellow(finalY))
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCloseConstants.Speed.Path.getYellow(finalY))
                         ),
 
                         new WaitCommand(1000),
@@ -125,7 +125,7 @@ public class FarBlue extends MatchOpMode {
                         new ParallelCommandGroup(
                               //  new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseTest.BlueCLoseConstants.Speed.Path.Park.park)
                         ),
-
+*/
 
                         run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
 
@@ -141,7 +141,7 @@ public class FarBlue extends MatchOpMode {
     @Config
     public static class BlueCLoseConstants {
 
-        public static BlueClose.BlueCLoseConstants.Speed speed;
+        public static BlueClose.BlueCloseConstants.Speed speed;
         public static class Speed {
             public static double baseVel = DriveConstants.MAX_VEL; // value
             public static double baseAccel = DriveConstants.MAX_ACCEL; // value
@@ -168,17 +168,17 @@ public class FarBlue extends MatchOpMode {
                 return new TrajectorySequenceConstraints(baseVel, baseAccel, turnVel, turnAccel);
             }
 
-            public static BlueClose.BlueCLoseConstants.Speed.Path path;
+            public static BlueClose.BlueCloseConstants.Speed.Path path;
             public static class Path {
-                public static BlueClose.BlueCLoseConstants.Speed.Path.PurpleLine PurpleLineUp;
+                public static BlueClose.BlueCloseConstants.Speed.Path.PurplePixel PurpleLineUp;
                 public static class PurpleLine {
                     public static Pose2dContainer startPose = new Pose2dContainer(-30, 62, 270);
                     public static StrafeLeft a = new StrafeLeft(20);
                     public static LineToLinearHeading b = new LineToLinearHeading(-40, 58, 180);
-                    static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(BlueClose.BlueCLoseConstants.Speed::getBaseConstraints, a, b);
+                    static TrajectorySequenceContainer purpleLineup = new TrajectorySequenceContainer(BlueClose.BlueCloseConstants.Speed::getBaseConstraints, a, b);
                 }
 
-                public static BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel purplePixel;
+                public static BlueClose.BlueCloseConstants.Speed.Path.PurplePixel purplePixel;
                 public static class PurplePixel {
                     public static double leftY = 30,
                             leftX = -32;
@@ -193,24 +193,24 @@ public class FarBlue extends MatchOpMode {
                         MID,
                         RIGHT
                     }
-                    public static BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.AutoPosition autoPosition = BlueClose.BlueCLoseConstants.Speed.Path.PurplePixel.AutoPosition.MID;
+                    public static BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.AutoPosition autoPosition = BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.AutoPosition.MID;
                     static TrajectorySequenceContainer getPurple(double Y) {
                         switch (autoPosition) {
                             case lEFT:
                                 return new TrajectorySequenceContainer(
-                                        BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                        BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(leftX, leftY, heading)
                                 );
 
                             case MID:
                                 return new TrajectorySequenceContainer(
-                                        BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                        BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(midX, midY, heading)
                                 );
                             default:
                             case RIGHT:
                                 return new TrajectorySequenceContainer(
-                                        BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                        BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                         new LineToLinearHeading(rightX, rightY, heading)
                                 );
                         }
@@ -228,17 +228,17 @@ public class FarBlue extends MatchOpMode {
                     switch (autoPosition) {
                         case lEFT:
                             return new TrajectorySequenceContainer(
-                                    BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                    BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, leftY, heading)
                             );
                         case MID:
                             return new TrajectorySequenceContainer(
-                                    BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                    BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, midY, heading)
                             );
                         case RIGHT:
                             return new TrajectorySequenceContainer(
-                                    BlueClose.BlueCLoseConstants.Speed::getBaseConstraints,
+                                    BlueClose.BlueCloseConstants.Speed::getBaseConstraints,
                                     new LineToLinearHeading(X, rightY, heading)
                             );
                     }
@@ -248,7 +248,7 @@ public class FarBlue extends MatchOpMode {
                // public static BlueCloseTest.BlueCLoseConstants.Speed.Path. park;
                 public static class Park {
                     public static StrafeLeft a = new StrafeLeft(20);
-                    static TrajectorySequenceContainer park = new TrajectorySequenceContainer(BlueClose.BlueCLoseConstants.Speed::getBaseConstraints, a);
+                    static TrajectorySequenceContainer park = new TrajectorySequenceContainer(BlueClose.BlueCloseConstants.Speed::getBaseConstraints, a);
                 }
             }
         }

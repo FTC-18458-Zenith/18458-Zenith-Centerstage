@@ -71,7 +71,7 @@ public class IntakeV2 extends SubsystemBase {
     }
 
     public void IntakeReverseAuto() {
-        Intake.set(0.5);
+        Intake.set(-0.3);
         intakeOn = true;
         intakePower = intakePower.ON;
 

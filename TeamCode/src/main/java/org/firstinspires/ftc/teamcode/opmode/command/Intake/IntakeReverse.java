@@ -14,13 +14,13 @@ public class IntakeReverse extends SequentialCommandGroup {
         if (auto) {
             addCommands(
                     new ParallelCommandGroup(
-                            new InstantCommand(wheel::outtake),
+                            //new InstantCommand(wheel::outtake),
                     new InstantCommand(intakeV2::IntakeReverseAuto)
 
             ),
                     new WaitCommand(1000),
-                    new InstantCommand(intakeV2::IntakeOff),
-                    new InstantCommand(wheel::off)
+                    new InstantCommand(intakeV2::IntakeOff)
+                    //new InstantCommand(wheel::off)
                     );
         } else {
             addCommands(
