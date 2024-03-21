@@ -17,7 +17,7 @@ public class BlueClose {
         Double rightScore = 44.0;
         Double centerScore = 36.0;
 
-        Pose2d closeRightSpike = new Pose2d(15, 39, Math.toRadians(45));
+        Pose2d closeRightSpike = new Pose2d(15, 39, Math.toRadians(295));
         Pose2d closeCenterSpike = new Pose2d(21, 32, Math.toRadians(180 - 45));
         Pose2d closeLeftSpike = new Pose2d(6, 39, Math.toRadians(180 - 45));
 

@@ -208,9 +208,9 @@ public class BlueClose extends MatchOpMode {
                             midX = 21;
                     public static double rightY = 39,
                             rightX = 6;
-                    public static double rightHeading = 270;
+                    public static double rightHeading = 295;
 
-                    public static double heading = 135;
+                    public static double heading = 235;
 
                     public enum AutoPosition {
                         lEFT,
