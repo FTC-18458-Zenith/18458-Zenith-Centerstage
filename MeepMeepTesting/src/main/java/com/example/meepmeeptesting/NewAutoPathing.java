@@ -51,7 +51,7 @@ public class NewAutoPathing {
         Double farLeftScore = 28.0;
         Double farRightScore = 44.0;
         Double farCenterScore = 36.0;
-        Pose2d farLeftSpike = new Pose2d(-36, 30, Math.toRadians(180));
+        Pose2d farLeftSpike = new Pose2d(-36, 35, Math.toRadians(180));
         Pose2d farCenterSpike = new Pose2d(-55,23, Math.toRadians(180));
 
         Pose2d farCenterSpline = new Pose2d(-46, 10, Math.toRadians(180));
@@ -64,8 +64,10 @@ public class NewAutoPathing {
                 .setConstraints(45,45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(-40, 63, Math.toRadians(270)))
-                                .lineToLinearHeading(farCenterSpike)
-                                .back(15)
+                                .lineToLinearHeading(farLeftSpike)
+                                .strafeLeft(10)
+                                .splineToConstantHeading(new Vector2d(-52, 10 ), Math.toRadians(270))
+                                .waitSeconds(5)
 //                                .turn(Math.toRadians(180))
                                 .lineToLinearHeading(farCenterSpline)
                                 .lineToLinearHeading(moving)
@@ -82,6 +84,7 @@ public class NewAutoPathing {
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(Robot)
+                .addEntity(Robot2)
                 .start();
     }
 }
