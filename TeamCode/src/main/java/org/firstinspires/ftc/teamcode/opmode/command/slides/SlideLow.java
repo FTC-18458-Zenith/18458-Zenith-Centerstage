@@ -12,8 +12,8 @@ public class SlideLow extends SequentialCommandGroup {
         addCommands(
                 new InstantCommand(slideV2::liftLow)
         );
-        /*addCommands(
+        addCommands(
                 new InstantCommand(wrist::Score)
-        );*/
+        );
     }
 }

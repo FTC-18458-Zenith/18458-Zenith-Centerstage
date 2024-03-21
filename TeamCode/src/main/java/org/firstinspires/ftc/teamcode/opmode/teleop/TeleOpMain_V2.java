@@ -101,10 +101,10 @@ public class TeleOpMain_V2 extends MatchOpMode {
                 .whileActiveContinuous(new IntakeOn(intakeV2, wheel))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
 
-        /*Trigger Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
+        Trigger Outtake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)
                 .whileActiveContinuous(new IntakeReverse(intakeV2, wheel, false))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
-*/
+
         Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
                 .whenPressed(new Score(outtake, wheel));
 

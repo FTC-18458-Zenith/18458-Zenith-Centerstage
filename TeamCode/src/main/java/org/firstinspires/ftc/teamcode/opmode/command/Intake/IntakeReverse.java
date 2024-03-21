@@ -27,7 +27,7 @@ public class IntakeReverse extends SequentialCommandGroup {
                     new InstantCommand(intakeV2::IntakeReverse)
             );
             addCommands(
-                    new InstantCommand(wheel::outtake)
+                    //new InstantCommand(wheel::outtake)
             );
         }
 
