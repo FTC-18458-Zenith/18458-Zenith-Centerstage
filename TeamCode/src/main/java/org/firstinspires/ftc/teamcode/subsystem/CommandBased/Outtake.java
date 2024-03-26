@@ -34,7 +34,6 @@ public class Outtake extends SubsystemBase {
     @Override
     public void periodic() {
         telemetry.addData("Outtake", clampServo.getPosition());
-        distanceSensor.periodic();
     }
 
     public void score() {
