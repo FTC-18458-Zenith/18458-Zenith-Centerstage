@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystem.vision;
 
-@Autonomous
+@Autonomous(group = "testing")
 public class CameraTest2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

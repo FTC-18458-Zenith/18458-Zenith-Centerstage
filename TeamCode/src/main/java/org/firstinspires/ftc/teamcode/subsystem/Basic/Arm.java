@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystem.Basic;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -12,7 +13,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
 public class Arm {
-    //TODO: PROGRAM THE ARM, WHEN THE AXON MOVE IN THE SAME DIRECTION, IT MOVES, BUT IN THE OPPOSITE DIRECTION THE CLAW ROTATES.
     public final Servo leftArmServo, rightArmServo;
     public final Gamepad gamepad2;
     public final Gamepad gamepad1;

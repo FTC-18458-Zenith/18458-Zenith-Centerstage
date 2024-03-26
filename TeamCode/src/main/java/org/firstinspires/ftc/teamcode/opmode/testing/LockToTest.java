@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drive;
 
-@Autonomous
+@Autonomous(group = "testing")
 public class LockToTest extends LinearOpMode {
 
     double xyP = 1;

@@ -7,20 +7,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 @Config
-@TeleOp
+@TeleOp(group = "testing")
 public class ServoTest extends LinearOpMode {
     Servo servo1, servo2;
-    public static double testingPower1 = 0.9;
+    public static double testingPower1 = 0.4;
     public static double testingPower2 = 0;
     @Override
     public void runOpMode() throws InterruptedException {
         servo1 = (Servo) hardwareMap.get("servo1");
         servo2 = (Servo) hardwareMap.get("servo2");
         servo1.setDirection(Servo.Direction.FORWARD);
-        servo2.setDirection(Servo.Direction.REVERSE);
+        servo2.setDirection(Servo.Direction.FORWARD);
 
         waitForStart();
         while (opModeIsActive()) {
+            // A is X.
             if (gamepad1.a) servoTesting(testingPower1);
             if (gamepad1.b) servoTesting(testingPower2);
         }

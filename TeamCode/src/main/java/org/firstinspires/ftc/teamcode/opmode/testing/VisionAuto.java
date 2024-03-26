@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
-@Autonomous
+@Autonomous(group = "testing")
 public class VisionAuto extends MatchOpMode {
     private FFVision FFVision;
 

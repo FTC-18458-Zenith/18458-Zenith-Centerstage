@@ -42,7 +42,7 @@ public class NewAutoPathing {
                                 .waitSeconds(1)
                                 //Cycle 1 end
                                 .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(49, centerScore), Math.toRadians(270))
+                                .splineToConstantHeading(new Vector2d(45, centerScore), Math.toRadians(270))
                                 .waitSeconds(1)
                                 .splineToConstantHeading(new Vector2d(60, -60), Math.toRadians(0))
                                 .build()
@@ -67,7 +67,7 @@ public class NewAutoPathing {
                                 .lineToLinearHeading(farLeftSpike)
                                 .strafeLeft(10)
                                 .splineToConstantHeading(new Vector2d(-52, 10 ), Math.toRadians(270))
-                                .waitSeconds(5)
+                                .waitSeconds(1)
 //                                .turn(Math.toRadians(180))
                                 .lineToLinearHeading(farCenterSpline)
                                 .lineToLinearHeading(moving)

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
-@TeleOp
+@TeleOp(group = "testing")
 public class MotorTest extends LinearOpMode {
     DcMotor motorTester;
     public static double testingPower = 0.6;

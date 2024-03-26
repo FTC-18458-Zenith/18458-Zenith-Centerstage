@@ -83,7 +83,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
         Button slowMode = (new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_BUMPER))
                 .whileHeld(new SlowDriveCommand(drivetrain, driverGamepad, true));
 
-        slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getRightY));
+        slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getLeftY));
 
         Button slideReset = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)
                 .whenPressed(new SlideReset(slide, wrist, outtake, wheel));
@@ -110,6 +110,7 @@ public class TeleOpMain_V2 extends MatchOpMode {
 
         Button Hold = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
                 .whenPressed(new Hold(outtake));
+
 
         /*Trigger Drone = new GamepadTrigger(operatorGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whileActiveContinuous(new launch(drone))

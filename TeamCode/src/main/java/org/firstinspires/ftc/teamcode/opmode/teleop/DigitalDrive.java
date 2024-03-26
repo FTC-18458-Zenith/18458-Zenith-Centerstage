@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystem.Basic.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.HangingMech;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Basic.Slides;
-
+@TeleOp
 public class DigitalDrive extends LinearOpMode {
     private DcMotor leftFront, leftRear, rightRear, rightFront;
     private final DcMotor[] driveTrainMotors = {leftRear, leftFront, rightRear, rightFront};

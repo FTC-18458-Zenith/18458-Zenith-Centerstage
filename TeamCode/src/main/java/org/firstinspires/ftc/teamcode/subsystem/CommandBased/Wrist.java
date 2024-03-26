@@ -4,6 +4,8 @@ import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -17,10 +19,11 @@ public class Wrist extends SubsystemBase {
     public static double grabPose = 0,
             scorePose = 0.7;
 
-    public static double resetPose = 0.37;
+    public static double resetPose = 0.39;
     Telemetry telemetry;
-
+    private static ColorSensor sensor;
     private static ServoEx leftArmServo, rightArmServo;
+
 
     public Wrist(final HardwareMap hMap, Telemetry telemetry) {
         leftArmServo = new SimpleServo(hMap, "leftArmServo", 0, 360);
@@ -34,14 +37,12 @@ public class Wrist extends SubsystemBase {
 
         this.telemetry = telemetry;
     }
-
     @Override
     public void periodic() {
         telemetry.addData("WristPose", leftArmServo.getPosition());
     }
 
     public void Score() {
-
         leftArmServo.setPosition(scorePose);
         rightArmServo.setPosition(scorePose);
     }
@@ -50,5 +51,4 @@ public class Wrist extends SubsystemBase {
         leftArmServo.setPosition(resetPose);
         rightArmServo.setPosition(resetPose);
     }
-
 }

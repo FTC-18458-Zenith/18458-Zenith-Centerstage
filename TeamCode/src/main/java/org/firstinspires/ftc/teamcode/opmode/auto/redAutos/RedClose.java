@@ -56,6 +56,8 @@ public class RedClose extends MatchOpMode {
 
     @Override
     public void robotInit() {
+        telemetry.addLine("Go to the farthest pixel stack, press (Y/Δ). Or closest pixel stack press (B/O)");
+        telemetry.update();
 
         wrist = new Wrist(hardwareMap, telemetry);
         slide = new SlideV2(hardwareMap, telemetry);
@@ -74,23 +76,20 @@ public class RedClose extends MatchOpMode {
             telemetry.update();
         }
         this.matchStart();
-
     }
-
     /*@Override
     public void disabledPeriodic() {
         vision.setPosition(vision.getPosition());
         vision.periodic();
         telemetry.update();
     }*/
-
     @Override
     public void matchStart() {
-
         TeamMarkerPipeline.FFPosition position = vision.getPosition();
 
         double finalY = 0;
         double finalX = 0;
+
         switch (vision.getFinalPosition()) {
             case LEFT:
                 finalY = RedCloseConstants.Speed.Path.PurplePixel.leftY;
@@ -105,58 +104,55 @@ public class RedClose extends MatchOpMode {
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
-        drivetrain.setPoseEstimate(RedCloseConstants.Speed.Path.start.startPose.getPose());
-        PoseStorage.trajectoryPose = RedCloseConstants.Speed.Path.start.startPose.getPose();
-        schedule(
-                new SequentialCommandGroup(
+            telemetry.addLine("Trajectory sequence is: " );
+            drivetrain.setPoseEstimate(RedCloseConstants.Speed.Path.start.startPose.getPose());
+            PoseStorage.trajectoryPose = RedCloseConstants.Speed.Path.start.startPose.getPose();
+            schedule(
+                    new SequentialCommandGroup(
+                            /* Purple Pixel */
+                            new ParallelCommandGroup(
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY)),
+                            ),
 
-                        /* Purple Pixel */
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
-                        ),
+                            new SequentialCommandGroup(
+                                    new IntakeReverse(intake, wheel, true),
+                                    new WaitCommand(500),
+                                    new Hold(outtake),
+                                    new SlideMid(slide, wrist)
 
-                        new SequentialCommandGroup(
-                                new IntakeReverse(intake, wheel, true),
-                                new WaitCommand(500),
-                                new Hold(outtake),
-                                new SlideMid(slide, wrist)
+                            ),
 
-                        ),
+                            new ParallelCommandGroup(
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.back.back)
+                            ),
 
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.back.back)
-                        ),
+                            new WaitCommand(500),
 
-                        new WaitCommand(500),
+                            new ParallelCommandGroup(
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.getYellow(finalY))
+                            ),
 
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.getYellow(finalY))
-                        ),
+                            new SequentialCommandGroup(
+                                    new Score(outtake, wheel),
+                                    new WaitCommand(500),
+                                    new SlideHigh(slide, wrist),
+                                    new WaitCommand(500),
+                                    new SlideReset(slide, wrist, outtake, wheel)
+                            ),
 
-                        new SequentialCommandGroup(
-                                new Score(outtake, wheel),
-                                new WaitCommand(500),
-                                new SlideHigh(slide, wrist),
-                                new WaitCommand(500),
-                                new SlideReset(slide, wrist, outtake, wheel)
-                        ),
-
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
-                        ),
-
-
-                        run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
-
-                        /* Save Pose and end opmode*/
-
-                        run(this::stop)
-                )
-        );
+                            new ParallelCommandGroup(
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
+                            ),
 
 
-    }
+                            run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
 
+                            /* Save Pose and end opmode*/
+
+                            run(this::stop)
+                    )
+            );
+        }
     @Config
     public static class RedCloseConstants {
 
@@ -204,7 +200,7 @@ public class RedClose extends MatchOpMode {
                 public static class PurplePixel {
                     public static double leftY = -39,
                             leftX = 6;
-                    public static double midY = -28,
+                    public static double midY = -32,
                             midX = 21;
                     public static double rightY = -39,
                             rightX = 15;
@@ -218,9 +214,10 @@ public class RedClose extends MatchOpMode {
                         RIGHT
                     }
 
-                    public static AutoPosition autoPosition = AutoPosition.MID;
+                    public static AutoPosition autoPosition = AutoPosition.RIGHT;
 
                     static TrajectorySequenceContainer getPurple(double Y) {
+
                         switch (autoPosition) {
                             case lEFT:
                                 return new TrajectorySequenceContainer(
@@ -250,12 +247,10 @@ public class RedClose extends MatchOpMode {
                     static TrajectorySequenceContainer back = new TrajectorySequenceContainer(RedCloseConstants.Speed::getBaseConstraints, a);
                 }
 
-
-
-                public static double leftY = -23;
-                public static double midY = -28;
+                public static double leftY = -26;
+                public static double midY = -34;
                 public static double rightY = -44;
-                public static double X = 64;
+                public static double X = 63;
                 public static double heading = 180;
 
                 public static TrajectorySequenceContainer getYellow(double Y) {

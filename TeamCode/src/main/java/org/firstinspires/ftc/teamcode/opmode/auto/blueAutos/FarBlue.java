@@ -1,6 +1,7 @@
+/*
 package org.firstinspires.ftc.teamcode.opmode.auto.blueAutos;
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.autoPosition;
+//import static org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -90,13 +91,15 @@ public class FarBlue extends MatchOpMode {
         PoseStorage.trajectoryPose = BlueClose.BlueCloseConstants.Speed.Path.Start.startPose.getPose();
         schedule(
                 new SequentialCommandGroup(
-                        /* Purple Line Up */
-                       /* new ParallelCommandGroup(
+ Purple Line Up
+
+ new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCloseConstants.Speed.Path.PurpleLine.purpleLineup)
                         ),
                         new WaitCommand(100),
 
-                        *//* Purple Pixel *//*
+
+ Purple Pixel
                         new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, BlueClose.BlueCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                         ),
@@ -125,11 +128,13 @@ public class FarBlue extends MatchOpMode {
                         new ParallelCommandGroup(
                               //  new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseTest.BlueCLoseConstants.Speed.Path.Park.park)
                         ),
-*/
+
+
 
                         run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
 
-                        /* Save Pose and end opmode*/
+ Save Pose and end opmode
+
 
                         run(this::stop)
                 )
@@ -256,3 +261,4 @@ public class FarBlue extends MatchOpMode {
 
     }
 }
+*/

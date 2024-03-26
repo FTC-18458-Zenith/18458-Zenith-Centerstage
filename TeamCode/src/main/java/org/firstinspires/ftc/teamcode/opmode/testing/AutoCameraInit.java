@@ -35,7 +35,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
  * and then snapshot that value for later use when the START
  * command is issued. The pipeline is re-used from SkystoneDeterminationExample
  */
-@TeleOp
+@TeleOp(group = "testing")
 public class AutoCameraInit extends LinearOpMode
 {
     OpenCvWebcam webcam;
