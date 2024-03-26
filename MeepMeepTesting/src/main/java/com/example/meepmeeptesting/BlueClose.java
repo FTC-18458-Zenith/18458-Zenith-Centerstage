@@ -17,34 +17,50 @@ public class BlueClose {
         Double rightScore = 44.0;
         Double centerScore = 36.0;
 
-        Pose2d closeRightSpike = new Pose2d(15, 39, Math.toRadians(295));
-        Pose2d closeCenterSpike = new Pose2d(21, 32, Math.toRadians(180 - 45));
-        Pose2d closeLeftSpike = new Pose2d(6, 39, Math.toRadians(180 - 45));
+        Pose2d closeLeftSpike = new Pose2d(18, 39, Math.toRadians(90));
+        Pose2d closeCenterSpike = new Pose2d(12, 32, Math.toRadians(90));
+        Pose2d closeRightSpike = new Pose2d(6, 39, Math.toRadians(75));
 
-        Pose2d closeRightScore = new Pose2d(49, 44, Math.toRadians(180));
+        Pose2d closeLeftScore = new Pose2d(49, 44, Math.toRadians(180));
         Pose2d closeCenterScore = new Pose2d(49, 36, Math.toRadians(180));
-        Pose2d closeLeftScore = new Pose2d(49, 28, Math.toRadians(180));
+        Pose2d closeRightScore = new Pose2d(49, 28, Math.toRadians(180));
 
-        Pose2d closeRightStartCycle = new Pose2d(30, 25, Math.toRadians(180));
-        Pose2d closeLeftStartCycle = new Pose2d(30, 20, Math.toRadians(180));
+        Vector2d ParkLeft = new Vector2d(45, 60);
+        Vector2d ParkRight = new Vector2d(45, 12);
 
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
                 .setDimensions(14, 16)
-                .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setConstraints(52.48291908330528, 52.48291908330528, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                                driveShim.trajectorySequenceBuilder(new Pose2d(7, 63, Math.toRadians(0)))
-                                        .lineToLinearHeading(closeRightSpike)
-                                        .lineToLinearHeading(closeRightScore)
+                                driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(90)))
+                                        .lineToSplineHeading(closeRightSpike)
+                                        //.strafeRight(5)
+                                        .lineToSplineHeading(closeRightScore)
+
                                         .waitSeconds(1)
-//                                        //Cycle 1 start
-//                                        .lineToLinearHeading(closeRightStartCycle)
-//                                        .splineToConstantHeading(new Vector2d(59, 11), Math.toRadians(180))
-//                                        .waitSeconds(1)
-//                                        //Cycle 1 end
-//                                        .lineToLinearHeading(new Pose2d(0, 14, Math.toRadians(180)))
-//                                        .splineToConstantHeading(new Vector2d(49, rightScore), Math.toRadians(270))
-//                                        .waitSeconds(1)
+
+                                        //Cycle 1 Start
+                                        .strafeRight(5)
+                                        .splineToConstantHeading(new Vector2d(7, 60), Math.toRadians(180))
+                                        .forward(25)
+                                        .splineToConstantHeading(new Vector2d(-56, 35), Math.toRadians(180))
+
+                                        //Intake
+                                        .waitSeconds(1)
+
+                                        //Cycle 1 End
+                                        .back(5)
+                                        .splineToConstantHeading(new Vector2d(-24, 60), Math.toRadians(0))
+                                        .back(35)
+                                        .splineToConstantHeading(new Vector2d(49, 36), Math.toRadians(0))
+
+                                        //Score
+                                        .waitSeconds(1)
+
+                                        .waitSeconds(1)
+
+                                        .lineToConstantHeading(ParkRight)
                                         .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
