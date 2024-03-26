@@ -36,7 +36,6 @@ public class NewAutoPathing {
                                 .lineToLinearHeading(closeCenterSpike)
                                 .lineToLinearHeading(closeCenterScore)
                                 .waitSeconds(1)
-//
                                 .lineToLinearHeading(closeRightStartCycle)
                                 .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
                                 .waitSeconds(1)

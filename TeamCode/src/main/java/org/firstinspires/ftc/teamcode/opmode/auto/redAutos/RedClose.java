@@ -111,7 +111,7 @@ public class RedClose extends MatchOpMode {
                     new SequentialCommandGroup(
                             /* Purple Pixel */
                             new ParallelCommandGroup(
-                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY)),
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
                             ),
 
                             new SequentialCommandGroup(

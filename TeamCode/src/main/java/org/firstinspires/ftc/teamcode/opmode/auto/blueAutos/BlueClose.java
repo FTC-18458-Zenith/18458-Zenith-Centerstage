@@ -7,19 +7,17 @@ import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
+import com.arcrobotics.ftclib.hardware.SensorDistanceEx;
+import com.arcrobotics.ftclib.hardware.SensorRevTOFDistance;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.R;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.opmode.command.Intake.IntakeReverse;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Hold;
 import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
-import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideAuto;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Drone;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
@@ -36,11 +34,13 @@ import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToCo
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToLinearHeading;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeLeft;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeRight;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceConstraints;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 import org.firstinspires.ftc.teamcode.util.PoseStorage;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceContainer;
+
+import java.util.List;
+import java.util.Map;
 
 @Autonomous
 public class BlueClose extends MatchOpMode {
