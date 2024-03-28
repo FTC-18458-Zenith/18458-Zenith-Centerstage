@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
-import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
+import org.firstinspires.ftc.teamcode.subsystem.Vision.BlueCLoseVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 
 public class AutoPathPlanning extends MatchOpMode {
@@ -17,7 +17,7 @@ public class AutoPathPlanning extends MatchOpMode {
     private Wrist wrist;
     private Drivetrain drivetrain;
     private SlideV2 slide;
-    private FFVision vision;
+    private BlueCLoseVision vision;
     private Outtake outtake;
     private Wheel wheel;
 
@@ -54,7 +54,7 @@ public class AutoPathPlanning extends MatchOpMode {
         outtake = new Outtake(hardwareMap, telemetry);
         wheel = new Wheel(hardwareMap, telemetry);
 
-        vision = new FFVision(hardwareMap, telemetry);
+        vision = new BlueCLoseVision(hardwareMap, telemetry);
 
         drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
         drivetrain.init();

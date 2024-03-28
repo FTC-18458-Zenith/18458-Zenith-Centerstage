@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.redAutos;
 
 
-import static org.firstinspires.ftc.teamcode.opmode.auto.redAutos.RedClose.RedCloseConstants.Speed.Path.PurplePixel.autoPosition;
+import static org.firstinspires.ftc.teamcode.opmode.auto.redAutos.RedClose.RedCloseConstants.Path.PurplePixel.autoPosition;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
@@ -28,7 +28,7 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.DriveConstants;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
-import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
+import org.firstinspires.ftc.teamcode.subsystem.Vision.RedCloseVision;
 import org.firstinspires.ftc.teamcode.subsystem.Vision.TeamMarkerPipeline;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceContainerFollowCommand;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Back;
@@ -50,7 +50,7 @@ public class RedClose extends MatchOpMode {
     private Wrist wrist;
     private Drivetrain drivetrain;
     private SlideV2 slide;
-    private FFVision vision;
+    private RedCloseVision vision;
     private Outtake outtake;
     private Wheel wheel;
 
@@ -65,7 +65,7 @@ public class RedClose extends MatchOpMode {
         outtake = new Outtake(hardwareMap, telemetry);
         wheel = new Wheel(hardwareMap, telemetry);
 
-        vision = new FFVision(hardwareMap, telemetry);
+        vision = new RedCloseVision(hardwareMap, telemetry);
 
         drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
         drivetrain.init();
@@ -92,26 +92,26 @@ public class RedClose extends MatchOpMode {
 
         switch (vision.getFinalPosition()) {
             case LEFT:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.leftY;
+                finalY = RedCloseConstants.Path.PurplePixel.leftY;
                 autoPosition = autoPosition.lEFT;
                 break;
             case MIDDLE:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.midY;
+                finalY = RedCloseConstants.Path.PurplePixel.midY;
                 autoPosition = autoPosition.MID;
                 break;
             case RIGHT:
-                finalY = RedCloseConstants.Speed.Path.PurplePixel.rightY;
+                finalY = RedCloseConstants.Path.PurplePixel.rightY;
                 autoPosition = autoPosition.RIGHT;
                 break;
         }
             telemetry.addLine("Trajectory sequence is: " );
-            drivetrain.setPoseEstimate(RedCloseConstants.Speed.Path.start.startPose.getPose());
-            PoseStorage.trajectoryPose = RedCloseConstants.Speed.Path.start.startPose.getPose();
+            drivetrain.setPoseEstimate(RedCloseConstants.Path.start.startPose.getPose());
+            PoseStorage.trajectoryPose = RedCloseConstants.Path.start.startPose.getPose();
             schedule(
                     new SequentialCommandGroup(
                             /* Purple Pixel */
                             new ParallelCommandGroup(
-                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.PurplePixel.getPurple(finalY))
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.PurplePixel.getPurple(finalY))
                             ),
 
                             new SequentialCommandGroup(
@@ -123,13 +123,13 @@ public class RedClose extends MatchOpMode {
                             ),
 
                             new ParallelCommandGroup(
-                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.back.back)
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.back.back)
                             ),
 
                             new WaitCommand(500),
 
                             new ParallelCommandGroup(
-                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.getYellow(finalY))
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.getYellow(finalY))
                             ),
 
                             new SequentialCommandGroup(
@@ -141,7 +141,7 @@ public class RedClose extends MatchOpMode {
                             ),
 
                             new ParallelCommandGroup(
-                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Speed.Path.Park.park)
+                                    new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.Park.park)
                             ),
 
 
@@ -183,6 +183,7 @@ public class RedClose extends MatchOpMode {
             static TrajectorySequenceConstraints getBaseConstraints() {
                 return new TrajectorySequenceConstraints(baseVel, baseAccel, turnVel, turnAccel);
             }
+        }
 
             public static Path path;
 
@@ -281,6 +282,6 @@ public class RedClose extends MatchOpMode {
             }
 
 
-        }
+
     }
 }

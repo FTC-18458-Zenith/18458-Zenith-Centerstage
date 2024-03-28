@@ -2,15 +2,15 @@ package org.firstinspires.ftc.teamcode.opmode.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.subsystem.Vision.FFVision;
+import org.firstinspires.ftc.teamcode.subsystem.Vision.BlueCLoseVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 @Autonomous(group = "testing")
 public class VisionAuto extends MatchOpMode {
-    private FFVision FFVision;
+    private BlueCLoseVision FFVision;
 
     @Override
     public void robotInit() {
-        FFVision = new FFVision(hardwareMap, telemetry);
+        FFVision = new BlueCLoseVision(hardwareMap, telemetry);
     }
 
     @Override

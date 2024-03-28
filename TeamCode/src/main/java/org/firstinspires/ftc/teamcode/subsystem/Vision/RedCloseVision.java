@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class FFVision extends SubsystemBase {
+public class RedCloseVision extends SubsystemBase {
     private final Telemetry telemetry;
     private final FFRectDetector duckDetector;
     private TeamMarkerPipeline.FFPosition finalPos;
 
-    public FFVision(HardwareMap hw, Telemetry tl) {
+    public RedCloseVision(HardwareMap hw, Telemetry tl) {
         duckDetector = new FFRectDetector(hw, tl);
         duckDetector.init();
 //y-

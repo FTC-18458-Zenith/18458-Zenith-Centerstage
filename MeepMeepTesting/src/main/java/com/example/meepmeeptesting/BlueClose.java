@@ -31,36 +31,23 @@ public class BlueClose {
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
                 .setDimensions(14, 16)
-                .setConstraints(52.48291908330528, 52.48291908330528, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                                 driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(90)))
-                                        .lineToSplineHeading(closeRightSpike)
-                                        //.strafeRight(5)
-                                        .lineToSplineHeading(closeRightScore)
+
+                                        .lineToLinearHeading(closeCenterSpike)
+                                        .lineToLinearHeading(closeCenterScore)
 
                                         .waitSeconds(1)
 
-                                        //Cycle 1 Start
                                         .strafeRight(5)
-                                        .splineToConstantHeading(new Vector2d(7, 60), Math.toRadians(180))
-                                        .forward(25)
-                                        .splineToConstantHeading(new Vector2d(-56, 35), Math.toRadians(180))
-
-                                        //Intake
-                                        .waitSeconds(1)
-
-                                        //Cycle 1 End
-                                        .back(5)
-                                        .splineToConstantHeading(new Vector2d(-24, 60), Math.toRadians(0))
-                                        .back(35)
-                                        .splineToConstantHeading(new Vector2d(49, 36), Math.toRadians(0))
-
-                                        //Score
-                                        .waitSeconds(1)
+                                        .splineToConstantHeading(new Vector2d(17, 63), Math.toRadians(180))
+                                        .forward(35)
+                                        .splineToLinearHeading(new Pose2d(-56, 46, Math.toRadians(45 + 180)), Math.toRadians(180))
 
                                         .waitSeconds(1)
 
-                                        .lineToConstantHeading(ParkRight)
+
                                         .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
