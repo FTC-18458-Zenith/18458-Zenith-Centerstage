@@ -94,6 +94,7 @@ public class AutomaticFeedforwardTuner extends LinearOpMode {
         while (!isStopRequested() && gamepad1.y) {
             idle();
         }
+        //TODO:BALLS
 
         telemetry.clearAll();
         telemetry.addLine("Running...");
