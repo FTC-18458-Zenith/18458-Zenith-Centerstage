@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystem.CommandBased;
 
+import static org.firstinspires.ftc.teamcode.subsystem.CommandBased.AutoDistance.Sensor.Distance;
+
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -8,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class AutoDistance extends SubsystemBase {
-        private ColorRangeSensor leftSensor;
-    private ColorRangeSensor rightSensor;
+        private static ColorRangeSensor leftSensor;
+    private static ColorRangeSensor rightSensor;
         private final Telemetry telemetry;
 
         public boolean Ignored = false;
@@ -17,10 +19,9 @@ public class AutoDistance extends SubsystemBase {
         public static double error = 0;
 
     public static Sensor sensor;
-
-
-    private static class Sensor {
-        public static volatile double BackBoardDistance = 1; //IN
+    public static class Sensor {
+        public static double Distance = 0;
+        public static double BackBoardDistance = 2; //IN
     }
 
         public enum SensorState {
@@ -30,7 +31,7 @@ public class AutoDistance extends SubsystemBase {
             DISABLED
     }
 
-    public static SensorState sensorState = SensorState.DISABLED;
+    public static SensorState sensorState = SensorState.FORWARD;
 
         public AutoDistance(Telemetry telemetry, HardwareMap hardwareMap) {
             this.leftSensor = hardwareMap.get(ColorRangeSensor.class, "leftSensor");
@@ -39,26 +40,24 @@ public class AutoDistance extends SubsystemBase {
         }
 
         public void periodic() {
-
-
+            telemetry.addData("Distance", Distance);
+            telemetry.addData("Error", error);
         }
-
-    public double Distance = leftSensor.getDistance(DistanceUnit.INCH) + rightSensor.getDistance(DistanceUnit.INCH) / 2;
 
         public boolean TooFar() {
             Ignored = false;
 
-            telemetry.addData("Distance", Distance);
+            Distance = (leftSensor.getDistance(DistanceUnit.INCH) + rightSensor.getDistance(DistanceUnit.INCH) / 2);
 
-            return (Distance) < Sensor.BackBoardDistance;
+            return (Distance) > Sensor.BackBoardDistance;
         }
 
         public boolean InRange() {
             Ignored = false;
 
-            telemetry.addData("Distance", Distance);
+            Distance = (leftSensor.getDistance(DistanceUnit.INCH) + rightSensor.getDistance(DistanceUnit.INCH) / 2);
 
-            return (Distance) >= Sensor.BackBoardDistance;
+            return (Distance) <= Sensor.BackBoardDistance;
         }
 
         /*public boolean Left() {
@@ -80,7 +79,7 @@ public class AutoDistance extends SubsystemBase {
             case FORWARD:
                 if (InRange()) break;
                 if (TooFar())
-                    error = Distance - Sensor.BackBoardDistance;
+                    error = Sensor.BackBoardDistance - Distance;
                 break;
         }
     }
