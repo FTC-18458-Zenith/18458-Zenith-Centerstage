@@ -70,10 +70,8 @@ public class BlueClose extends MatchOpMode {
         this.matchStart();
 
     }
-
     @Override
     public void matchStart() {
-
 
         TeamMarkerPipeline.FFPosition position = vision.getPosition();
 
@@ -141,8 +139,6 @@ public class BlueClose extends MatchOpMode {
                         run(this::stop)
                 )
         );
-
-
     }
 
     @Config
@@ -175,7 +171,6 @@ public class BlueClose extends MatchOpMode {
             static TrajectorySequenceConstraints getBaseConstraints() {
                 return new TrajectorySequenceConstraints(baseVel, baseAccel, turnVel, turnAccel);
             }
-
         }
 
             public static Path path;
