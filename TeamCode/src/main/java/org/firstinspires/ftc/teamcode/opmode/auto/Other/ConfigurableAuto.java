@@ -18,15 +18,13 @@ public class ConfigurableAuto extends SubsystemBase {
         if (gamepad1.dpad_down) {
             return Position.CLOSE;
         }
-
         if (gamepad1.dpad_up) {
             return Position.FAR;
         }
-            else return null;
+            else return Position.CLOSE;
         }
-
     public enum Position {
             CLOSE,
-            FAR;
+            FAR
     }
 }

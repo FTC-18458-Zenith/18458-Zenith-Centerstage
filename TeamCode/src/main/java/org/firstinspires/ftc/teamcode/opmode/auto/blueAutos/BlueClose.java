@@ -237,9 +237,6 @@ public class BlueClose extends MatchOpMode {
 
                 }
 
-
-
-
                 public static double leftY = 44;
                 public static double midY = 28;
                 public static double rightY = 23;
