@@ -19,6 +19,8 @@ import org.firstinspires.ftc.robotcore.internal.system.Misc;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drive;
 import org.firstinspires.ftc.teamcode.util.LoggingUtil;
 import org.firstinspires.ftc.teamcode.util.RegressionUtil;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.LineToConstantHeading;
+import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.StrafeLeft;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,6 @@ import java.util.List;
  *      regression.
  */
 @Config
-@Disabled
 @Autonomous(group = "drive")
 public class AutomaticFeedforwardTuner extends LinearOpMode {
     public static double MAX_POWER = 0.7;
@@ -70,7 +71,7 @@ public class AutomaticFeedforwardTuner extends LinearOpMode {
             if (gamepad1.y) {
                 fitIntercept = true;
                 while (!isStopRequested() && gamepad1.y) {
-                    idle();
+                    drive.drive(0.1,0.1,1000);
                 }
                 break;
             } else if (gamepad1.b) {
@@ -94,7 +95,6 @@ public class AutomaticFeedforwardTuner extends LinearOpMode {
         while (!isStopRequested() && gamepad1.y) {
             idle();
         }
-        //TODO:BALLS
 
         telemetry.clearAll();
         telemetry.addLine("Running...");
