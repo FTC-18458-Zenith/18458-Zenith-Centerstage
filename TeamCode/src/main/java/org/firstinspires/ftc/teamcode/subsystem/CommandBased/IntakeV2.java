@@ -20,9 +20,19 @@ public class IntakeV2 extends SubsystemBase {
     private boolean intakeOn;
 
     public static double Power = 0.6;
-    public static double intakeDropDown = 0.49;
+    public static double intakeDropDown = 0.47;
     public static double outtakeDropDown = 0.6;
     //Value can be lower than this, such as 0.6 or smth
+
+
+    // Auto Stack
+    public static double Cycle1_1Pixel = 0.51;
+    public static double Cycle1_2Pixel = 0.5;
+    public static double Cycle2_3Pixel = 0.49;
+    public static double Cycle2_4Pixel = 0.485;
+
+
+
     public enum intakePower {
         ON, OFF
     }
@@ -86,5 +96,31 @@ public class IntakeV2 extends SubsystemBase {
 
         leftIntake.setPosition(outtakeDropDown);
         rightIntake.setPosition(outtakeDropDown);
+    }
+
+    public void autoStack() {
+        Intake.set(Power);
+        intakeOn = true;
+        intakePower = intakePower.ON;
+    }
+
+    public void firstCycle1() {
+        leftIntake.setPosition(Cycle1_1Pixel);
+        leftIntake.setPosition(Cycle1_1Pixel);
+    }
+
+    public void firstCycle2() {
+        leftIntake.setPosition(Cycle1_2Pixel);
+        leftIntake.setPosition(Cycle1_2Pixel);
+    }
+
+    public void secondCycle1() {
+        leftIntake.setPosition(Cycle2_3Pixel);
+        leftIntake.setPosition(Cycle2_3Pixel);
+    }
+
+    public void secondCycle2() {
+        leftIntake.setPosition(Cycle2_4Pixel);
+        leftIntake.setPosition(Cycle2_4Pixel);
     }
 }

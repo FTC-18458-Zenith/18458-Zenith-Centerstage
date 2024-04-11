@@ -8,9 +8,11 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
 
 public class IntakeOn extends SequentialCommandGroup {
     public IntakeOn (IntakeV2 intakeV2, Wheel wheel) {
-        addCommands(
-                new InstantCommand(intakeV2::IntakeOn)
-        );
+
+            addCommands(
+                    new InstantCommand(intakeV2::IntakeOn)
+            );
+        }
 
     }
-}
+

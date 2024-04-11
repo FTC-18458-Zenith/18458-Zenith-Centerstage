@@ -19,7 +19,7 @@ public class BlueClose {
 
         Pose2d closeLeftSpike = new Pose2d(18, 39, Math.toRadians(90));
         Pose2d closeCenterSpike = new Pose2d(12, 32, Math.toRadians(90));
-        Pose2d closeRightSpike = new Pose2d(6, 39, Math.toRadians(75));
+        Pose2d closeRightSpike = new Pose2d(10, 32, Math.toRadians(0));
 
         Pose2d closeLeftScore = new Pose2d(49, 44, Math.toRadians(180));
         Pose2d closeCenterScore = new Pose2d(49, 36, Math.toRadians(180));
@@ -31,22 +31,58 @@ public class BlueClose {
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
                 .setDimensions(14, 16)
-                .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                                 driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(90)))
 
-                                        .lineToLinearHeading(closeCenterSpike)
-                                        .lineToLinearHeading(closeCenterScore)
+                                        //Pre Load
+                                        .lineToLinearHeading(closeLeftSpike)
+                                        .splineToLinearHeading(new Pose2d(49, 36, Math.toRadians(180)), Math.toRadians(0))
 
                                         .waitSeconds(1)
 
-                                        .strafeRight(5)
-                                        .splineToConstantHeading(new Vector2d(17, 63), Math.toRadians(180))
+                                        //Cycle 1 Start
+                                        .splineToConstantHeading(new Vector2d(17, 11), Math.toRadians(180))
+                                        .lineToLinearHeading(new Pose2d(-24, 11, Math.toRadians(180)))
+                                        .splineTo(new Vector2d(-58, 11), Math.toRadians(180))
+
+                                        .waitSeconds(1)
+
+                                        //Cycle 1 End
+                                        .back(1)
+                                        .splineTo(new Vector2d(-24, 11), Math.toRadians(0))
+                                        .lineToLinearHeading(new Pose2d(16, 11, Math.toRadians(180)))
+                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))
+
+                                        .waitSeconds(1)
+
+                                        //Cycle 2 Start
+                                        .splineTo(new Vector2d(17, 63), Math.toRadians(180))
                                         .forward(35)
-                                        .splineToLinearHeading(new Pose2d(-56, 46, Math.toRadians(45 + 180)), Math.toRadians(180))
+                                        .splineTo(new Vector2d(-58, 35), Math.toRadians(180))
 
                                         .waitSeconds(1)
 
+                                        //Cycle 2 End
+                                        .back(1)
+                                        .splineTo(new Vector2d(-24, 63), Math.toRadians(0))
+                                        .back(35)
+                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))
+
+                                        .waitSeconds(1)
+
+                                        /*//Cycle 3 Start
+                                        .splineTo(new Vector2d(17, 63), Math.toRadians(180))
+                                        .forward(35)
+                                        .splineTo(new Vector2d(-58, 35), Math.toRadians(180))
+
+                                        .waitSeconds(1)
+
+                                        //Cycle 3 End
+                                        .back(1)
+                                        .splineTo(new Vector2d(-24, 63), Math.toRadians(0))
+                                        .back(35)
+                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))*/
 
                                         .build()
                 );

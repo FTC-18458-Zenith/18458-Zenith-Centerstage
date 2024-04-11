@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystem.CommandBased;
 
+import static org.firstinspires.ftc.teamcode.subsystem.CommandBased.AutoDistance.Sensor.BackBoardDistance;
 import static org.firstinspires.ftc.teamcode.subsystem.CommandBased.AutoDistance.Sensor.Distance;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
@@ -79,7 +80,7 @@ public class AutoDistance extends SubsystemBase {
             case FORWARD:
                 if (InRange()) break;
                 if (TooFar())
-                    error = Sensor.BackBoardDistance - Distance;
+                    error = Distance - Sensor.BackBoardDistance;
                 break;
         }
     }

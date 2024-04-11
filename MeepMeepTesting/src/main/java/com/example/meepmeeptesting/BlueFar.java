@@ -16,10 +16,10 @@ public class BlueFar {
 
         public static void main(String[] args) {
             MeepMeep meepMeep = new MeepMeep(650);
-            Pose2d rightPoseSpike = new Pose2d(-38, 32, Math.toRadians(180));
-            Pose2d leftPoseSpike = new Pose2d(-34, 32, Math.toRadians(0));
+            Pose2d rightPoseSpike = new Pose2d(-46, 38, Math.toRadians(90));
+            Pose2d leftPoseSpike = new Pose2d(-34, 32, Math.toRadians(180));
             // Use reset pose 2 times
-            Pose2d centerPoseSpike = new Pose2d(-34, 32 , Math.toRadians(270));
+            Pose2d centerPoseSpike = new Pose2d(-34, 32 , Math.toRadians(90));
             // Use reset pose 2 times
             Pose2d reset = new Pose2d(-40, 58, Math.toRadians(180));
             Pose2d backdropPose = new Pose2d(47, 60, Math.toRadians(180));
@@ -30,16 +30,30 @@ public class BlueFar {
             RoadRunnerBotEntity blueAllianceRight = new DefaultBotBuilder(meepMeep)
                     .setColorScheme((new ColorSchemeBlueDark()))
                     .setDimensions(16, 16)
-                    .setConstraints(30, 40, Math.toRadians(180), Math.toRadians(270), 11.15)
+                    .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                     .followTrajectorySequence(drive ->
-                            drive.trajectorySequenceBuilder(new Pose2d(-30, 62, Math.toRadians(270)))
-                                    .lineToLinearHeading(reset)
-                                    .lineToLinearHeading(centerPoseSpike)
-                                    .lineToLinearHeading(reset)
-                                    .lineToLinearHeading(new Pose2d(-30, 60, Math.toRadians(180)))
-                                    .waitSeconds(10)
-                                    .lineToLinearHeading(backdropPose)
-                                    .lineToLinearHeading(rightScoringPose)
+                            drive.trajectorySequenceBuilder(new Pose2d(-40, 62, Math.toRadians(90)))
+                                    .lineToLinearHeading(leftPoseSpike)
+
+                                    // Grab 1 Pixel
+                                    .lineToLinearHeading(new Pose2d(-58, 35, Math.toRadians(180)))
+
+                                    //Yellow Pixel + 1
+                                    .strafeLeft(5)
+                                    .splineToConstantHeading(new Vector2d(-24, 10), Math.toRadians(0))
+                                    .back(45)
+                                    .splineToConstantHeading(new Vector2d(51, 34), Math.toRadians(0))
+
+                                    // 1st Cycle
+                                    .forward(1)
+                                    .splineToLinearHeading(new Pose2d(24, 10, Math.toRadians(180)), Math.toRadians(180))
+                                    .forward(45)
+                                    .splineToConstantHeading(new Vector2d(-56, 12), Math.toRadians(5))
+
+                                    //Cycle End
+                                    .lineToLinearHeading(new Pose2d(-24, 10, Math.toRadians(180)))
+                                    .back(45)
+                                    .splineToConstantHeading(new Vector2d(51, 34), Math.toRadians(0))
                                     .build()
                     );
             meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
