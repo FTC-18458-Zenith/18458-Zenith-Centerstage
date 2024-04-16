@@ -1,187 +1,120 @@
 package org.firstinspires.ftc.teamcode.opmode.auto.Other;
 
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
-import com.arcrobotics.ftclib.command.SequentialCommandGroup;
-import com.arcrobotics.ftclib.command.WaitCommand;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.opmode.auto.blueAutos.BlueClose;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
-import org.firstinspires.ftc.teamcode.subsystem.DriveSub.DriveConstants;
-import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drivetrain;
-import org.firstinspires.ftc.teamcode.subsystem.Vision.BlueCLoseVision;
 import org.firstinspires.ftc.teamcode.util.MatchOpMode;
-import org.firstinspires.ftc.teamcode.util.PoseStorage;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceContainerFollowCommand;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Forward;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Pose2dContainer;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceConstraints;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.TrajectorySequenceContainer;
-import org.firstinspires.ftc.teamcode.util.trajectorysequence.container.Turn;
+
+import java.util.Locale;
 
 @Autonomous
 public class AutoPathPlanning extends MatchOpMode {
+    public static final AutoChoices autoChoices = new AutoChoices();
 
-    //subsystems
-    private IntakeV2 intake;
-    private Wrist wrist;
-    private Drivetrain drivetrain;
-    private SlideV2 slide;
-    private BlueCLoseVision vision;
-    private Outtake outtake;
-    private Wheel wheel;
-    private ConfigurableAuto configurableAuto;
-
-    public enum AllianceSide  {
-        RED,
-        BLUE;
-    }
-    public enum Pose  {
-        CLOSE,
-        FAR;
+    public enum Alliance
+    {
+        RED_ALLIANCE,
+        BLUE_ALLIANCE
     }
 
-    public enum Park  {
+    public enum StartPos
+    {
         LEFT,
-        RIGHT;
+        RIGHT
     }
-    double StartDelay = 0;
+    public enum AutoStrategy
+    {
+        LEFT_TRUSS,
+        MID_TRUSS,
+        RIGHT_TRUSS
+    }   //enum AutoStrategy
+    public static class AutoChoices {
+        public double delay = 0.0;
+        public Alliance alliance = Alliance.RED_ALLIANCE;
+        public StartPos startPos = StartPos.LEFT;
+        public AutoStrategy strategy = AutoStrategy.MID_TRUSS;
+        public double xTarget = 0.0;
+        public double yTarget = 0.0;
+        public double turnTarget = 0.0;
+
+        @Override
+        public String toString() {
+            return String.format(
+                    Locale.US,
+                    "delay=%.0f " +
+                            "alliance=\"%s\" " +
+                            "startPos=\"%s\" " +
+                            "strategy=\"%s\" " +
+                            "xTarget=%.1f " +
+                            "yTarget=%.1f " +
+                            "turnTarget=%.0f " +
+                            "driveTime=%.0f " +
+                            "drivePower=%.1f",
+                    delay, alliance, startPos, strategy, xTarget, yTarget, turnTarget);
+        }   //toString
+
+    }
     @Override
     public void robotInit() {
 
-        wrist = new Wrist(hardwareMap, telemetry);
-        slide = new SlideV2(hardwareMap, telemetry);
-        intake = new IntakeV2(hardwareMap, telemetry);
-        outtake = new Outtake(hardwareMap, telemetry);
-        wheel = new Wheel(hardwareMap, telemetry);
-
-        vision = new BlueCLoseVision(hardwareMap, telemetry);
-        configurableAuto = new ConfigurableAuto(telemetry, gamepad1);
-
-//        drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
-//        drivetrain.init();
-
-        while (!isStarted() & !isStopRequested()) {
-
-            telemetry.clearAll();
-            telemetry.addLine("Truss movement");
-            telemetry.addLine("UP = UP TRUSS");
-            telemetry.addLine("D-PAD DOWN = DOWN TRUSS");
-
-            telemetry.update();
-            telemetry.addData("Path traveled", configurableAuto.position());
-
-        }
     }
+
     @Override
     public void matchStart() {
-        double finalY = 0;
-        double finalX = 0;
-        switch (configurableAuto.position()) {
-            case CLOSE:
-                finalX = BlueClose.BlueCloseConstants.Path.PurplePixel.leftX;
-                AutoPathPlanning.Constants.Path.Testing.autoPosition = AutoPathPlanning.Constants.Path.Testing.autoPosition.CLOSE;
-                break;
-            case FAR:
-                finalX = BlueClose.BlueCloseConstants.Path.PurplePixel.leftX;
-                AutoPathPlanning.Constants.Path.Testing.autoPosition = AutoPathPlanning.Constants.Path.Testing.autoPosition.FAR;
-                break;
-        }
-        drivetrain.setPoseEstimate(AutoPathPlanning.Constants.Path.start.startPose.getPose());
-        PoseStorage.trajectoryPose = AutoPathPlanning.Constants.Path.start.startPose.getPose();
-        schedule(
-                new SequentialCommandGroup(
 
-                        /* Purple Pixel */
-                        new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, AutoPathPlanning.Constants.Path.Testing.testing(finalX))
-                        ),
-
-                        new WaitCommand(1),
-
-                        run(() -> PoseStorage.currentPose = drivetrain.getPoseEstimate()),
-
-                        /* Save Pose and end opmode*/
-
-                        run(this::stop)
-                )
-        );
     }
-    public static class Constants {
+    private void doAutoChoicesMenus()
+    {
+        FtcValueMenu delayMenu = new FtcValueMenu("Delay time:", null, 0.0, 30.0, 1.0, 0.0, " %.0f sec");
+        FtcChoiceMenu<Alliance> allianceMenu = new FtcChoiceMenu<>("Alliance:", delayMenu);
+        FtcChoiceMenu<StartPos> startPosMenu = new FtcChoiceMenu<>("Start Position:", allianceMenu);
+        FtcChoiceMenu<AutoStrategy> strategyMenu = new FtcChoiceMenu<>("Auto Strategies:", startPosMenu);
 
-        public static AutoPathPlanning.Constants.Speed speed;
+        FtcValueMenu xTargetMenu = new FtcValueMenu(
+                "xTarget:", strategyMenu, -12.0, 12.0, 0.5, 4.0, " %.1f ft");
+        FtcValueMenu yTargetMenu = new FtcValueMenu(
+                "yTarget:", xTargetMenu, -12.0, 12.0, 0.5, 4.0, " %.1f ft");
+        FtcValueMenu turnTargetMenu = new FtcValueMenu(
+                "turnTarget:", yTargetMenu, -180.0, 180.0, 5.0, 90.0, " %.0f deg");
+        FtcValueMenu driveTimeMenu = new FtcValueMenu(
+                "Drive time:", strategyMenu, 0.0, 30.0, 1.0, 5.0, " %.0f sec");
+        FtcValueMenu drivePowerMenu = new FtcValueMenu(
+                "Drive power:", strategyMenu, -1.0, 1.0, 0.1, 0.5, " %.1f");
 
-        public static class Speed {
-            public static double baseVel = DriveConstants.MAX_VEL; // value
-            public static double baseAccel = DriveConstants.MAX_ACCEL; // value
-            public static double turnVel = DriveConstants.MAX_ANG_VEL; // value
-            public static double turnAccel = DriveConstants.MAX_ANG_ACCEL; // value
+        // Link Value Menus to their children.
+        delayMenu.setChildMenu(allianceMenu);
+        xTargetMenu.setChildMenu(yTargetMenu);
+        yTargetMenu.setChildMenu(turnTargetMenu);
+        turnTargetMenu.setChildMenu(drivePowerMenu);
+        driveTimeMenu.setChildMenu(drivePowerMenu);
+        //
+        // Populate choice menus.
+        //
+        telemetry.addData("Red", Alliance.RED_ALLIANCE, true, startPosMenu);
+        allianceMenu.addChoice("Blue", Alliance.BLUE_ALLIANCE, false, startPosMenu);
 
-            static TrajectorySequenceConstraints getDropConstraints() {
-                return new TrajectorySequenceConstraints(
-                        (s, a, b, c) -> {
-                            if (s > 18) {
-                                return baseVel * 0.4;
-                            } else {
-                                return baseVel;
-                            }
+        startPosMenu.addChoice("Start Position Left", StartPos.LEFT, true, strategyMenu);
+        startPosMenu.addChoice("Start Position Right", StartPos.RIGHT, false, strategyMenu);
 
-                        },
-                        (s, a, b, c) -> baseAccel,
-                        turnVel,
-                        turnAccel
-                );
-            }
-
-            static TrajectorySequenceConstraints getBaseConstraints() {
-                return new TrajectorySequenceConstraints(baseVel, baseAccel, turnVel, turnAccel);
-            }
-        }
-
-        public static AutoPathPlanning.Constants.Path path;
-
-        public static class Path {
-            public static AutoPathPlanning.Constants.Path.Start start;
-
-            public static class Start {
-                public static Pose2dContainer startPose = new Pose2dContainer(17, 63, 90);
-
-                static TrajectorySequenceContainer start = new TrajectorySequenceContainer(AutoPathPlanning.Constants.Speed::getBaseConstraints);
-            }
-
-            public static AutoPathPlanning.Constants.Path.Testing testing;
-
-            public static class Testing {
-
-                public static double heading = 90;
-
-                public enum AutoPosition {
-                    FAR,
-                    CLOSE
-                }
-                public static AutoPathPlanning.Constants.Path.Testing.AutoPosition autoPosition = AutoPosition.FAR;
-
-                static TrajectorySequenceContainer testing(double Y) {
-                    switch (autoPosition) {
-                        case FAR:
-                            return new TrajectorySequenceContainer(
-                                    AutoPathPlanning.Constants.Speed::getBaseConstraints,
-                                    new Forward(10)
-                            );
-                        default:
-                        case CLOSE:
-                            return new TrajectorySequenceContainer(
-                                    AutoPathPlanning.Constants.Speed::getBaseConstraints,
-                                    new Turn(180)
-                            );
-                    }
-                }
-            }
-        }
-    }
+        strategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE, false, xTargetMenu);
+        strategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE, false, driveTimeMenu);
+        strategyMenu.addChoice("Do nothing", AutoStrategy.DO_NOTHING, true);
+        //
+        // Traverse menus.
+        //
+        FtcMenu.walkMenuTree(delayMenu);
+        //
+        // Fetch choices.
+        //
+        autoChoices.delay = delayMenu.getCurrentValue();
+        autoChoices.alliance = allianceMenu.getCurrentChoiceObject();
+        autoChoices.startPos = startPosMenu.getCurrentChoiceObject();
+        autoChoices.strategy = strategyMenu.getCurrentChoiceObject();
+        autoChoices.xTarget = xTargetMenu.getCurrentValue();
+        autoChoices.yTarget = yTargetMenu.getCurrentValue();
+        autoChoices.turnTarget = turnTargetMenu.getCurrentValue();
+        //
+        // Show choices.
+        //
+    }   //doAutoChoicesMenus
 }
