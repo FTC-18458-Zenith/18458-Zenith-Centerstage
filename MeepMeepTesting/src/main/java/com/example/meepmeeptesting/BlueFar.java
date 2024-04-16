@@ -16,7 +16,7 @@ public class BlueFar {
 
         public static void main(String[] args) {
             MeepMeep meepMeep = new MeepMeep(650);
-            Pose2d rightPoseSpike = new Pose2d(-46, 38, Math.toRadians(90));
+            Pose2d rightPoseSpike = new Pose2d(-46, 34, Math.toRadians(90));
             Pose2d leftPoseSpike = new Pose2d(-34, 32, Math.toRadians(180));
             // Use reset pose 2 times
             Pose2d centerPoseSpike = new Pose2d(-34, 32 , Math.toRadians(90));
@@ -33,26 +33,45 @@ public class BlueFar {
                     .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                     .followTrajectorySequence(drive ->
                             drive.trajectorySequenceBuilder(new Pose2d(-40, 62, Math.toRadians(90)))
-                                    .lineToLinearHeading(leftPoseSpike)
+                                    .lineToLinearHeading(rightPoseSpike)
 
                                     // Grab 1 Pixel
                                     .lineToLinearHeading(new Pose2d(-58, 35, Math.toRadians(180)))
 
                                     //Yellow Pixel + 1
-                                    .strafeLeft(5)
-                                    .splineToConstantHeading(new Vector2d(-24, 10), Math.toRadians(0))
-                                    .back(45)
+                                    .strafeRight(5)
+                                    .splineToConstantHeading(new Vector2d(-46, 61), Math.toRadians(0))
+                                    .lineToLinearHeading(new Pose2d(11, 61, Math.toRadians(180)))
                                     .splineToConstantHeading(new Vector2d(51, 34), Math.toRadians(0))
+
+                                    .waitSeconds(1)
 
                                     // 1st Cycle
                                     .forward(1)
-                                    .splineToLinearHeading(new Pose2d(24, 10, Math.toRadians(180)), Math.toRadians(180))
-                                    .forward(45)
-                                    .splineToConstantHeading(new Vector2d(-56, 12), Math.toRadians(5))
+                                    .splineToConstantHeading(new Vector2d(11, 10), Math.toRadians(180))
+                                    .lineToLinearHeading(new Pose2d(-24, 10, Math.toRadians(180)))
+                                    .splineToConstantHeading(new Vector2d(-56, 12), Math.toRadians(180))
+
+                                    .waitSeconds(1)
 
                                     //Cycle End
+                                    .splineToConstantHeading(new Vector2d(-24, 12), Math.toRadians(0))
+                                    .lineToLinearHeading(new Pose2d(11, 12, Math.toRadians(180)))
+                                    .splineToConstantHeading(new Vector2d(51, 34), Math.toRadians(0))
+
+                                    .waitSeconds(1)
+
+                                    // 1st Cycle
+                                    .forward(1)
+                                    .splineToConstantHeading(new Vector2d(11, 10), Math.toRadians(180))
                                     .lineToLinearHeading(new Pose2d(-24, 10, Math.toRadians(180)))
-                                    .back(45)
+                                    .splineToConstantHeading(new Vector2d(-56, 12), Math.toRadians(180))
+
+                                    .waitSeconds(1)
+
+                                    //Cycle End
+                                    .splineToConstantHeading(new Vector2d(-24, 12), Math.toRadians(0))
+                                    .lineToLinearHeading(new Pose2d(11, 12, Math.toRadians(180)))
                                     .splineToConstantHeading(new Vector2d(51, 34), Math.toRadians(0))
                                     .build()
                     );

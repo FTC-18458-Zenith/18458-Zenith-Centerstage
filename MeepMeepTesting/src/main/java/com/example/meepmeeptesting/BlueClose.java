@@ -30,7 +30,7 @@ public class BlueClose {
 
         RoadRunnerBotEntity blueAllianceLeft = new DefaultBotBuilder(meepMeep)
                 .setColorScheme((new ColorSchemeBlueLight()))
-                .setDimensions(14, 16)
+                .setDimensions(14, 14)
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                                 driveShim.trajectorySequenceBuilder(new Pose2d(17, 63, Math.toRadians(90)))
@@ -58,8 +58,8 @@ public class BlueClose {
 
                                         //Cycle 2 Start
                                         .splineTo(new Vector2d(17, 63), Math.toRadians(180))
-                                        .forward(35)
-                                        .splineTo(new Vector2d(-58, 35), Math.toRadians(180))
+                                        .lineToLinearHeading(new Pose2d(-23, 63, Math.toRadians(180)))
+                                        .lineToSplineHeading(new Pose2d(-58, 43, Math.toRadians(45 + 180)))
 
                                         .waitSeconds(1)
 
