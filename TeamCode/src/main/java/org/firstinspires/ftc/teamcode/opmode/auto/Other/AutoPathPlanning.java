@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.opmode.auto.Other;
 
 
@@ -118,3 +119,4 @@ public class AutoPathPlanning extends MatchOpMode {
         //
     }   //doAutoChoicesMenus
 }
+*/

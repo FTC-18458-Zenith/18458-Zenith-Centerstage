@@ -16,7 +16,7 @@ public class ServoTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         servo1 = (Servo) hardwareMap.get("servo1");
         servo2 = (Servo) hardwareMap.get("servo2");
-        servo1.setDirection(Servo.Direction.FORWARD);
+        servo1.setDirection(Servo.Direction.REVERSE);
         servo2.setDirection(Servo.Direction.FORWARD);
 
         waitForStart();
