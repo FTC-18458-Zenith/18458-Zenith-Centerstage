@@ -15,6 +15,7 @@ public abstract class MatchOpMode extends CommandOpMode {
     protected FtcDashboard dashboard = FtcDashboard.getInstance();
     public static Map<String, Object> telemetryList = new HashMap<>();
     public static Canvas canvas = new Canvas();
+
     @Override
     public void initialize() {
 
@@ -47,6 +48,7 @@ public abstract class MatchOpMode extends CommandOpMode {
             robotPeriodic();
         }
         reset();
+
     }
 
     public abstract void robotInit();
