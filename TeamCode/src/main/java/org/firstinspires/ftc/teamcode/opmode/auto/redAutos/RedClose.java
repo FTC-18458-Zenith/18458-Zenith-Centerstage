@@ -118,7 +118,7 @@ public class RedClose extends MatchOpMode {
                                     new IntakeReverse(intake, wheel, true),
                                     new WaitCommand(500),
                                     new Hold(outtake),
-                                    new SlideMid(slide, wrist)
+                                    new SlideMid(slide, wrist, outtake)
 
                             ),
 
@@ -135,7 +135,7 @@ public class RedClose extends MatchOpMode {
                             new SequentialCommandGroup(
                                     new Score(outtake, wheel),
                                     new WaitCommand(500),
-                                    new SlideHigh(slide, wrist),
+                                    new SlideHigh(slide, wrist, outtake),
                                     new WaitCommand(500),
                                     new SlideReset(slide, wrist, outtake, wheel)
                             ),

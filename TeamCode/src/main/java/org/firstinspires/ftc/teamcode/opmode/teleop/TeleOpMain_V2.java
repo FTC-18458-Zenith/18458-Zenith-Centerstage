@@ -89,13 +89,13 @@ public class TeleOpMain_V2 extends MatchOpMode {
                 .whenPressed(new SlideReset(slide, wrist, outtake, wheel));
 
         Button slideLow = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)
-                .whenPressed(new SlideLow(slide, wrist));
+                .whenPressed(new SlideLow(slide, wrist, outtake));
 
         Button slideMid = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_RIGHT)
-                .whenPressed(new SlideMid(slide, wrist));
+                .whenPressed(new SlideMid(slide, wrist, outtake));
 
         Button slideHigh = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)
-                .whenPressed(new SlideHigh(slide, wrist));
+                .whenPressed(new SlideHigh(slide, wrist, outtake));
 
         Trigger Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
                 .whileActiveContinuous(new IntakeOn(intakeV2, wheel))

@@ -19,7 +19,7 @@ public class SlideMoveManual extends CommandBase {
     public void execute() {
         double position = doubleSupplier.get();
         if (Math.abs(position) > 0.1) {
-            SlideV2.setPosition(SlideV2.getPosition() + position * -25);
+            SlideV2.setPosition(SlideV2.getPosition() + position * 25);
         }
     }
 }

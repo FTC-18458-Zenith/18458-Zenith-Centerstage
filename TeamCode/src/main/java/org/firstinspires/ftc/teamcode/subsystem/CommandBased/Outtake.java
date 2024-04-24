@@ -12,10 +12,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class Outtake extends SubsystemBase {
 
-    public static boolean REVERSED = true;
+    public static boolean REVERSED = false;
 
-    public static double holdingPose = 0.8,
-                                scorePose = 0.7;
+    public static double holdingPose = 0.42,
+                                scorePose = 0.6;
     Telemetry telemetry;
     private final ServoEx clampServo;
     private SensorDistance sensorDistance;
