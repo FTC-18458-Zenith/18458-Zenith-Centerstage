@@ -137,7 +137,7 @@ public class RedClose extends MatchOpMode {
                                     new WaitCommand(500),
                                     new SlideHigh(slide, wrist, outtake),
                                     new WaitCommand(500),
-                                    new SlideReset(slide, wrist, outtake, wheel)
+                                    new SlideReset(slide, wrist, outtake)
                             ),
 
                             new ParallelCommandGroup(

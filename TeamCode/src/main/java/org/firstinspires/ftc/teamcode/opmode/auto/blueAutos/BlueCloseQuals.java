@@ -125,7 +125,7 @@ public class BlueCloseQuals extends MatchOpMode {
                                 new SequentialCommandGroup(
                                         new IntakeOn(intake, wheel),
                                         new WaitCommand(400),
-                                        new SlideReset(slide, wrist, outtake, wheel)
+                                        new SlideReset(slide, wrist, outtake)
                                 )
                         ),
 

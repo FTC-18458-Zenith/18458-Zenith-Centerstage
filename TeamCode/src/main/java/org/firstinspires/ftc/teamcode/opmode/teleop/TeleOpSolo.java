@@ -87,7 +87,7 @@ public class TeleOpSolo extends MatchOpMode {
                 .whenHeld(new SlideMoveManual(slide, operatorGamepad::getRightY));
 */
         Button slideReset = new GamepadButton(driverGamepad, GamepadKeys.Button.A)
-                .whenPressed(new SlideReset(slide, wrist, outtake, wheel));
+                .whenPressed(new SlideReset(slide, wrist, outtake));
 
         Button slideLow = new GamepadButton(driverGamepad, GamepadKeys.Button.B)
                 .whenPressed(new SlideLow(slide, wrist, outtake));
