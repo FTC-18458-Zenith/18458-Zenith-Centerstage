@@ -70,6 +70,9 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
 
     public MecanumDrive(HardwareMap hardwareMap, Telemetry telemetry, boolean deprecatedParameter) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
+
+        //TODO: mess with these till the auto is more accurate
+        //https://learnroadrunner.com/advanced.html#admissible-error-and-timeout
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
                 new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
 

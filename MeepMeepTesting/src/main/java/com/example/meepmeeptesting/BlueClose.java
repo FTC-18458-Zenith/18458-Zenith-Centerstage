@@ -17,7 +17,7 @@ public class BlueClose {
         Double rightScore = 44.0;
         Double centerScore = 36.0;
 
-        Pose2d closeLeftSpike = new Pose2d(18, 39, Math.toRadians(90));
+        Pose2d closeLeftSpike = new Pose2d(21, 39, Math.toRadians(90));
         Pose2d closeCenterSpike = new Pose2d(12, 32, Math.toRadians(90));
         Pose2d closeRightSpike = new Pose2d(10, 32, Math.toRadians(0));
 
@@ -41,48 +41,13 @@ public class BlueClose {
 
                                         .waitSeconds(1)
 
-                                        //Cycle 1 Start
-                                        .splineToConstantHeading(new Vector2d(17, 11), Math.toRadians(180))
-                                        .lineToLinearHeading(new Pose2d(-24, 11, Math.toRadians(180)))
+                                        .splineTo(new Vector2d(0, 11), Math.toRadians(180))
                                         .splineTo(new Vector2d(-58, 11), Math.toRadians(180))
 
                                         .waitSeconds(1)
 
-                                        //Cycle 1 End
-                                        .back(1)
-                                        .splineTo(new Vector2d(-24, 11), Math.toRadians(0))
-                                        .lineToLinearHeading(new Pose2d(16, 11, Math.toRadians(180)))
-                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))
-
-                                        .waitSeconds(1)
-
-                                        //Cycle 2 Start
-                                        .splineTo(new Vector2d(17, 63), Math.toRadians(180))
-                                        .lineToLinearHeading(new Pose2d(-23, 63, Math.toRadians(180)))
-                                        .lineToSplineHeading(new Pose2d(-58, 43, Math.toRadians(45 + 180)))
-
-                                        .waitSeconds(1)
-
-                                        //Cycle 2 End
-                                        .back(1)
-                                        .splineTo(new Vector2d(-24, 63), Math.toRadians(0))
-                                        .back(35)
-                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))
-
-                                        .waitSeconds(1)
-
-                                        /*//Cycle 3 Start
-                                        .splineTo(new Vector2d(17, 63), Math.toRadians(180))
-                                        .forward(35)
-                                        .splineTo(new Vector2d(-58, 35), Math.toRadians(180))
-
-                                        .waitSeconds(1)
-
-                                        //Cycle 3 End
-                                        .back(1)
-                                        .splineTo(new Vector2d(-24, 63), Math.toRadians(0))
-                                        .back(35)
-                                        .splineTo(new Vector2d(51, 36), Math.toRadians(0))*/
+                                        .lineToConstantHeading(new Vector2d(0, 11))
+                                        .lineToSplineHeading(new Pose2d(49, 21, Math.toRadians(-120)))
 
                                         .build()
                 );
