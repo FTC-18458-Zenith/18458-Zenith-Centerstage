@@ -1,7 +1,11 @@
 package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.button.Button;
+import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SummerProjects.Realignment;
@@ -20,7 +24,7 @@ public class SensorTest extends MatchOpMode {
 
         driverGamepad = new GamepadEx(gamepad1);
 
-        Sensor = new Realignment(hardwareMap, telemetry);
+        Sensor = new Realignment(telemetry, hardwareMap);
 
     }
 
@@ -32,7 +36,8 @@ public class SensorTest extends MatchOpMode {
 
     @Override
     public void matchStart() {
-        Sensor.reAlignment();
+        Button sensorOn = (new GamepadButton(driverGamepad, GamepadKeys.Button.B))
+                .whenPressed(new InstantCommand(Sensor::run));
 
     }
 }

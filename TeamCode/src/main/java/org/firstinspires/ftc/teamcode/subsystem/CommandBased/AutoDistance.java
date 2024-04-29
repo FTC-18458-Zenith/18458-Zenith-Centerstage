@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class AutoDistance extends SubsystemBase {
-        private static ColorRangeSensor leftSensor;
+    private static ColorRangeSensor leftSensor;
     private static ColorRangeSensor rightSensor;
         private final Telemetry telemetry;
 
@@ -81,9 +81,8 @@ public class AutoDistance extends SubsystemBase {
                 if (InRange()) break;
                 if (TooFar())
                     error = Distance - Sensor.BackBoardDistance;
+
                 break;
         }
     }
-
-
 }

@@ -38,18 +38,8 @@ public class RedClose {
                 .setDimensions(16, 16)
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
-                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(0)))
-                                .lineToLinearHeading(rightSpike)
-                                .lineToLinearHeading(rightScore)
-                                .waitSeconds(1)
-                                //Cycle 1 start
-                                .lineToLinearHeading(rightStartCycle)
-                                .splineToConstantHeading(new Vector2d(-59, -11), Math.toRadians(180))
-                                .waitSeconds(1)
-                                //Cycle 1 end
-                                .lineToLinearHeading(new Pose2d(0, -14, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(49, leftCycleScore), Math.toRadians(270))
-                                .waitSeconds(1)
+                        driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(7, 60, Math.toRadians(90)))
                                 .build()
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
