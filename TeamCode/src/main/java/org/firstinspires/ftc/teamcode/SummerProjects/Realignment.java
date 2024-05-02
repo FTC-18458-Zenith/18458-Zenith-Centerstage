@@ -35,8 +35,8 @@ public class Realignment extends SubsystemBase {
     }
 
     public void periodic() {
-        telemetry.addData("DistanceLeft", leftSensor.getDistance(DistanceUnit.MM));
-        telemetry.addData("DistanceRight", rightSensor.getDistance(DistanceUnit.MM));
+        telemetry.addData("DistanceLeft", leftSensor.getDistance(DistanceUnit.CM));
+        telemetry.addData("DistanceRight", rightSensor.getDistance(DistanceUnit.CM));
         telemetry.addData("leftImbalence", leftImbalance());
         telemetry.addData("rightImbalence", rightImbalance());
         telemetry.addData("Error", error);
