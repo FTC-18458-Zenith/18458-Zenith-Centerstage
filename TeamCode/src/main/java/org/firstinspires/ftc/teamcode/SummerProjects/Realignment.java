@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.SummerProjects;
 
 
-import static org.firstinspires.ftc.teamcode.SummerProjects.Realignment.AlignmentState.ALIGNED;
-import static org.firstinspires.ftc.teamcode.SummerProjects.Realignment.AlignmentState.UNALIGNED;
+
 import static org.firstinspires.ftc.teamcode.subsystem.CommandBased.AutoDistance.Sensor.Distance;
 
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,28 +15,18 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.AutoDistance;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.DriveSub.DriveConstants;
+import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
 
 
 public class Realignment extends SubsystemBase {
     private final ColorRangeSensor leftSensor, rightSensor;
     private final Telemetry telemetry;
-
     public boolean Ignored = false;
-
     public static double error = 0;
-
-    public static Drive drive;
-    public static class Sensor {
-        public static double Distance = 0;
-        public static double BackBoardDistance = 2; //IN
-    }
-
-    public enum AlignmentState {
-        ALIGNED,
-        UNALIGNED
-    }
-
-    public static AlignmentState alignmentState = UNALIGNED;
+    private static Drivetrain drive;
+    public static HardwareMap hardwareMap;
+    public boolean leftImbalance;
 
     public Realignment(Telemetry telemetry, HardwareMap hardwareMap) {
         this.leftSensor = hardwareMap.get(ColorRangeSensor.class, "leftSensor");
@@ -44,61 +35,39 @@ public class Realignment extends SubsystemBase {
     }
 
     public void periodic() {
-        telemetry.addData("Distance", Distance);
+        telemetry.addData("DistanceLeft", leftSensor.getDistance(DistanceUnit.MM));
+        telemetry.addData("DistanceRight", rightSensor.getDistance(DistanceUnit.MM));
+        telemetry.addData("leftImbalence", leftImbalance());
+        telemetry.addData("rightImbalence", rightImbalance());
         telemetry.addData("Error", error);
     }
-
-    public boolean TooFar() {
-        Ignored = false;
-
-        Distance = (leftSensor.getDistance(DistanceUnit.INCH) + rightSensor.getDistance(DistanceUnit.INCH) / 2);
-
-        return (Distance) > AutoDistance.Sensor.BackBoardDistance;
+    public boolean distance() {
+        return leftSensor.getDistance(DistanceUnit.CM) > 3 && rightSensor.getDistance(DistanceUnit.CM) > 3;
     }
-
-    public boolean InRange() {
-        Ignored = false;
-
-        Distance = (leftSensor.getDistance(DistanceUnit.INCH) + rightSensor.getDistance(DistanceUnit.INCH) / 2);
-
-        return (Distance) <= AutoDistance.Sensor.BackBoardDistance;
+    public boolean leftImbalance() {
+            return leftSensor.getDistance(DistanceUnit.CM) < rightSensor.getDistance(DistanceUnit.CM);
     }
-    public void check() {
-        double leftDistance = leftSensor.getDistance(DistanceUnit.INCH);
-
-        double rightDistance = rightSensor.getDistance(DistanceUnit.INCH);
+    public boolean rightImbalance() {
+        return rightSensor.getDistance(DistanceUnit.CM) < leftSensor.getDistance(DistanceUnit.CM);
+    }
+    public void realignmentLeft() {
 
         double error = 0;
-
-        if (leftDistance > rightDistance) {
-            error = Math.atan(DriveConstants.TRACK_WIDTH / leftDistance);
+        error = Math.atan(DriveConstants.TRACK_WIDTH / leftSensor.getDistance(DistanceUnit.INCH));
+        if (error > 1) {
+            drive.turn(drive.getHeading() - (error - 45));
         }
-        if (rightDistance > leftDistance) {
-            error = Math.atan(DriveConstants.TRACK_WIDTH / rightDistance);
-        }
-        if (error <= 1) {
-            double correction = error - 45;
-            double currentHeading = drive.getExternalHeading();
-
-            drive.turn(currentHeading - correction);
-            alignmentState = UNALIGNED;
-        }
-        else alignmentState = ALIGNED;
     }
-
-    public boolean disableDistance() {
-        return Ignored;
+    public void realignmentRight() {
+        double error = 0;
+        error = Math.atan(DriveConstants.TRACK_WIDTH / rightSensor.getDistance(DistanceUnit.INCH));
+        if (error > 1) {
+            drive.turn(drive.getHeading() - (error - 45));
+        }
     }
-
-    public void run() {
-
-        switch (alignmentState) {
-            case UNALIGNED:
-                if (TooFar()) break;
-                check();
-                break;
-            case ALIGNED:
-                break;
+    public void backingUp() throws InterruptedException {
+        if (leftSensor.getDistance(DistanceUnit.INCH) <= 2 && rightSensor.getDistance(DistanceUnit.INCH) <= 2) {
+            drive.timedPowers(-0.2, -0.2, -0.2, -0.2, 1000);
         }
     }
 }

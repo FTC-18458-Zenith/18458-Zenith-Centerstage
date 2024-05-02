@@ -33,6 +33,9 @@ public class NewAutoPathing {
                 .setConstraints(45, 45, Math.toRadians(180), Math.toRadians(270), 11.15)
                 .followTrajectorySequence(driveShim ->
                         driveShim.trajectorySequenceBuilder(new Pose2d(7, -63, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(10, 10, Math.toRadians(90)))
+                                .turn(Math.toRadians(90))
+                                .waitSeconds(10)
                                 .lineToLinearHeading(closeCenterSpike)
                                 .lineToLinearHeading(closeCenterScore)
                                 .waitSeconds(1)

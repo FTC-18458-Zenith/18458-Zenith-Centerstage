@@ -1,16 +1,19 @@
 
 package org.firstinspires.ftc.teamcode.subsystem.DriveSub;
 
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.util.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.util.PoseStorage;
@@ -19,7 +22,6 @@ import java.util.List;
 
 
 public class Drivetrain extends SubsystemBase {
-
     private final MecanumDrive drive;
     private Telemetry telemetry;
     //    private BNO055IMU imu;
@@ -28,8 +30,7 @@ public class Drivetrain extends SubsystemBase {
             RFVal = 2,
             RRVal = 3;
     double[] powers = new double[4];
-
-
+    private ColorRangeSensor leftSensor, rightSensor;
 
     public Drivetrain(MecanumDrive drive, Telemetry tl, HardwareMap hardwareMap) {
         this.drive = drive;
@@ -51,6 +52,10 @@ public class Drivetrain extends SubsystemBase {
 
     public void setPowers(double leftF, double leftR, double rightR, double rightF) {
         drive.setMotorPowers(leftF, leftR, rightR, rightF);
+    }
+    public void timedPowers(double leftF, double leftR, double rightR, double rightF, int duration) throws InterruptedException {
+        drive.setMotorPowers(leftF, leftR, rightR, rightF);
+        Thread.sleep(duration);
     }
 
     public void mecDrive(double y, double x, double rx) {
@@ -292,10 +297,31 @@ public class Drivetrain extends SubsystemBase {
     public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose){
         return drive.trajectorySequenceBuilder(startPose);
     }
-
-
     public void followTrajectorySequence(TrajectorySequence trajectorySequence) {
         drive.followTrajectorySequence(trajectorySequence);
     }
-
+    public void realignmentLeft() {
+            double error = 0;
+            error = Math.atan(DriveConstants.TRACK_WIDTH / leftSensor.getDistance(DistanceUnit.INCH));
+            if (error > 1) {
+                drive.turn(drive.getExternalHeading() - (error - 45));
+            }
+    }
+    public void realignmentRight() {
+        double error = 0;
+        error = Math.atan(DriveConstants.TRACK_WIDTH / rightSensor.getDistance(DistanceUnit.INCH));
+        if (error > 1) {
+            drive.turn(drive.getExternalHeading() - (error - 45));
+            }
+    }
+    public Command backingUp() {
+        return new InstantCommand(() -> {
+            if (leftSensor.getDistance(DistanceUnit.INCH) == 2 && rightSensor.getDistance(DistanceUnit.INCH) == 2) {
+                drive.setMotorPowers(-0.3, -0.3, -0.3, -0.3);
+            }
+            else if (leftSensor.getDistance(DistanceUnit.INCH) == 3 && rightSensor.getDistance(DistanceUnit.INCH) == 3) {
+                drive.setMotorPowers(0, 0,0,0);
+            }
+        });
+    }
 }

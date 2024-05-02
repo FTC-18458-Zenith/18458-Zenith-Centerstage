@@ -23,7 +23,6 @@ public class TeleOpMain extends LinearOpMode  {
 
         waitForStart();
         while (opModeIsActive()) {
-            realignment.run();
         }
     }
 }
