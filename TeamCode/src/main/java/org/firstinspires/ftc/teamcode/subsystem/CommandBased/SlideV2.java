@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystem.CommandBased;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
@@ -8,6 +11,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.subsystem.DriveSub.DriveConstants;
 
 @Config
 public class SlideV2 extends SubsystemBase {
@@ -147,6 +152,12 @@ public class SlideV2 extends SubsystemBase {
         slideAutomatic = true;
         upController.setSetPoint(1400);
         liftPos = liftPos.HIGH;
+    }
+    public void sensorTest() {
+            liftHigh();
+    }
+    public void testSensor() {
+            liftRest();
     }
 
     public void setPosition(double position) {

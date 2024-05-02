@@ -60,13 +60,6 @@ public class AutoDistance extends SubsystemBase {
 
             return (Distance) <= Sensor.BackBoardDistance;
         }
-
-        /*public boolean Left() {
-            Ignored = false;
-
-
-        }*/
-
         public boolean disableDistance() {
             return Ignored;
         }
@@ -81,7 +74,6 @@ public class AutoDistance extends SubsystemBase {
                 if (InRange()) break;
                 if (TooFar())
                     error = Distance - Sensor.BackBoardDistance;
-
                 break;
         }
     }
