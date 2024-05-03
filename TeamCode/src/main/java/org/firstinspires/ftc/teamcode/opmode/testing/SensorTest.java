@@ -20,20 +20,19 @@ import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 @Config
 @TeleOp
 public class SensorTest extends MatchOpMode {
-    private GamepadEx driverGamepad;
     private Realignment sensor;
     private Drivetrain drivetrain;
+    private MecanumDrive drive;
     @Override
     public void robotInit() {
-
-
+        drivetrain = new Drivetrain(drive, telemetry, hardwareMap);
         sensor = new Realignment(telemetry, hardwareMap);
 
     }
 
     @Override
     public void configureButtons() {
-         sensor.setDefaultCommand(new Realign(sensor));
+         sensor.setDefaultCommand(new Realign(sensor, drivetrain));
 
     }
     @Override

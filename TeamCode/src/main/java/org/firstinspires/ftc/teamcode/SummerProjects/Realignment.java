@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.subsystem.DriveSub.MecanumDrive;
 
 
 public class Realignment extends SubsystemBase {
-    private final ColorRangeSensor leftSensor, rightSensor;
+    private final ColorRangeSensor leftSensor;
     private final Telemetry telemetry;
     public boolean Ignored = false;
     public static double error = 0;
@@ -30,25 +30,14 @@ public class Realignment extends SubsystemBase {
 
     public Realignment(Telemetry telemetry, HardwareMap hardwareMap) {
         this.leftSensor = hardwareMap.get(ColorRangeSensor.class, "leftSensor");
-        this.rightSensor = hardwareMap.get(ColorRangeSensor.class, "rightSensor");
         this.telemetry = telemetry;
     }
 
     public void periodic() {
         telemetry.addData("DistanceLeft", leftSensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("DistanceRight", rightSensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("leftImbalence", leftImbalance());
-        telemetry.addData("rightImbalence", rightImbalance());
-        telemetry.addData("Error", error);
     }
     public boolean distance() {
-        return leftSensor.getDistance(DistanceUnit.CM) > 3 && rightSensor.getDistance(DistanceUnit.CM) > 3;
-    }
-    public boolean leftImbalance() {
-            return leftSensor.getDistance(DistanceUnit.CM) < rightSensor.getDistance(DistanceUnit.CM);
-    }
-    public boolean rightImbalance() {
-        return rightSensor.getDistance(DistanceUnit.CM) < leftSensor.getDistance(DistanceUnit.CM);
+        return leftSensor.getDistance(DistanceUnit.INCH) < 2.1;
     }
     public void realignmentLeft() {
 
@@ -58,16 +47,12 @@ public class Realignment extends SubsystemBase {
             drive.turn(drive.getHeading() - (error - 45));
         }
     }
-    public void realignmentRight() {
-        double error = 0;
-        error = Math.atan(DriveConstants.TRACK_WIDTH / rightSensor.getDistance(DistanceUnit.INCH));
-        if (error > 1) {
-            drive.turn(drive.getHeading() - (error - 45));
+    public void backingUp() {
+        if (leftSensor.getDistance(DistanceUnit.INCH) <= 2.1) {
+            drive.setPowers(-0.2, -0.2, -0.2, -0.2);
         }
-    }
-    public void backingUp() throws InterruptedException {
-        if (leftSensor.getDistance(DistanceUnit.INCH) <= 2 && rightSensor.getDistance(DistanceUnit.INCH) <= 2) {
-            drive.timedPowers(-0.2, -0.2, -0.2, -0.2, 1000);
+        else if (leftSensor.getDistance(DistanceUnit.INCH) >= 2.1) {
+            drive.setPowers(0,0,0,0);
         }
     }
 }

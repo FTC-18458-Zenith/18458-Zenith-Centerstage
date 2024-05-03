@@ -314,14 +314,10 @@ public class Drivetrain extends SubsystemBase {
             drive.turn(drive.getExternalHeading() - (error - 45));
             }
     }
-    public Command backingUp() {
-        return new InstantCommand(() -> {
-            if (leftSensor.getDistance(DistanceUnit.INCH) == 2 && rightSensor.getDistance(DistanceUnit.INCH) == 2) {
-                drive.setMotorPowers(-0.3, -0.3, -0.3, -0.3);
-            }
-            else if (leftSensor.getDistance(DistanceUnit.INCH) == 3 && rightSensor.getDistance(DistanceUnit.INCH) == 3) {
-                drive.setMotorPowers(0, 0,0,0);
-            }
-        });
+    public void backUp() {
+        drive.setMotorPowers(-0.2, -0.2, -0.2,-0.2);
+    }
+    public void waiting() {
+        drive.setMotorPowers(0,0,0,0);
     }
 }

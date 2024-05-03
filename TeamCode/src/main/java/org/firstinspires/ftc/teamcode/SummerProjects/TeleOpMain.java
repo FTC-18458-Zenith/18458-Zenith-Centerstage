@@ -20,9 +20,13 @@ public class TeleOpMain extends LinearOpMode  {
     public void runOpMode() throws InterruptedException {
 
         Realignment realignment = new Realignment(telemetry, hardwareMap);
+        Drive drive = new Drive(this);
 
         waitForStart();
         while (opModeIsActive()) {
+            if (realignment.distance()) {
+                realignment.backingUp();
+            }
         }
     }
 }
