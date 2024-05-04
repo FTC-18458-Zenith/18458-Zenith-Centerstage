@@ -114,7 +114,7 @@ public class BlueClose extends MatchOpMode {
                         new WaitCommand(1000),
 
                         new ParallelCommandGroup(
-                                new AutoStack(intake, 1),
+                                new AutoStack(intake),
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseConstants.Path.closeCycleStart.startCycle)
                         ),
 
@@ -129,7 +129,7 @@ public class BlueClose extends MatchOpMode {
 
                         new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, BlueCloseConstants.Path.closeCycleStart.startCycle),
-                                new AutoStack(intake, 3)
+                                new AutoStack(intake)
                         ),
 
                         new WaitCommand(1000),

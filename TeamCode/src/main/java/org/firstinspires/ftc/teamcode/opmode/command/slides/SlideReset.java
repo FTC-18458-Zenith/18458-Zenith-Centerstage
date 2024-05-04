@@ -10,10 +10,10 @@ import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
 
 public class SlideReset extends SequentialCommandGroup {
     public SlideReset (SlideV2 slideV2, Wrist wrist, Outtake outtake) {
-        new SequentialCommandGroup(
-                new InstantCommand(outtake::score),
-                new InstantCommand(wrist::Reset),
-                new InstantCommand(slideV2::liftRest)
-        );
+                addCommands(
+                        new InstantCommand(outtake::score),
+                        new InstantCommand(wrist::Reset),
+                        new InstantCommand(slideV2::liftRest)
+                );
     }
 }

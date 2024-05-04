@@ -108,13 +108,13 @@ public class RedCloseQuals extends MatchOpMode {
 
                         /* Purple Pixel */
                         new ParallelCommandGroup(
-                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.PurplePixel.getPurple(finalX)),
-                                new SlideLow(slide, wrist, outtake)
+                                new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.PurplePixel.getPurple(finalX))
                         ),
 
                         new WaitCommand(1),
 
                         new ParallelCommandGroup(
+                                new SlideLow(slide, wrist, outtake),
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.getYellow(finalY))
                         ),
 
@@ -124,14 +124,14 @@ public class RedCloseQuals extends MatchOpMode {
                         new ParallelCommandGroup(
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.farCycleStart.startCycle),
                                 new SequentialCommandGroup(
-                                        new IntakeOn(intake, wheel),
+                                        new AutoStack(intake),
                                         new WaitCommand(400),
                                         new SlideReset(slide, wrist, outtake)
                                 )
                         ),
 
-                        new WaitCommand(500),
-                        new IntakeOff(intake, wheel),
+                       /* new WaitCommand(500),
+                        new IntakeOff(intake, wheel),*/
                         new WaitCommand((long) delay),
 
                         new ParallelCommandGroup(
@@ -139,6 +139,7 @@ public class RedCloseQuals extends MatchOpMode {
                                 new TrajectorySequenceContainerFollowCommand(drivetrain, RedCloseConstants.Path.farCycleEnd.endCycle),
                                 new SequentialCommandGroup(
                                         new WaitCommand(1800),
+                                        new IntakeOff(intake, wheel),
                                         new SlideLow(slide, wrist, outtake)
                                 )
                         ),
@@ -168,7 +169,7 @@ public class RedCloseQuals extends MatchOpMode {
         public static Speed speed;
 
         public static class Speed {
-            public static double baseVel = 45; // value
+            public static double baseVel = 35; // value
             public static double baseAccel = 35; // value
             public static double turnVel = DriveConstants.MAX_ANG_VEL; // value
             public static double turnAccel = DriveConstants.MAX_ANG_ACCEL; // value
@@ -200,7 +201,7 @@ public class RedCloseQuals extends MatchOpMode {
             public static Start start;
 
             public static class Start {
-                public static Pose2dContainer startPose = new Pose2dContainer(17, 63, 90);
+                public static Pose2dContainer startPose = new Pose2dContainer(17, -63, 270);
 
                 static TrajectorySequenceContainer start = new TrajectorySequenceContainer(Speed::getBaseConstraints);
             }
@@ -249,10 +250,10 @@ public class RedCloseQuals extends MatchOpMode {
 
             }
 
-            public static double leftY = -44;
+            public static double leftY = -24;
             public static double midY = -28;
-            public static double rightY = -23;
-            public static double X = 52;
+            public static double rightY = -44;
+            public static double X = 58;
             public static double heading = 180;
             public static double endHeading = 0;
 
@@ -294,17 +295,17 @@ public class RedCloseQuals extends MatchOpMode {
             }
 
             public static class farCycleStart {
-                public static SplineTo a = new SplineTo(17, -10, 180);
-                public static LineToLinearHeading b = new LineToLinearHeading(-24, -10, 180);
-                public static SplineTo c = new SplineTo(-56, -10, 180);
+                public static SplineTo a = new SplineTo(17, -10.5, 180);
+                public static LineToLinearHeading b = new LineToLinearHeading(-24, -10.5, 180);
+                public static SplineTo c = new SplineTo(-54, -10.5, 180);
                 static TrajectorySequenceContainer startCycle = new TrajectorySequenceContainer(RedCloseConstants.Speed::getBaseConstraints, a, b, c);
             }
 
             public static class farCycleEnd {
                 public static Back a = new Back(2);
-                public static SplineTo b = new SplineTo(-24, -11, 0);
-                public static LineToLinearHeading c = new LineToLinearHeading(16, -11, 180);
-                public static SplineToConstantHeading d = new SplineToConstantHeading(46, -46, 0);
+                public static SplineTo b = new SplineTo(-24, -10.5, 0);
+                public static LineToLinearHeading c = new LineToLinearHeading(16, -10.5, 180);
+                public static SplineToConstantHeading d = new SplineToConstantHeading(58, -40, 0);
 
                 static TrajectorySequenceContainer endCycle = new TrajectorySequenceContainer(RedCloseConstants.Speed::getBaseConstraints, a, b, c, d);
             }

@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystem.CommandBased;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.arcrobotics.ftclib.command.Command;
-import com.arcrobotics.ftclib.command.CommandBase;
-import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
@@ -11,8 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.subsystem.DriveSub.DriveConstants;
 
 @Config
 public class SlideV2 extends SubsystemBase {
@@ -27,16 +22,16 @@ public class SlideV2 extends SubsystemBase {
     private PIDFController upController;
     private boolean slideAutomatic;
 
-    public static double CPR = 537.7; //Counts Per Revolution (312 RPM)
+    public static double CPR = 384.5; //Counts Per Revolution (435 RPM)
 
     public double upSpeed = 1;
     public double downSpeed= -1;
 
     //Make sure to test positions with manual
     public static int restingPose = 0;
-    public static int lowPose = 800;
-    public static int midPose = 1000;
-    public static int highPose = 1400;
+    public static int lowPose = 1250;
+    public static int midPose = 1700;
+    public static int highPose = 2175;
     double output = 0;
 
     public enum LiftPos{
@@ -50,8 +45,8 @@ public class SlideV2 extends SubsystemBase {
         leftSlide = new MotorEx(hardwareMap, "leftSlide");
         rightSlide = new MotorEx(hardwareMap, "rightSlide");
 
-        rightSlide.setInverted(false);
-        leftSlide.setInverted(false);
+        rightSlide.setInverted(true);
+        leftSlide.setInverted(true);
 
         leftSlide.resetEncoder();
         rightSlide.resetEncoder();
@@ -152,12 +147,6 @@ public class SlideV2 extends SubsystemBase {
         slideAutomatic = true;
         upController.setSetPoint(1400);
         liftPos = liftPos.HIGH;
-    }
-    public void sensorTest() {
-            liftHigh();
-    }
-    public void testSensor() {
-            liftRest();
     }
 
     public void setPosition(double position) {
