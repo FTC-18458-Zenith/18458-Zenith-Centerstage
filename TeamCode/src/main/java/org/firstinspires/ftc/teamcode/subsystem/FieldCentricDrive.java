@@ -122,8 +122,9 @@ public class FieldCentricDrive {
         } else {
             x = leftX;
             y = leftY;
+            hello
         }
-
+        
         double turn;
         if (FIELD_CENTRIC_TURNING) {
             Vector2d turn2d = new Vector2d(rightX, rightY);
