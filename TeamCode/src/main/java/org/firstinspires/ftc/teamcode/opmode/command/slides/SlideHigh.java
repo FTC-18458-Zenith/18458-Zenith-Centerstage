@@ -4,22 +4,16 @@ import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Arm;
+import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.SlideV2;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wheel;
-import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Wrist;
-
 public class SlideHigh extends SequentialCommandGroup {
-    public SlideHigh(SlideV2 slideV2, Wrist wrist, Outtake outtake) {
+    public SlideHigh(SlideV2 slideV2, Claw claw, Arm arm) {
         addCommands(
-                new InstantCommand(outtake::reset)
+                new InstantCommand(arm::reset)
         );
         addCommands(
                 new InstantCommand(slideV2::liftHigh)
-        );
-        new WaitCommand(1000);
-        addCommands(
-                new InstantCommand(wrist::Score)
         );
     }
 }
