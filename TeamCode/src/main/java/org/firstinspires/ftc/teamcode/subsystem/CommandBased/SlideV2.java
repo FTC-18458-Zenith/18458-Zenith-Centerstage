@@ -29,9 +29,9 @@ public class SlideV2 extends SubsystemBase {
 
     //Make sure to test positions with manual
     public static int restingPose = 0;
-    public static int lowPose = 100;
-    public static int midPose = 200;
-    public static int highPose = 300;
+    public static int lowPose = 1250;
+    public static int midPose = 1700;
+    public static int highPose = 2175;
     double output = 0;
 
     public enum LiftPos{

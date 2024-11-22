@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.opmode.command.Outtake.Score;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drive.SlowDriveCommand;
 import org.firstinspires.ftc.teamcode.opmode.command.drone.launch;
-import org.firstinspires.ftc.teamcode.opmode.command.drone.reset;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideHigh;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideLow;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMid;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideMoveManual;
 import org.firstinspires.ftc.teamcode.opmode.command.slides.SlideReset;
+import org.firstinspires.ftc.teamcode.subsystem.DriveSub.Drive;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Drone;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.IntakeV2;
 import org.firstinspires.ftc.teamcode.subsystem.CommandBased.Outtake;
@@ -36,7 +36,7 @@ import org.firstinspires.ftc.teamcode.util.MatchOpMode;
 
 @Config
 @TeleOp
-public class TeleOpMain_V2 extends MatchOpMode {
+public class TeleOpSolo extends MatchOpMode {
 
     private GamepadEx driverGamepad; //Driver 1
     private GamepadEx operatorGamepad; // Driver 2
@@ -47,9 +47,8 @@ public class TeleOpMain_V2 extends MatchOpMode {
     private Outtake outtake;
     private Drone drone;
     private Wheel wheel;
-    private Drivetrain drivetrain;
 
-    //Drive drive = new Drive(this);
+    private Drivetrain drivetrain;
 
     @Override
     public void robotInit() {
@@ -64,9 +63,9 @@ public class TeleOpMain_V2 extends MatchOpMode {
         drone = new Drone(hardwareMap, telemetry);
         wheel = new Wheel(hardwareMap, telemetry);
 
+
         drivetrain = new Drivetrain(new MecanumDrive(hardwareMap, telemetry, true), telemetry, hardwareMap);
         drivetrain.init();
-
     }
 
     @Override
@@ -75,26 +74,28 @@ public class TeleOpMain_V2 extends MatchOpMode {
         drivetrain.setDefaultCommand(new DefaultDriveCommand(drivetrain, driverGamepad, true));
 
         //Button recenterIMU = (new GamepadButton(driverGamepad, GamepadKeys.Button.A))
-                //.whenPressed(new InstantCommand(drivetrain::reInitializeIMU));
+        //.whenPressed(new InstantCommand(drivetrain::reInitializeIMU));
 
-        Button recenterIMU2 = (new GamepadButton(driverGamepad, GamepadKeys.Button.B))
+        Button recenterIMU2 = new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_UP)
                 .whenPressed(new InstantCommand(drivetrain::reInitializeIMU));
 
         Button slowMode = (new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_BUMPER))
                 .whileHeld(new SlowDriveCommand(drivetrain, driverGamepad, true));
 
-        slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getLeftY));
-
-        Button slideReset = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)
+        //slide.setDefaultCommand(new SlideMoveManual(slide, operatorGamepad::getRightY));
+        /*Button slideManual = new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_BUMPER)
+                .whenHeld(new SlideMoveManual(slide, operatorGamepad::getRightY));
+*/
+        Button slideReset = new GamepadButton(driverGamepad, GamepadKeys.Button.A)
                 .whenPressed(new SlideReset(slide, wrist, outtake));
 
-        Button slideLow = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)
+        Button slideLow = new GamepadButton(driverGamepad, GamepadKeys.Button.B)
                 .whenPressed(new SlideLow(slide, wrist, outtake));
 
-        Button slideMid = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_RIGHT)
+        Button slideMid = new GamepadButton(driverGamepad, GamepadKeys.Button.X)
                 .whenPressed(new SlideMid(slide, wrist, outtake));
 
-        Button slideHigh = new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)
+        Button slideHigh = new GamepadButton(driverGamepad, GamepadKeys.Button.Y)
                 .whenPressed(new SlideHigh(slide, wrist, outtake));
 
         Trigger Intake = new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
@@ -105,20 +106,17 @@ public class TeleOpMain_V2 extends MatchOpMode {
                 .whileActiveContinuous(new IntakeReverse(intakeV2, wheel, false))
                 .whenInactive(new IntakeOff(intakeV2, wheel));
 
-        Button Score = new GamepadButton(operatorGamepad, GamepadKeys.Button.A)
+        Button Score = new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)
                 .whenPressed(new Score(outtake, wheel));
 
-        Button Hold = new GamepadButton(operatorGamepad, GamepadKeys.Button.B)
+        Button Hold = new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_STICK_BUTTON)
                 .whenPressed(new Hold(outtake));
 
-
-        /*Trigger Drone = new GamepadTrigger(operatorGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)
-                .whileActiveContinuous(new launch(drone))
-                .whenInactive(new reset(drone));*/
+        Button Drone = new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)
+                .whenPressed(new launch(drone));
     }
+
     @Override
     public void matchStart() {
-
     }
-
 }
